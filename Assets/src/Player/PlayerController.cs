@@ -18,7 +18,7 @@ namespace RollABall.Assets.src.Player
         float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
         [Export] float tempMouseSensitivity = 1, msDiv = 140;
-        float speed = 5, jumpVelocity = 8;
+        float speed = 5, jumpVelocity = 8, velocityLerpFactor = 0.75f;
         #endregion
         public override void _Process(double delta)
         {
@@ -45,11 +45,15 @@ namespace RollABall.Assets.src.Player
 
             // Get the input direction and handle the movement/deceleration.
             Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveUp", "moveDown");
-            Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+            Vector3 direction = ((cam.GetParent() as Node3D).Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
             if (direction != Vector3.Zero)
             {
+                Vector3 newVelocity = velocity;
                 velocity.X = direction.X * speed;
                 velocity.Z = direction.Z * speed;
+                newVelocity.X = Mathf.Lerp(velocity.X, newVelocity.X, velocityLerpFactor);
+                newVelocity.Z = Mathf.Lerp(velocity.Z, newVelocity.Z, velocityLerpFactor);
+                velocity = newVelocity;
             }
             else
             {
