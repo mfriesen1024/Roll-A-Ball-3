@@ -6,4 +6,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>RollABall</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Assets\src\LevelObjects\" />
+  </ItemGroup>
 </Project>
