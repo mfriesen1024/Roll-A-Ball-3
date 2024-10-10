@@ -15,14 +15,16 @@ radius = 0.45
 script = ExtResource("1_bad40")
 controller = NodePath("PlayerController")
 ball = NodePath("PlayerBall")
-cam = NodePath("PlayerController/PlayerCam")
+cam = NodePath("PlayerController/CamParent/PlayerCam")
 
 [node name="PlayerController" type="Node3D" parent="." node_paths=PackedStringArray("ball", "cam")]
 script = ExtResource("2_vlbyn")
 ball = NodePath("../PlayerBall")
-cam = NodePath("PlayerCam")
+cam = NodePath("CamParent/PlayerCam")
 
-[node name="PlayerCam" type="Camera3D" parent="PlayerController"]
+[node name="CamParent" type="Node3D" parent="PlayerController"]
+
+[node name="PlayerCam" type="Camera3D" parent="PlayerController/CamParent"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.51, 1.9)
 script = ExtResource("3_5xord")
 
