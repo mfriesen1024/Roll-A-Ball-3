@@ -41,7 +41,7 @@ namespace RollABall.Assets.src.Player
             moveVector3D = new(moveVector2D.X,0,moveVector2D.Y);
         }
 
-        public void Look(Vector2 direction)
+        public void OnLook(Vector2 direction)
         {
 
         }
