@@ -9,5 +9,6 @@ namespace RollABall.Assets.src.Managers
 {
     internal partial class GameManager:Node
     {
+        public static GameManager Instance { get; private set; }
     }
 }
