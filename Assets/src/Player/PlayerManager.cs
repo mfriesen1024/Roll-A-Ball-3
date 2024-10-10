@@ -15,6 +15,7 @@ namespace RollABall.Assets.src.Player
 
         [Export] PlayerController controller;
         [Export] RigidBody3D ball;
+        [Export] PlayerCam cam;
         #endregion
     }
 }
