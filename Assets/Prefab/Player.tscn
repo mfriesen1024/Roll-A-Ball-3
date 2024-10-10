@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bufig8w0mugb4"]
+
+[ext_resource type="Script" path="res://Assets/src/Player/PlayerManager.cs" id="1_bad40"]
+[ext_resource type="Script" path="res://Assets/src/Player/PlayerController.cs" id="2_vlbyn"]
+[ext_resource type="Script" path="res://Assets/src/Player/PlayerCam.cs" id="3_5xord"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_loah7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_u6ron"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nekfl"]
+radius = 0.45
+
+[node name="Playerman" type="Node"]
+script = ExtResource("1_bad40")
+
+[node name="PlayerController" type="Node3D" parent="."]
+script = ExtResource("2_vlbyn")
+
+[node name="PlayerCam" type="Camera3D" parent="PlayerController"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.51, 1.9)
+script = ExtResource("3_5xord")
+
+[node name="PlayerBall" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBall"]
+shape = SubResource("SphereShape3D_loah7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerBall"]
+mesh = SubResource("SphereMesh_u6ron")
+
+[node name="Area3D" type="Area3D" parent="PlayerBall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBall/Area3D"]
+shape = SubResource("SphereShape3D_nekfl")
