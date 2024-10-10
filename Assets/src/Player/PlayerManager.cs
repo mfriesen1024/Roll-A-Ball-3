@@ -9,7 +9,7 @@ namespace RollABall.Assets.src.Player
     internal partial class PlayerManager : Node
     {
         #region Refs
-        public PlayerManager Instance { get; private set; }
+        public static PlayerManager Instance { get; private set; }
 
         [Export] PlayerController controller;
         [Export] RigidBody3D ball;
