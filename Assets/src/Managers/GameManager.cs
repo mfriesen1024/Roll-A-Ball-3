@@ -29,9 +29,9 @@ namespace RollABall.Assets.src.Managers
         {
             // Check other managers for their singleton instances, and if they don't exist, create them.
             if (PlayerManager.Instance != null) { PlayerManager = PlayerManager.Instance; }
-            else { PlayerManager = playerManPrefab.Instantiate() as PlayerManager; }
+            else { PlayerManager = playerManPrefab.Instantiate() as PlayerManager; AddChild(PlayerManager); }
             if (InputManager.Instance != null) { InputManager = InputManager.Instance; }
-            else { InputManager = inputManPrefab.Instantiate() as InputManager; }
+            else { InputManager = inputManPrefab.Instantiate() as InputManager; AddChild(InputManager); }
         }
 
         private void SetGMSingleton()
