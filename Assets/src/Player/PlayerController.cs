@@ -1,108 +1,95 @@
 ﻿using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KeystoneUtils.Logging;
 
 namespace RollABall.Assets.src.Player
 {
-    internal partial class PlayerController:CharacterBody3D
+    /// <summary>
+    /// Responsible for moving the player.
+    /// </summary>
+    internal partial class PlayerController : Node3D
     {
-        #region Refs
-        [Export]Camera3D cam;
-        #endregion
-        #region Movement
-        // Get the gravity from the project settings to be synced with RigidBody nodes.
-        // This should eventually be moved to utils.
-        float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+        #region refs
+        Logger playerLog;
 
-        [Export] float tempMouseSensitivity = 1, msDiv = 140;
-        float speed = 5, jumpVelocity = 8, velocityLerpFactor = 0.75f;
+        [Export] RigidBody3D ball;
+        [Export] PlayerCam cam;
+        Node3D camParent;
         #endregion
-        public override void _Process(double delta)
+
+        #region speeds
+        [Export] float maxMoveSpeed = 10;
+        [Export] float moveLerpMod = 1;
+        [Export] float mouseSensitivityMod = 1f;
+        #endregion
+
+        #region moveFields
+        Vector3 moveVector3D = Vector3.Zero;
+        Vector2 lookVector = Vector2.Zero;
+        #endregion
+
+        public override void _Ready()
         {
-            if (Input.IsActionJustPressed("pause")) { Input.MouseMode = Input.MouseModeEnum.Visible; }
+            playerLog = new Logger(true, true, "logs\\", "playerLog", "txt", false);
+
+            // Set refs.
+            camParent = (Node3D)cam.GetParent();
         }
 
         public override void _PhysicsProcess(double delta)
         {
-            UpdateMovement(delta);
-        }
+            SetBallVelocity();
+            SetLookRotations();
+            UpdateOurPosition();
 
-        private void UpdateMovement(double delta)
-        {
-            Vector3 velocity = Velocity;
-
-            // Add the gravity.
-            if (!IsOnFloor())
-                velocity.Y -= gravity * (float)delta;
-
-            // TODO: As good practice, you should replace UI actions with custom gameplay actions.
-            // Handle Jump.
-            if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-                velocity.Y = jumpVelocity;
-
-            // Get the input direction and handle the movement/deceleration.
-            Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveUp", "moveDown");
-            Vector3 direction = ((cam.GetParent() as Node3D).Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-            if (direction != Vector3.Zero)
+            void SetBallVelocity()
             {
-                Vector3 newVelocity = velocity;
-                velocity.X = direction.X * speed;
-                velocity.Z = direction.Z * speed;
-                newVelocity.X = Mathf.Lerp(velocity.X, newVelocity.X, velocityLerpFactor);
-                newVelocity.Z = Mathf.Lerp(velocity.Z, newVelocity.Z, velocityLerpFactor);
-                velocity = newVelocity;
-            }
-            else
-            {
-                velocity.X = Mathf.MoveToward(Velocity.X, 0, speed);
-                velocity.Z = Mathf.MoveToward(Velocity.Z, 0, speed);
+                Vector3 moveVelocityGoal = moveVector3D * maxMoveSpeed;
+                Vector3 newVelocity = ball.LinearVelocity.Lerp(moveVelocityGoal, (float)delta * moveLerpMod);
+                ball.LinearVelocity = newVelocity; // TODO: use a different velocity set method because threads.
             }
 
-            Velocity = velocity;
-            MoveAndSlide();
-        }
-
-        public override void _UnhandledInput(InputEvent inputEvent)
-        {
-            // Mouse movement, should probably move this to inputman when we make it.
-            if (inputEvent is InputEventMouseMotion)
+            void SetLookRotations()
             {
-                RotatePlayerAndCam(((InputEventMouseMotion)inputEvent).Relative);
+                // Clamp X rot so the player can't do silly things with it.
+                float oldX = camParent.Basis.GetEuler().X;
+                float xDelta = -(float)delta * lookVector.Y * mouseSensitivityMod;
+                playerLog.Write($"Trying to look up/down, old is {oldX}, delta is {xDelta}");
+                float newX = oldX + xDelta;
+                float toRadians = Mathf.Pi / 180;
+                newX = Mathf.Clamp(newX, -74 * toRadians, 14 * toRadians);
+                // Reassign xDelta based on our clamping.
+                xDelta = newX - oldX;
+
+                // Now execute the rotations
+                camParent.RotateX(xDelta);
+                RotateY(-(float)delta * lookVector.X * mouseSensitivityMod);
+
+                lookVector = Vector2.Zero; // Apparently we dont get an event when relative is zero.
+            }
+
+            void UpdateOurPosition()
+            {
+                Position = ball.Position;
             }
         }
 
         /// <summary>
-        /// Rotates the camera's X rot and player's Y rot based on lookVector.
+        /// Move the player.
         /// </summary>
-        /// <param name="lookVector">The 2d vector to be used for rotations, modified by sensitivity modifiers.</param>
-        void RotatePlayerAndCam(Vector2 lookVector)
+        public void OnMove(Vector2 direction)
         {
-            if (!GetTree().Paused)
-            {
-                Node3D camParent = (Node3D)cam.GetParent();
-                lookVector *= (tempMouseSensitivity / msDiv);
+            direction = direction.Normalized();
 
-                // Rotate the player obj.
-                camParent.RotateY(-lookVector.X);
+            // Compose the move direction.
+            Vector2 moveVector2D = direction.Y * cam.Get2DForward();
+            moveVector2D += direction.X * cam.Get2DRight();
+            playerLog.Write($"Cam forward is {cam.Get2DForward()}, cam right is {cam.Get2DRight()}");
+            moveVector3D = new(moveVector2D.X, 0, moveVector2D.Y);
+        }
 
-                // Rotate camera.
-                cam.RotateX(-lookVector.Y);
-
-                // Manual clamping because mathf is weird.
-                Vector3 rot = cam.Rotation;
-                if (rot.X > Mathf.Pi / 2)
-                {
-                    rot.X = Mathf.Pi / 2;
-                }
-                if (rot.X < -Mathf.Pi / 2)
-                {
-                    rot.X = -Mathf.Pi / 2;
-                }
-                cam.Rotation = rot;
-            }
+        public void OnLook(Vector2 direction)
+        {
+            lookVector = direction;
         }
     }
 }

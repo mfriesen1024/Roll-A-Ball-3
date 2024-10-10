@@ -1,24 +1,25 @@
 ﻿using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RollABall.Assets.src.Managers;
 
 namespace RollABall.Assets.src.Player
 {
     /// <summary>
     /// Keeps track of and/or centralizes player stuff for encapsulation's sake.
     /// </summary>
-    internal partial class PlayerManager:Node
+    internal partial class PlayerManager : Node
     {
         #region Refs
-        /// <summary>
-        /// Singleton instance of the player.
-        /// </summary>
-        public static PlayerManager Instance {  get; private set; }
+        public static PlayerManager Instance { get; private set; }
 
-        [Export]PlayerController controller;
+        [Export] public PlayerController controller;
+        [Export] RigidBody3D ball;
+        [Export] PlayerCam cam;
         #endregion
+
+        public override void _Ready()
+        {
+            if (Instance == null) { Instance = this; }
+            else { QueueFree(); }
+        }
     }
 }

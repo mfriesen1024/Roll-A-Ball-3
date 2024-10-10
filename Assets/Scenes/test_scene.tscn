@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxosgomfi3hf7"]
+
+[ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="1_ne63p"]
+[ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="2_p5spi"]
+[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/input_man.tscn" id="3_gbshr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ikp3l"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="Gradient" id="Gradient_rqkq7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l27q0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lpls6"]
+color_ramp = SubResource("Gradient_rqkq7")
+noise = SubResource("FastNoiseLite_l27q0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5cp2"]
+albedo_texture = SubResource("NoiseTexture2D_lpls6")
+
+[sub_resource type="BoxMesh" id="BoxMesh_p1ppr"]
+material = SubResource("StandardMaterial3D_v5cp2")
+size = Vector3(10, 0.1, 10)
+
+[node name="TestScene" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_ikp3l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_p1ppr")
+
+[node name="Playerman" parent="." instance=ExtResource("1_ne63p")]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_p5spi")
+inputManPrefab = ExtResource("3_gbshr")
+playerManPrefab = ExtResource("1_ne63p")
