@@ -12,26 +12,43 @@ namespace RollABall.Assets.src.Player
         [Export] PlayerCam cam;
         #endregion
 
-        public override void _Process(double delta)
+        #region speeds
+        [Export] float maxMoveSpeed = 10;
+        [Export] float moveLerpMod = 1;
+        [Export] float mouseSensitivityMod = 1;
+        #endregion
+
+        #region moveFields
+        Vector3 moveVector3D = Vector3.Zero;
+        #endregion
+
+        public override void _PhysicsProcess(double delta)
         {
-            
+            Vector3 moveVelocityGoal = moveVector3D * maxMoveSpeed;
+            Vector3 newVelocity = ball.LinearVelocity.Lerp(moveVelocityGoal, (float)delta*moveLerpMod);
         }
 
         /// <summary>
         /// Move the player.
         /// </summary>
-        public void Move(Vector2 direction)
+        public void OnMove(Vector2 direction)
         {
             direction = direction.Normalized();
 
             // Compose the move direction.
-            Vector2 moveVector = direction.Y*cam.Get2DForward();
-            moveVector += direction.X * cam.Get2DRight();
+            Vector2 moveVector2D = direction.Y*cam.Get2DForward();
+            moveVector2D += direction.X * cam.Get2DRight();
+            moveVector3D = new(moveVector2D.X,0,moveVector2D.Y);
         }
 
         public void Look(Vector2 direction)
         {
 
+        }
+
+        void UpdateOurPosition()
+        {
+            Position=ball.Position;
         }
     }
 }
