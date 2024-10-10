@@ -15,6 +15,9 @@ namespace RollABall.Assets.src.Managers
         {
             if (Instance == null) { Instance = this; }
             else { QueueFree(); }
+
+            controller = PlayerManager.Instance.controller;
+        }
         void KeyInput(InputEventKey iek)
         {
             // For now, we'll hardcode inputs. No idea if I'll change it around later or not.
