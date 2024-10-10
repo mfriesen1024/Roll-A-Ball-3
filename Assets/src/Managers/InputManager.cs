@@ -1,19 +1,19 @@
 ﻿using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KeystoneUtils.Logic;
+using RollABall.Assets.src.Player;
 
 namespace RollABall.Assets.src.Managers
 {
-    internal partial class InputManager:Node
+    internal partial class InputManager : Node
     {
+        #region refs
         public static InputManager Instance { get; private set; }
+        PlayerController controller;
+        #endregion
 
         public override void _Ready()
         {
-            if(Instance == null) { Instance = this; }
+            if (Instance == null) { Instance = this; }
             else { QueueFree(); }
         void KeyInput(InputEventKey iek)
         {
