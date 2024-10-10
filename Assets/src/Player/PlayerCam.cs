@@ -14,13 +14,13 @@ namespace RollABall.Assets.src.Player
         {
             Vector3 trueForward = GlobalBasis.Z;
             Vector2 forward2d = new Vector2(trueForward.X,trueForward.Z);
-            return forward2d;
+            return forward2d.Normalized();
         }
         public Vector2 Get2DRight()
         {
             Vector3 trueRight = GlobalBasis.X;
             Vector2 right2d = new Vector2(trueRight.X,trueRight.Z);
-            return right2d;
+            return right2d.Normalized();
         }
     }
 }

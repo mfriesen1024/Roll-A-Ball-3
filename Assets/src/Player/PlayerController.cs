@@ -56,7 +56,7 @@ namespace RollABall.Assets.src.Player
                 playerLog.Write($"Trying to look up/down, old is {oldX}, delta is {xDelta}");
                 float newX = oldX + xDelta;
                 float toRadians = Mathf.Pi / 180;
-                newX = Mathf.Clamp(newX, -75 * toRadians, 15 * toRadians);
+                newX = Mathf.Clamp(newX, -74 * toRadians, 14 * toRadians);
                 // Reassign xDelta based on our clamping.
                 xDelta = newX - oldX;
 
