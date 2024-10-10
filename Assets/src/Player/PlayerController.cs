@@ -45,7 +45,7 @@ namespace RollABall.Assets.src.Player
             {
                 Vector3 moveVelocityGoal = moveVector3D * maxMoveSpeed;
                 Vector3 newVelocity = ball.LinearVelocity.Lerp(moveVelocityGoal, (float)delta * moveLerpMod);
-                ball.LinearVelocity = newVelocity;
+                ball.LinearVelocity = newVelocity; // TODO: use a different velocity set method because threads.
             }
 
             void SetLookRotations()
@@ -83,6 +83,7 @@ namespace RollABall.Assets.src.Player
             // Compose the move direction.
             Vector2 moveVector2D = direction.Y * cam.Get2DForward();
             moveVector2D += direction.X * cam.Get2DRight();
+            playerLog.Write($"Cam forward is {cam.Get2DForward()}, cam right is {cam.Get2DRight()}");
             moveVector3D = new(moveVector2D.X, 0, moveVector2D.Y);
         }
 
