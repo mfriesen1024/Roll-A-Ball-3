@@ -81,9 +81,9 @@ namespace RollABall.Assets.src.Player
             direction = direction.Normalized();
 
             // Compose the move direction.
-            Vector2 moveVector2D = direction.Y*cam.Get2DForward();
+            Vector2 moveVector2D = direction.Y * cam.Get2DForward();
             moveVector2D += direction.X * cam.Get2DRight();
-            moveVector3D = new(moveVector2D.X,0,moveVector2D.Y);
+            moveVector3D = new(moveVector2D.X, 0, moveVector2D.Y);
         }
 
         public void OnLook(Vector2 direction)
