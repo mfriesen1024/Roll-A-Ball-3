@@ -2,7 +2,6 @@
 using KeystoneUtils.Logging;
 using KeystoneUtils.Logic;
 using RollABall.Assets.src.Player;
-using System;
 
 namespace RollABall.Assets.src.Managers
 {
@@ -11,6 +10,8 @@ namespace RollABall.Assets.src.Managers
         #region refs
         public static InputManager Instance { get; private set; }
         Logger inputLog;
+
+        // Components
         PlayerController controller;
         #endregion
 
@@ -21,20 +22,23 @@ namespace RollABall.Assets.src.Managers
             else { QueueFree(); return; }
 
             // Set logger
-            inputLog = new Logger(true,true,"logs\\","inputLog","txt",true);
+            inputLog = new Logger(true, true, "logs\\", "inputLog", "txt", true);
 
             // Set references.
             controller = PlayerManager.Instance.controller;
         }
+
         public override void _Input(InputEvent ie)
         {
             if (ie is InputEventMouse) { MouseInput((InputEventMouse)ie); }
             if (ie is InputEventKey) { KeyInput((InputEventKey)ie); }
         }
+
+        #region inputImplementation
         void MouseInput(InputEventMouse iem)
         {
-            if(iem is InputEventMouseMotion iemm) { controller.OnLook(iemm.Relative); }
-            if(iem is InputEventMouseButton iemb) { inputLog.Write("Mouse button input not implemented!",LogLevel.warn); }
+            if (iem is InputEventMouseMotion iemm) { controller.OnLook(iemm.Relative); }
+            if (iem is InputEventMouseButton iemb) { inputLog.Write("Mouse button input not implemented!", LogLevel.warn); }
         }
 
         void KeyInput(InputEventKey iek)
@@ -62,5 +66,6 @@ namespace RollABall.Assets.src.Managers
             // Move the player by this but normalized. No idea if normalizing is redundant here.
             controller.OnMove(newMove.Normalized());
         }
+        #endregion
     }
 }
