@@ -63,11 +63,11 @@ namespace RollABall.Assets.src.Managers
             // Only set an axis' value if and only if one of its keys is pressed.
             bool s = Input.IsKeyPressed(Key.S);
             bool w = Input.IsKeyPressed(Key.W);
-            if (Gates.XOR(s, w)) { if (s) { newMove.X--; } else { newMove.X++; } }
+            if (Gates.XOR(s, w)) { if (s) { newMove.Y++; } else { newMove.Y--; } }
 
             bool a = Input.IsKeyPressed(Key.A);
             bool d = Input.IsKeyPressed(Key.D);
-            if (Gates.XOR(a, d)) { if (a) { newMove.Y--; } else { newMove.Y++; } }
+            if (Gates.XOR(a, d)) { if (a) { newMove.X--; } else { newMove.X++; } }
 
             // Move the player by this but normalized. No idea if normalizing is redundant here.
             controller.OnMove(newMove.Normalized());
