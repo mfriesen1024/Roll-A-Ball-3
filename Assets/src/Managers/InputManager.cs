@@ -30,6 +30,7 @@ namespace RollABall.Assets.src.Managers
 
         public override void _Input(InputEvent ie)
         {
+            inputLog.Write($"Got an input of type {ie.GetType()}.");
             if (ie is InputEventMouse) { MouseInput((InputEventMouse)ie); }
             if (ie is InputEventKey) { KeyInput((InputEventKey)ie); }
         }
