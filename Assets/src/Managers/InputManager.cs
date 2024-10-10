@@ -26,6 +26,12 @@ namespace RollABall.Assets.src.Managers
             // Set references.
             controller = PlayerManager.Instance.controller;
         }
+        void MouseInput(InputEventMouse iem)
+        {
+            if(iem is InputEventMouseMotion iemm) { controller.OnLook(iemm.Relative); }
+            if(iem is InputEventMouseButton iemb) { inputLog.Write("Mouse button input not implemented!",LogLevel.warn); }
+        }
+
         void KeyInput(InputEventKey iek)
         {
             // For now, we'll hardcode inputs. No idea if I'll change it around later or not.
