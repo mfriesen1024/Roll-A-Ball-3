@@ -11,11 +11,16 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_nekfl"]
 radius = 0.45
 
-[node name="Playerman" type="Node"]
+[node name="Playerman" type="Node" node_paths=PackedStringArray("controller", "ball", "cam")]
 script = ExtResource("1_bad40")
+controller = NodePath("PlayerController")
+ball = NodePath("PlayerBall")
+cam = NodePath("PlayerController/PlayerCam")
 
-[node name="PlayerController" type="Node3D" parent="."]
+[node name="PlayerController" type="Node3D" parent="." node_paths=PackedStringArray("ball", "cam")]
 script = ExtResource("2_vlbyn")
+ball = NodePath("../PlayerBall")
+cam = NodePath("PlayerCam")
 
 [node name="PlayerCam" type="Camera3D" parent="PlayerController"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.51, 1.9)
