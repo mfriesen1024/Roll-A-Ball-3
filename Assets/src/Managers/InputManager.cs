@@ -26,6 +26,11 @@ namespace RollABall.Assets.src.Managers
             // Set references.
             controller = PlayerManager.Instance.controller;
         }
+        public override void _Input(InputEvent ie)
+        {
+            if (ie is InputEventMouse) { MouseInput((InputEventMouse)ie); }
+            if (ie is InputEventKey) { KeyInput((InputEventKey)ie); }
+        }
         void MouseInput(InputEventMouse iem)
         {
             if(iem is InputEventMouseMotion iemm) { controller.OnLook(iemm.Relative); }
