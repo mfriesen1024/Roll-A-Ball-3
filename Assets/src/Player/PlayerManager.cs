@@ -1,4 +1,5 @@
 ﻿using Godot;
+using RollABall.Assets.src.Managers;
 
 namespace RollABall.Assets.src.Player
 {
@@ -8,14 +9,17 @@ namespace RollABall.Assets.src.Player
     internal partial class PlayerManager : Node
     {
         #region Refs
-        /// <summary>
-        /// Singleton instance of the player.
-        /// </summary>
-        public static PlayerManager Instance { get; private set; }
+        public PlayerManager Instance { get; private set; }
 
         [Export] PlayerController controller;
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
         #endregion
+
+        public override void _Ready()
+        {
+            if (Instance == null) { Instance = this; }
+            else { QueueFree(); }
+        }
     }
 }
