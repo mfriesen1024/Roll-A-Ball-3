@@ -54,6 +54,11 @@ namespace RollABall.Assets.src.Player
                 camParent.RotateX(-(float)delta * lookVector.Y * mouseSensitivityMod);
                 lookVector = Vector2.Zero; // Apparently we dont get an event when relative is zero.
             }
+
+            void UpdateOurPosition()
+            {
+                Position = ball.Position;
+            }
         }
 
         /// <summary>
@@ -72,11 +77,6 @@ namespace RollABall.Assets.src.Player
         public void OnLook(Vector2 direction)
         {
             lookVector = direction;
-        }
-
-        void UpdateOurPosition()
-        {
-            Position=ball.Position;
         }
     }
 }
