@@ -22,7 +22,7 @@ namespace RollABall.Assets.src.Managers
             else { QueueFree(); return; }
 
             // Set logger
-            inputLog = new Logger(true, true, "logs\\", "inputLog", "txt", true);
+            inputLog = new Logger(true, true, "logs\\", "inputLog", "txt", false);
 
             // Set references.
             controller = PlayerManager.Instance.controller;

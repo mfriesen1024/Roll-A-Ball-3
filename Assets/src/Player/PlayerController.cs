@@ -29,7 +29,7 @@ namespace RollABall.Assets.src.Player
 
         public override void _Ready()
         {
-            playerLog = new Logger(true,true,"logs\\","playerLog","txt",true);
+            playerLog = new Logger(true, true, "logs\\", "playerLog", "txt", false);
 
             // Set refs.
             camParent = (Node3D)cam.GetParent();
