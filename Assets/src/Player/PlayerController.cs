@@ -1,4 +1,5 @@
 ﻿using Godot;
+using KeystoneUtils.Logging;
 
 namespace RollABall.Assets.src.Player
 {
@@ -8,6 +9,8 @@ namespace RollABall.Assets.src.Player
     internal partial class PlayerController : Node3D
     {
         #region refs
+        Logger playerLog;
+
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
         #endregion
@@ -22,10 +25,18 @@ namespace RollABall.Assets.src.Player
         Vector3 moveVector3D = Vector3.Zero;
         #endregion
 
+        public override void _Ready()
+        {
+            playerLog = new Logger(true,true,"logs\\","playerLog","txt",true);
+        }
+
         public override void _PhysicsProcess(double delta)
         {
             Vector3 moveVelocityGoal = moveVector3D * maxMoveSpeed;
             Vector3 newVelocity = ball.LinearVelocity.Lerp(moveVelocityGoal, (float)delta*moveLerpMod);
+            ball.LinearVelocity = newVelocity;
+
+            UpdateOurPosition();
         }
 
         /// <summary>
