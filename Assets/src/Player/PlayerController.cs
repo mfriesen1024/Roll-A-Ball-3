@@ -50,8 +50,20 @@ namespace RollABall.Assets.src.Player
 
             void SetLookRotations()
             {
+                // Clamp X rot so the player can't do silly things with it.
+                float oldX = camParent.Basis.GetEuler().X;
+                float xDelta = -(float)delta * lookVector.Y * mouseSensitivityMod;
+                playerLog.Write($"Trying to look up/down, old is {oldX}, delta is {xDelta}");
+                float newX = oldX + xDelta;
+                float toRadians = Mathf.Pi / 180;
+                newX = Mathf.Clamp(newX, -75 * toRadians, 15 * toRadians);
+                // Reassign xDelta based on our clamping.
+                xDelta = newX - oldX;
+
+                // Now execute the rotations
+                camParent.RotateX(xDelta);
                 RotateY(-(float)delta * lookVector.X * mouseSensitivityMod);
-                camParent.RotateX(-(float)delta * lookVector.Y * mouseSensitivityMod);
+
                 lookVector = Vector2.Zero; // Apparently we dont get an event when relative is zero.
             }
 
