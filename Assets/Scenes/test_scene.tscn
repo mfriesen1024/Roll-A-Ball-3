@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxosgomfi3hf7"]
+[gd_scene load_steps=10 format=3 uid="uid://cxosgomfi3hf7"]
 
 [ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="1_ne63p"]
+[ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="2_p5spi"]
+[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/input_man.tscn" id="3_gbshr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikp3l"]
 size = Vector3(10, 0.1, 10)
@@ -32,3 +34,8 @@ shape = SubResource("BoxShape3D_ikp3l")
 mesh = SubResource("BoxMesh_p1ppr")
 
 [node name="Playerman" parent="." instance=ExtResource("1_ne63p")]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_p5spi")
+inputManPrefab = ExtResource("3_gbshr")
+playerManPrefab = ExtResource("1_ne63p")
