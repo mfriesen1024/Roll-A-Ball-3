@@ -18,7 +18,7 @@ namespace RollABall.Assets.src.Player
         #region speeds
         [Export] float maxMoveSpeed = 10;
         [Export] float moveLerpMod = 1;
-        [Export] float mouseSensitivityMod = 1;
+        [Export] float mouseSensitivityMod = 0.01f;
         #endregion
 
         #region moveFields
