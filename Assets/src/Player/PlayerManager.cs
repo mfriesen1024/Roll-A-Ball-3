@@ -11,7 +11,7 @@ namespace RollABall.Assets.src.Player
         #region Refs
         public static PlayerManager Instance { get; private set; }
 
-        [Export] PlayerController controller;
+        [Export] public PlayerController controller;
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
         #endregion
