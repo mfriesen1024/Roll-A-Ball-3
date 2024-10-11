@@ -1,5 +1,4 @@
 ﻿using Godot;
-using RollABall.Assets.src.Managers;
 
 namespace RollABall.Assets.src.Player
 {
@@ -14,6 +13,10 @@ namespace RollABall.Assets.src.Player
         [Export] public PlayerController controller;
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
+        #endregion
+        #region Stats
+        public int Lives { get => lives; set => lives = value; }
+        private int lives = 3;
         #endregion
 
         public override void _Ready()
