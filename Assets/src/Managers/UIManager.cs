@@ -19,8 +19,8 @@ namespace RollABall.Assets.src.Managers
         #region UIObjectRefs
         Control mainMenu, options, levelSelect, loading;
         //HUD hud;
-        Control levelComplete, levelFailure;
-        [Export] PackedScene mainMenuScene, optionsScene, levelSelectScene, loadingScene, hudScene, levelCompleteScene, levelFailureScene;
+        Control pause, levelComplete, levelFailure;
+        [Export] PackedScene mainMenuScene, optionsScene, levelSelectScene, loadingScene, hudScene, pauseScene, levelCompleteScene, levelFailureScene;
         #endregion
 
         public override void _Ready()
@@ -47,6 +47,7 @@ namespace RollABall.Assets.src.Managers
                 case UIState.LevelSelect:
                 case UIState.Loading:
                 case UIState.HUD:
+                case UIState.Pause:
                 case UIState.LevelComplete:
                 case UIState.LevelFailure:
                 default:
@@ -83,7 +84,11 @@ namespace RollABall.Assets.src.Managers
         }
         void HudHelper()
         {
-            //hud = hudScene.Instantiate() as Control;
+            //hud = hudScene.Instantiate() as HUD;
+        }
+        void PauseHelper()
+        {
+            pause = pauseScene.Instantiate() as Control;
         }
         void LevelCompleteHelper()
         {
@@ -102,6 +107,7 @@ namespace RollABall.Assets.src.Managers
         LevelSelect,
         Loading,
         HUD,
+        Pause,
         LevelComplete,
         LevelFailure
     }
