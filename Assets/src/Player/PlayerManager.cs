@@ -13,6 +13,7 @@ namespace RollABall.Assets.src.Player
         public Logger log;
 
         [Export] public PlayerController controller;
+        public RigidBody3D Ball { get => ball; set => ball = value; }
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
         #endregion
