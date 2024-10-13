@@ -24,5 +24,14 @@ namespace RollABall.Assets.src.Player
             if (Instance == null) { Instance = this; }
             else { QueueFree(); }
         }
+
+        /// <summary>
+        /// Kills the player
+        /// </summary>
+        public void OnDamage()
+        {
+            lives--;
+            if (lives >= 0) { log.Write("Level should be reloaded, but levelman not implemented!",LogLevel.warn); }
+        }
     }
 }
