@@ -1,4 +1,5 @@
 ﻿using Godot;
+using KeystoneUtils.Logging;
 
 namespace RollABall.Assets.src.Player
 {
@@ -9,8 +10,10 @@ namespace RollABall.Assets.src.Player
     {
         #region Refs
         public static PlayerManager Instance { get; private set; }
+        public Logger log;
 
         [Export] public PlayerController controller;
+        public RigidBody3D Ball { get => ball; set => ball = value; }
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
         #endregion
@@ -23,6 +26,18 @@ namespace RollABall.Assets.src.Player
         {
             if (Instance == null) { Instance = this; }
             else { QueueFree(); }
+
+            log = new Logger(true, true, "logs\\", "playerLog", "txt", false);
+        }
+
+        /// <summary>
+        /// Kills the player
+        /// </summary>
+        public void OnDamage()
+        {
+            lives--;
+            if (lives >= 0) { Logger.StaticLogger.Write("Level should be reloaded, but levelman not implemented!",LogLevel.warn); }
+            else { Logger.StaticLogger.Write("Should be gameover!",LogLevel.warn); }
         }
     }
 }

@@ -17,8 +17,9 @@ controller = NodePath("PlayerController")
 ball = NodePath("PlayerBall")
 cam = NodePath("PlayerController/CamParent/PlayerCam")
 
-[node name="PlayerController" type="Node3D" parent="." node_paths=PackedStringArray("ball", "cam")]
+[node name="PlayerController" type="Node3D" parent="." node_paths=PackedStringArray("playerManager", "ball", "cam")]
 script = ExtResource("2_vlbyn")
+playerManager = NodePath("..")
 ball = NodePath("../PlayerBall")
 cam = NodePath("CamParent/PlayerCam")
 
