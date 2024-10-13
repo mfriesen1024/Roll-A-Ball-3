@@ -37,7 +37,7 @@ namespace RollABall.Assets.src.Managers
         private void SetGMSingleton()
         {
             if (Instance == null) { Instance = this; }
-            else { QueueFree(); }
+            else { QueueFree(); return; }
         }
     }
 
