@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpeq542j7tttv"]
+
+[ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/Level1.blend" id="1_hlxvo"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="2_xk6uf"]
+[ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="3_ofj8s"]
+[ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="4_2try3"]
+[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/input_man.tscn" id="5_g3bja"]
+
+[node name="Level1" instance=ExtResource("1_hlxvo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="KillPlane" parent="." index="1"]
+script = ExtResource("2_xk6uf")
+
+[node name="Playerman" parent="." index="15" instance=ExtResource("3_ofj8s")]
+
+[node name="Node" type="Node" parent="." index="16"]
+script = ExtResource("4_2try3")
+inputManPrefab = ExtResource("5_g3bja")
+playerManPrefab = ExtResource("3_ofj8s")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -13)
