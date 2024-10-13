@@ -19,7 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_c3ejc")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TexBG"]
+[node name="container" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
@@ -30,30 +30,30 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="e1" type="Control" parent="TexBG/VBoxContainer"]
+[node name="e1" type="Control" parent="container"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="play" type="Button" parent="TexBG/VBoxContainer"]
+[node name="play" type="Button" parent="container"]
 layout_mode = 2
 text = "Play"
 
-[node name="e2" type="Control" parent="TexBG/VBoxContainer"]
+[node name="e2" type="Control" parent="container"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="options" type="Button" parent="TexBG/VBoxContainer"]
+[node name="options" type="Button" parent="container"]
 layout_mode = 2
 text = "Options"
 
-[node name="e3" type="Control" parent="TexBG/VBoxContainer"]
+[node name="e3" type="Control" parent="container"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="exit" type="Button" parent="TexBG/VBoxContainer"]
+[node name="exit" type="Button" parent="container"]
 layout_mode = 2
 text = "Exit to Desktop"
 
-[node name="e4" type="Control" parent="TexBG/VBoxContainer"]
+[node name="e4" type="Control" parent="container"]
 layout_mode = 2
 size_flags_vertical = 3
