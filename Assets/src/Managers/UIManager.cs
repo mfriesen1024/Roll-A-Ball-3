@@ -40,16 +40,17 @@ namespace RollABall.Assets.src.Managers
 
         private void OnSetState(UIState value)
         {
+            HideAll();
             switch (value)
             {
-                case UIState.Main:
-                case UIState.Options:
-                case UIState.LevelSelect:
-                case UIState.Loading:
-                case UIState.HUD:
-                case UIState.Pause:
-                case UIState.LevelComplete:
-                case UIState.LevelFailure:
+                case UIState.Main: MainMenuHelper(); break;
+                case UIState.Options: OptionsHelper(); break;
+                case UIState.LevelSelect: LevelSelectHelper(); break;
+                case UIState.Loading: LoadingHelper(); break;
+                case UIState.HUD: HudHelper(); break;
+                case UIState.Pause: PauseHelper(); break;
+                case UIState.LevelComplete: LevelCompleteHelper(); break;
+                case UIState.LevelFailure: LevelFailureHelper(); break;
                 default:
                     string s = $"State {value} is not implemented.";
                     log.Write(s); throw new NotImplementedException(s);
