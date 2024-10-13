@@ -95,7 +95,6 @@ namespace RollABall.Assets.src.Managers
         }
     }
 
-
     public enum UIState
     {
         Main,
