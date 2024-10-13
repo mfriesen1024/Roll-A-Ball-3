@@ -10,6 +10,10 @@ namespace RollABall.Assets.src.Managers
 {
     internal partial class GameManager : Node
     {
+        /// <summary>
+        /// Called after the ready callback, intended to allow managers to get references to each other after initialization finishes.
+        /// </summary>
+        public static Action<GameManager> postInit = delegate { };
         public static GameManager Instance { get; private set; }
 
         #region managerRefs
@@ -23,6 +27,8 @@ namespace RollABall.Assets.src.Managers
         {
             SetGMSingleton();
             SetOtherSingletons();
+
+            postInit(this);
         }
 
         private void SetOtherSingletons()
