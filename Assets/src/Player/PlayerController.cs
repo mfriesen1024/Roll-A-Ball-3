@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 
 namespace RollABall.Assets.src.Player
 {
@@ -8,7 +8,7 @@ namespace RollABall.Assets.src.Player
     internal partial class PlayerController : Node3D
     {
         #region refs
-        PlayerManager playerManager;
+        [Export] PlayerManager playerManager;
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
         Node3D camParent;
@@ -27,7 +27,6 @@ namespace RollABall.Assets.src.Player
         {
             // Set refs.
             camParent = (Node3D)cam.GetParent();
-            playerManager = PlayerManager.Instance;
         }
 
         public override void _PhysicsProcess(double delta)
