@@ -40,4 +40,11 @@ namespace RollABall.Assets.src.Managers
             else { QueueFree(); }
         }
     }
+
+    public enum GameState
+    {
+        MenuOnly,
+        Gameplay,
+        Pause
+    }
 }
