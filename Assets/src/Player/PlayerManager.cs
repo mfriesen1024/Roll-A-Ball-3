@@ -36,7 +36,8 @@ namespace RollABall.Assets.src.Player
         public void OnDamage()
         {
             lives--;
-            if (lives >= 0) { log.Write("Level should be reloaded, but levelman not implemented!",LogLevel.warn); }
+            if (lives >= 0) { Logger.StaticLogger.Write("Level should be reloaded, but levelman not implemented!",LogLevel.warn); }
+            else { Logger.StaticLogger.Write("Should be gameover!",LogLevel.warn); }
         }
     }
 }
