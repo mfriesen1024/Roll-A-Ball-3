@@ -67,38 +67,17 @@ namespace RollABall.Assets.src.Managers
             if (levelComplete != null) { levelComplete.QueueFree(); levelComplete = null; }
             if (levelFailure != null) { levelFailure.QueueFree(); levelFailure = null; }
         }
-        void MainMenuHelper()
-        {
-            mainMenu = mainMenuScene.Instantiate() as Control;
-        }
-        void OptionsHelper()
-        {
-            options = optionsScene.Instantiate() as Control;
-        }
-        void LevelSelectHelper()
-        {
-            levelSelect = levelSelectScene.Instantiate() as Control;
-        }
-        void LoadingHelper()
-        {
-            loading = loadingScene.Instantiate() as Control;
-        }
+        void MainMenuHelper() { mainMenu = mainMenuScene.Instantiate() as Control; }
+        void OptionsHelper() { options = optionsScene.Instantiate() as Control; }
+        void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control; }
+        void LoadingHelper() { loading = loadingScene.Instantiate() as Control; }
         void HudHelper()
         {
             //hud = hudScene.Instantiate() as HUD;
         }
-        void PauseHelper()
-        {
-            pause = pauseScene.Instantiate() as Control;
-        }
-        void LevelCompleteHelper()
-        {
-            levelComplete = levelCompleteScene.Instantiate() as Control;
-        }
-        void LevelFailureHelper()
-        {
-            levelFailure = levelFailureScene.Instantiate() as Control;
-        }
+        void PauseHelper() { pause = pauseScene.Instantiate() as Control; }
+        void LevelCompleteHelper() { levelComplete = levelCompleteScene.Instantiate() as Control; }
+        void LevelFailureHelper() { levelFailure = levelFailureScene.Instantiate() as Control; }
     }
 
     public enum UIState
