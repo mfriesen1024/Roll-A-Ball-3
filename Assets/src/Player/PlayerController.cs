@@ -1,5 +1,4 @@
 ﻿using Godot;
-using KeystoneUtils.Logging;
 
 namespace RollABall.Assets.src.Player
 {
@@ -9,19 +8,16 @@ namespace RollABall.Assets.src.Player
     internal partial class PlayerController : Node3D
     {
         #region refs
-        Logger playerLog;
-
+        PlayerManager playerManager;
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
         Node3D camParent;
         #endregion
-
         #region speeds
         [Export] float maxMoveSpeed = 10;
         [Export] float moveLerpMod = 1;
         [Export] float mouseSensitivityMod = 1f;
         #endregion
-
         #region moveFields
         Vector3 moveVector3D = Vector3.Zero;
         Vector2 lookVector = Vector2.Zero;
@@ -29,10 +25,9 @@ namespace RollABall.Assets.src.Player
 
         public override void _Ready()
         {
-            playerLog = new Logger(true, true, "logs\\", "playerLog", "txt", false);
-
             // Set refs.
             camParent = (Node3D)cam.GetParent();
+            playerManager = PlayerManager.Instance;
         }
 
         public override void _PhysicsProcess(double delta)
@@ -53,7 +48,7 @@ namespace RollABall.Assets.src.Player
                 // Clamp X rot so the player can't do silly things with it.
                 float oldX = camParent.Basis.GetEuler().X;
                 float xDelta = -(float)delta * lookVector.Y * mouseSensitivityMod;
-                playerLog.Write($"Trying to look up/down, old is {oldX}, delta is {xDelta}");
+                playerManager.log.Write($"Trying to look up/down, old is {oldX}, delta is {xDelta}");
                 float newX = oldX + xDelta;
                 float toRadians = Mathf.Pi / 180;
                 newX = Mathf.Clamp(newX, -74 * toRadians, 14 * toRadians);
@@ -83,7 +78,7 @@ namespace RollABall.Assets.src.Player
             // Compose the move direction.
             Vector2 moveVector2D = direction.Y * cam.Get2DForward();
             moveVector2D += direction.X * cam.Get2DRight();
-            playerLog.Write($"Cam forward is {cam.Get2DForward()}, cam right is {cam.Get2DRight()}");
+            playerManager.log.Write($"Cam forward is {cam.Get2DForward()}, cam right is {cam.Get2DRight()}");
             moveVector3D = new(moveVector2D.X, 0, moveVector2D.Y);
         }
 
