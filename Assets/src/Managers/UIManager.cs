@@ -67,7 +67,20 @@ namespace RollABall.Assets.src.Managers
             if (levelComplete != null) { levelComplete.QueueFree(); levelComplete = null; }
             if (levelFailure != null) { levelFailure.QueueFree(); levelFailure = null; }
         }
-        void MainMenuHelper() { mainMenu = mainMenuScene.Instantiate() as Control; }
+        void MainMenuHelper()
+        {
+            mainMenu = mainMenuScene.Instantiate() as Control;
+            AddChild(mainMenu);
+
+            Button play = mainMenu.FindChild("play", true) as Button;
+            // This should be used, but currently, we dont have level selection implemented.
+            //play.Pressed += () => { State = UIState.LevelSelect; };
+            play.Pressed += () => { State = UIState.HUD; };
+            Button options = mainMenu.FindChild("options", true) as Button;
+            options.Pressed += () => { State = UIState.Options; gameManager.State = GameState.Gameplay; };
+            Button exit = mainMenu.FindChild("exit", true) as Button;
+            exit.Pressed += () => { gameManager.StartQuit(); };
+        }
         void OptionsHelper() { options = optionsScene.Instantiate() as Control; }
         void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control; }
         void LoadingHelper() { loading = loadingScene.Instantiate() as Control; }
