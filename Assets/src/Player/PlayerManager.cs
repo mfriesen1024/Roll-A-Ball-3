@@ -25,7 +25,7 @@ namespace RollABall.Assets.src.Player
         public override void _Ready()
         {
             if (Instance == null) { Instance = this; }
-            else { QueueFree(); }
+            else { QueueFree(); return; }
 
             log = new Logger(true, true, "logs\\", "playerLog", "txt", false);
         }
