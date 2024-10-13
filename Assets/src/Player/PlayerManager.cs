@@ -1,4 +1,5 @@
 ﻿using Godot;
+using KeystoneUtils.Logging;
 
 namespace RollABall.Assets.src.Player
 {
@@ -9,6 +10,7 @@ namespace RollABall.Assets.src.Player
     {
         #region Refs
         public static PlayerManager Instance { get; private set; }
+        public Logger log;
 
         [Export] public PlayerController controller;
         [Export] RigidBody3D ball;
@@ -23,6 +25,8 @@ namespace RollABall.Assets.src.Player
         {
             if (Instance == null) { Instance = this; }
             else { QueueFree(); }
+
+            log = new Logger(true, true, "logs\\", "playerLog", "txt", false);
         }
 
         /// <summary>
