@@ -1,4 +1,5 @@
 ﻿using Godot;
+using KeystoneUtils.Logging;
 using RollABall.Assets.src.Player;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace RollABall.Assets.src.LevelObjects
             {
                 if(rb == PlayerManager.Instance.Ball) { PlayerManager.Instance.OnDamage(); }
             }
+            Logger.StaticLogger.Write($"Trigger was entered by {body.Name}, it has type {body.GetType()}");
         }
     }
 }
