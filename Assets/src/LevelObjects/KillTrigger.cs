@@ -20,13 +20,13 @@ namespace RollABall.Assets.src.LevelObjects
             BodyEntered += OnTriggerEnter;
         }
 
-        private void OnTriggerEnter(Node3D body)
+        private void OnTriggerEnter(Node3D other)
         {
-            if (body is RigidBody3D rb)
+            if (other is RigidBody3D rb)
             {
                 if(rb == PlayerManager.Instance.Ball) { PlayerManager.Instance.OnDamage(); }
             }
-            Logger.StaticLogger.Write($"Trigger was entered by {body.Name}, it has type {body.GetType()}");
+            Logger.StaticLogger.Write($"Trigger was entered by {other.Name}, it has type {other.GetType()}");
         }
     }
 }
