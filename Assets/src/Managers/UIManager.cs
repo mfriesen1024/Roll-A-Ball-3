@@ -12,7 +12,7 @@ namespace RollABall.Assets.src.Managers
         #region refs
         GameManager gameManager;
         public static UIManager Instance { get; private set; }
-        public UIState State { get => state; set { state = value; OnSetState(value); } }
+        public UIState State { get => state; set { OnSetState(value); state = value; } }
         private UIState state;
         public Logger log;
         #endregion
