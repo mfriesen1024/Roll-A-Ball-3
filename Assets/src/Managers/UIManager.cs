@@ -36,6 +36,7 @@ namespace RollABall.Assets.src.Managers
         {
             gameManager = GameManager.Instance;
             log.Write("Initialization finished, setting state of MainMenu");
+            State = UIState.Main;
         }
 
         private void OnSetState(UIState value)
