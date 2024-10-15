@@ -75,7 +75,8 @@ namespace RollABall.Assets.src.Managers
             else { PlayerManager = playerManPrefab.Instantiate() as PlayerManager; AddChild(PlayerManager); }
             if (InputManager.Instance != null) { InputManager = InputManager.Instance; }
             else { InputManager = inputManPrefab.Instantiate() as InputManager; AddChild(InputManager); }
-            if (UIManager.Instance != null) { UIManager = uiManPrefab.Instantiate() as UIManager; AddChild(UIManager); }
+            if (UIManager.Instance != null) { UIManager = UIManager.Instance; }
+            else { UIManager = uiManPrefab.Instantiate() as UIManager; AddChild(UIManager); }
         }
 
         private void SetGMSingleton()
