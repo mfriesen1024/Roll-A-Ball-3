@@ -78,7 +78,7 @@ namespace RollABall.Assets.src.Managers
             //play.Pressed += () => { State = UIState.LevelSelect; };
             play.Pressed += () => { State = UIState.HUD; };
             Button options = mainMenu.FindChild("options", true) as Button;
-            options.Pressed += () => { State = UIState.Options; gameManager.State = GameState.Gameplay; };
+            options.Pressed += () => { State = UIState.Options; };
             Button exit = mainMenu.FindChild("exit", true) as Button;
             exit.Pressed += () => { gameManager.StartQuit(); };
         }
