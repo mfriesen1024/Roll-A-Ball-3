@@ -1,5 +1,6 @@
 ﻿using Godot;
 using KeystoneUtils.Logging;
+using RollABall.Assets.src.UI;
 using System;
 
 namespace RollABall.Assets.src.Managers
@@ -18,7 +19,7 @@ namespace RollABall.Assets.src.Managers
         #endregion
         #region UIObjectRefs
         Control mainMenu, options, levelSelect, loading;
-        //HUD hud;
+        public HUD hud { get; private set; }
         Control pause, levelComplete, levelFailure;
         [Export] PackedScene mainMenuScene, optionsScene, levelSelectScene, loadingScene, hudScene, pauseScene, levelCompleteScene, levelFailureScene;
         #endregion
@@ -64,7 +65,7 @@ namespace RollABall.Assets.src.Managers
             if (options != null) { options.QueueFree(); options = null; }
             if (levelSelect != null) { levelSelect.QueueFree(); levelSelect = null; }
             if (loading != null) { loading.QueueFree(); loading = null; }
-            //if (hud != null) { hud.QueueFree(); hud = null; }
+            if (hud != null) { hud.QueueFree(); hud = null; }
             if (levelComplete != null) { levelComplete.QueueFree(); levelComplete = null; }
             if (levelFailure != null) { levelFailure.QueueFree(); levelFailure = null; }
         }
@@ -85,10 +86,7 @@ namespace RollABall.Assets.src.Managers
         void OptionsHelper() { options = optionsScene.Instantiate() as Control; }
         void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control; }
         void LoadingHelper() { loading = loadingScene.Instantiate() as Control; }
-        void HudHelper()
-        {
-            //hud = hudScene.Instantiate() as HUD;
-        }
+        void HudHelper() { hud = hudScene.Instantiate() as HUD; }
         void PauseHelper() { pause = pauseScene.Instantiate() as Control; }
         void LevelCompleteHelper() { levelComplete = levelCompleteScene.Instantiate() as Control; }
         void LevelFailureHelper() { levelFailure = levelFailureScene.Instantiate() as Control; }
