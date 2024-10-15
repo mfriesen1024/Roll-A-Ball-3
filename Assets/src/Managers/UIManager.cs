@@ -81,7 +81,7 @@ namespace RollABall.Assets.src.Managers
             Button options = mainMenu.FindChild("options", true) as Button;
             options.Pressed += () => { State = UIState.Options; };
             Button exit = mainMenu.FindChild("exit", true) as Button;
-            exit.Pressed += () => { gameManager.StartQuit(); };
+            exit.Pressed += gameManager.StartQuit;
         }
         void OptionsHelper() { options = optionsScene.Instantiate() as Control; }
         void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control; }
