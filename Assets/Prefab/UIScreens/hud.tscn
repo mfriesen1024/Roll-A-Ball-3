@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqnvncekdgp34"]
+[gd_scene load_steps=3 format=3 uid="uid://dqnvncekdgp34"]
 
+[ext_resource type="Script" path="res://Assets/src/UI/HUD.cs" id="1_qlb61"]
 [ext_resource type="Texture2D" uid="uid://bim5v68d3wqnd" path="res://Assets/Arting/Tex/1upIcon.png" id="1_utme5"]
 
 [node name="HUDMain" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_qlb61")
 
 [node name="health" type="Control" parent="."]
 clip_contents = true
