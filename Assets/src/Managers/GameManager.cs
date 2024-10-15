@@ -22,7 +22,9 @@ namespace RollABall.Assets.src.Managers
         /// <summary>
         /// State of the game.
         /// </summary>
-        public GameState State;
+        public GameState State { get => state; set { OnSetState(value); state=value;  } }
+
+        private GameState state;
 
         #region managerRefs
         public static InputManager InputManager { get; private set; }
