@@ -97,7 +97,11 @@ namespace RollABall.Assets.src.Managers
             loading = loadingScene.Instantiate() as Control;
             AddChild(loading);
         }
-        void HudHelper() { hud = hudScene.Instantiate() as HUD; }
+        void HudHelper()
+        {
+            hud = hudScene.Instantiate() as HUD;
+            AddChild(hud);
+        }
         void PauseHelper()
         {
             pause = pauseScene.Instantiate() as Control;
