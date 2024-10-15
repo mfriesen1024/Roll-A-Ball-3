@@ -1,14 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://d4blftxugi6xy"]
 
-[ext_resource type="Texture2D" uid="uid://bmuhy4idcu7hm" path="res://Assets/Resources/menuGradient.tres" id="1_f7w3x"]
+[ext_resource type="Texture2D" uid="uid://c18kip1dhavm2" path="res://Assets/Arting/Tex/cat.jpg" id="1_bs36c"]
 
 [node name="loading" type="TextureRect"]
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_f7w3x")
+texture = ExtResource("1_bs36c")
 
 [node name="text" type="Label" parent="."]
 layout_mode = 1
