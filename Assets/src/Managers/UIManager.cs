@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.UI;
 using System;
@@ -92,7 +92,11 @@ namespace RollABall.Assets.src.Managers
             back.Pressed += () => { State = UIState.Main; };
         }
         void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control; }
-        void LoadingHelper() { loading = loadingScene.Instantiate() as Control; }
+        void LoadingHelper()
+        {
+            loading = loadingScene.Instantiate() as Control;
+            AddChild(loading);
+        }
         void HudHelper() { hud = hudScene.Instantiate() as HUD; }
         void PauseHelper()
         {
