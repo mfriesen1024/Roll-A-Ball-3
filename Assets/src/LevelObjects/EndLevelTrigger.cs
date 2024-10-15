@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace RollABall.Assets.src.LevelObjects
     /// <summary>
     /// Ends the level when triggered.
     /// </summary>
-    internal class EndLevelTrigger
+    internal partial class EndLevelTrigger:Area3D
     {
     }
 }
