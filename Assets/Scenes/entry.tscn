@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://cygxp5bbmyisv"]
+
+[ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="1_uveo8"]
+[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/Managers/input_man.tscn" id="2_6hscy"]
+[ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="3_5jty7"]
+[ext_resource type="PackedScene" uid="uid://p6rvwvi83vep" path="res://Assets/Prefab/Managers/ui_man.tscn" id="4_johtk"]
+
+[node name="Entry" type="Node"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_uveo8")
+inputManPrefab = ExtResource("2_6hscy")
+playerManPrefab = ExtResource("3_5jty7")
+uiManPrefab = ExtResource("4_johtk")

@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://dug5add7dwntf"]
+
+[ext_resource type="Texture2D" uid="uid://bmuhy4idcu7hm" path="res://Assets/Resources/menuGradient.tres" id="1_c3ejc"]
+
+[node name="mainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TexBG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_c3ejc")
+
+[node name="container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.6
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="e1" type="Control" parent="container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="play" type="Button" parent="container"]
+layout_mode = 2
+text = "Play"
+
+[node name="e2" type="Control" parent="container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="options" type="Button" parent="container"]
+layout_mode = 2
+text = "Options"
+
+[node name="e3" type="Control" parent="container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="exit" type="Button" parent="container"]
+layout_mode = 2
+text = "Exit to Desktop"
+
+[node name="e4" type="Control" parent="container"]
+layout_mode = 2
+size_flags_vertical = 3

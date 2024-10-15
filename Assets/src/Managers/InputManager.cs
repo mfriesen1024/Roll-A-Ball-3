@@ -51,7 +51,7 @@ namespace RollABall.Assets.src.Managers
                 case Key.A:
                 case Key.S:
                 case Key.D: HandleMoveInput(); break;
-                case Key.Escape:
+                case Key.Escape: if (UIManager.Instance.State == UIState.HUD) { UIManager.Instance.State = UIState.Pause; } break;
                 default: break;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using Godot;
 using KeystoneUtils.Logging;
+using RollABall.Assets.src.Managers;
 
 namespace RollABall.Assets.src.Player
 {
@@ -24,9 +25,9 @@ namespace RollABall.Assets.src.Player
 
         public override void _Ready()
         {
-            if (Instance == null) { Instance = this; }
-            else { QueueFree(); }
+            if (Instance != null) { QueueFree(); return; }
 
+            Instance = this;
             log = new Logger(true, true, "logs\\", "playerLog", "txt", false);
         }
 
@@ -35,9 +36,10 @@ namespace RollABall.Assets.src.Player
         /// </summary>
         public void OnDamage()
         {
-            lives--;
-            if (lives >= 0) { Logger.StaticLogger.Write("Level should be reloaded, but levelman not implemented!",LogLevel.warn); }
-            else { Logger.StaticLogger.Write("Should be gameover!",LogLevel.warn); }
+            Lives--;
+            UIManager.Instance.hud.Update();
+            if (Lives >= 0) { Logger.StaticLogger.Write("Level should be reloaded, but levelman not implemented!", LogLevel.warn); }
+            else { Logger.StaticLogger.Write("Should be gameover!", LogLevel.warn); }
         }
     }
 }
