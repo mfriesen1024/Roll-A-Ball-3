@@ -36,6 +36,7 @@ namespace RollABall.Assets.src.Managers
             postInit();
         }
 
+        #region helperMethods
         private void SetOtherSingletons()
         {
             // Check other managers for their singleton instances, and if they don't exist, create them.
@@ -59,6 +60,7 @@ namespace RollABall.Assets.src.Managers
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 
     public enum GameState
