@@ -83,7 +83,14 @@ namespace RollABall.Assets.src.Managers
             Button exit = mainMenu.FindChild("exit", true) as Button;
             exit.Pressed += gameManager.StartQuit;
         }
-        void OptionsHelper() { options = optionsScene.Instantiate() as Control; }
+        void OptionsHelper()
+        {
+            options = optionsScene.Instantiate() as Control;
+            AddChild(options);
+
+            Button back = options.FindChild("return", true) as Button;
+            back.Pressed += () => { State = UIState.Main; };
+        }
         void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control; }
         void LoadingHelper() { loading = loadingScene.Instantiate() as Control; }
         void HudHelper() { hud = hudScene.Instantiate() as HUD; }
