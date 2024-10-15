@@ -61,11 +61,13 @@ namespace RollABall.Assets.src.Managers
 
         void HideAll()
         {
+            PrintTreePretty();
             if (mainMenu != null) { mainMenu.QueueFree(); mainMenu = null; }
             if (options != null) { options.QueueFree(); options = null; }
             if (levelSelect != null) { levelSelect.QueueFree(); levelSelect = null; }
             if (loading != null) { loading.QueueFree(); loading = null; }
-            if (hud != null) { hud.QueueFree(); hud = null; }
+            if (hud != null) { RemoveChild(hud); hud = null; }
+            if (pause != null) { pause.QueueFree(); pause = null; }
             if (levelComplete != null) { levelComplete.QueueFree(); levelComplete = null; }
             if (levelFailure != null) { levelFailure.QueueFree(); levelFailure = null; }
         }
@@ -110,7 +112,7 @@ namespace RollABall.Assets.src.Managers
             Button resume = pause.FindChild("resume", true) as Button;
             resume.Pressed += () => { State = UIState.HUD; };
             Button menu = pause.FindChild("menu", true) as Button;
-            menu.Pressed += () => { State = UIState.HUD; };
+            menu.Pressed += () => { State = UIState.Main; };
         }
         void LevelCompleteHelper() { levelComplete = levelCompleteScene.Instantiate() as Control; }
         void LevelFailureHelper() { levelFailure = levelFailureScene.Instantiate() as Control; }
