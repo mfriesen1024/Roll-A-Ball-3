@@ -94,7 +94,16 @@ namespace RollABall.Assets.src.Managers
         void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control; }
         void LoadingHelper() { loading = loadingScene.Instantiate() as Control; }
         void HudHelper() { hud = hudScene.Instantiate() as HUD; }
-        void PauseHelper() { pause = pauseScene.Instantiate() as Control; }
+        void PauseHelper()
+        {
+            pause = pauseScene.Instantiate() as Control;
+            AddChild(pause);
+
+            Button resume = pause.FindChild("resume", true) as Button;
+            resume.Pressed += () => { State = UIState.HUD; };
+            Button menu = pause.FindChild("menu", true) as Button;
+            menu.Pressed += () => { State = UIState.HUD; };
+        }
         void LevelCompleteHelper() { levelComplete = levelCompleteScene.Instantiate() as Control; }
         void LevelFailureHelper() { levelFailure = levelFailureScene.Instantiate() as Control; }
     }
