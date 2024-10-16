@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="1_ne63p"]
 [ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="2_p5spi"]
 [ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/Managers/input_man.tscn" id="3_gbshr"]
-[ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingCollider.cs" id="4_wuqkq"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingPlatform.cs" id="4_xyvir"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikp3l"]
 size = Vector3(10, 0.1, 10)
@@ -45,9 +45,12 @@ script = ExtResource("2_p5spi")
 inputManPrefab = ExtResource("3_gbshr")
 playerManPrefab = ExtResource("1_ne63p")
 
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("trigger")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-script = ExtResource("4_wuqkq")
+script = ExtResource("4_xyvir")
+trigger = NodePath("")
+Start = Vector3(0, -1.4, -1)
+End = Vector3(0, -1.4, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
 shape = SubResource("BoxShape3D_0qj1w")
