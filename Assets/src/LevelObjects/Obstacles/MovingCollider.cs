@@ -32,7 +32,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
         public override void _PhysicsProcess(double delta)
         {
             UpdateMoveFields(delta);
-            Move(Unlocked, lerpFactor);
+            Move(Unlocked, lerpFactor, delta);
         }
 
         /// <summary>
@@ -40,12 +40,12 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
         /// </summary>
         /// <param name="unlocked">Whether or not the object is locked.</param>
         /// <param name="lerpFactor">The factor to be used for lerping its position.</param>
-        protected virtual void Move(bool unlocked, float lerpFactor)
+        protected virtual void Move(bool unlocked, float lerpFactor, double delta)
         {
             // Only run if unlocked.
             if (unlocked)
             {
-                Position = Start.Lerp(End,lerpFactor);
+                Position = Start.Lerp(End, lerpFactor);
                 Logger.StaticLogger.WriteAll($"LerpFactor is {lerpFactor}, Position is {Position}");
             }
         }
@@ -60,8 +60,8 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
             lerpFactor = Mathf.Clamp(lerpFactor, 0, 1);
 
             // Set returning bool.
-            if(lerpFactor == 1) { returning = true; }
-            if(lerpFactor == 0) { returning = false; }
+            if (lerpFactor == 1) { returning = true; }
+            if (lerpFactor == 0) { returning = false; }
         }
     }
 }
