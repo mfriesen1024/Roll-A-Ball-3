@@ -33,6 +33,8 @@ namespace RollABall.Assets.src.Managers
         [Export] PackedScene playerManPrefab;
         public static UIManager UIManager { get; private set; }
         [Export] PackedScene uiManPrefab;
+        public static LevelManager LevelManager { get; private set; }
+        [Export] PackedScene levelManPrefab;
         #endregion
 
         public override void _Ready()
@@ -77,6 +79,8 @@ namespace RollABall.Assets.src.Managers
             else { InputManager = inputManPrefab.Instantiate() as InputManager; AddChild(InputManager); }
             if (UIManager.Instance != null) { UIManager = UIManager.Instance; }
             else { UIManager = uiManPrefab.Instantiate() as UIManager; AddChild(UIManager); }
+            if (LevelManager.Instance != null) { LevelManager = LevelManager.Instance; }
+            else { LevelManager = levelManPrefab.Instantiate() as LevelManager; AddChild(LevelManager); }
         }
 
         private void SetGMSingleton()
