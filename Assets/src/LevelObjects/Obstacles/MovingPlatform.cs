@@ -9,7 +9,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
     /// <summary>
     /// A platform the player can ride on.
     /// </summary>
-    internal class MovingPlatform:MovingCollider
+    internal partial class MovingPlatform:MovingCollider
     {
     }
 }
