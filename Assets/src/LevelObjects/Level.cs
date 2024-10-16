@@ -21,22 +21,27 @@ namespace RollABall.Assets.src.LevelObjects
 
         public override void _Ready()
         {
-            var elts = triggers.ToList();
-            var cps = checkpoints.ToList();
-            var mps = movingPlatforms.ToList();
+            SetRefs();
 
-            foreach (var c in GetChildren())
+            void SetRefs()
             {
-                Logger.StaticLogger.Write($"Node {c.Name} was detected. It has type {c.GetType()}.");
-                if (c is EndLevelTrigger) { elts.Add(c as EndLevelTrigger); }
-                else if (c is Checkpoint) { cps.Add(c as Checkpoint); }
-                else if (c is MovingPlatform) { mps.Add(c as MovingPlatform); }
-                else { Logger.StaticLogger.Write($"Node {c.Name} was not registered. It has type {c.GetType()}",LogLevel.info); }
-            }
+                var elts = triggers.ToList();
+                var cps = checkpoints.ToList();
+                var mps = movingPlatforms.ToList();
 
-            triggers = elts.ToArray();
-            checkpoints = cps.ToArray();
-            movingPlatforms = mps.ToArray();
+                foreach (var c in GetChildren())
+                {
+                    Logger.StaticLogger.Write($"Node {c.Name} was detected. It has type {c.GetType()}.");
+                    if (c is EndLevelTrigger) { elts.Add(c as EndLevelTrigger); }
+                    else if (c is Checkpoint) { cps.Add(c as Checkpoint); }
+                    else if (c is MovingPlatform) { mps.Add(c as MovingPlatform); }
+                    else { Logger.StaticLogger.Write($"Node {c.Name} was not registered. It has type {c.GetType()}", LogLevel.info); }
+                }
+
+                triggers = elts.ToArray();
+                checkpoints = cps.ToArray();
+                movingPlatforms = mps.ToArray();
+            }
         }
     }
 }
