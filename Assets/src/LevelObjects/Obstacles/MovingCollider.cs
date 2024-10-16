@@ -1,4 +1,5 @@
 ﻿using Godot;
+using KeystoneUtils.Logging;
 
 namespace RollABall.Assets.src.LevelObjects.Obstacles
 {
@@ -25,8 +26,8 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
         [Export] public bool Unlocked = true;
 
         // Protected refs for movement stuff.
-        private float lerpFactor { get; set; } = 0;
-        private bool returning { get; set; } = false;
+        private float lerpFactor = 0;
+        private bool returning = false;
 
         public override void _PhysicsProcess(double delta)
         {
@@ -45,6 +46,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
             if (unlocked)
             {
                 Position = Start.Lerp(End,lerpFactor);
+                Logger.StaticLogger.WriteAll($"LerpFactor is {lerpFactor}, Position is {Position}");
             }
         }
 
@@ -52,9 +54,10 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
         {
             float newDelta = (float)delta;
             // Set new lerp factor.
-            if (returning) { lerpFactor -= newDelta / speed; }
-            else { lerpFactor += newDelta / speed; }
-            lerpFactor = Mathf.Clamp(newDelta, 0, 1);
+            float scaledDelta = newDelta / speed;
+            if (returning) { lerpFactor-=scaledDelta; }
+            else { lerpFactor+=newDelta; }
+            lerpFactor = Mathf.Clamp(lerpFactor, 0, 1);
 
             // Set returning bool.
             if(lerpFactor == 1) { returning = true; }
