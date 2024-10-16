@@ -16,7 +16,6 @@ namespace RollABall.Assets.src.Player
         [Export] public PlayerController controller;
         public RigidBody3D Ball { get => ball; set => ball = value; }
         [Export] RigidBody3D ball;
-        [Export] PlayerCam cam;
         #endregion
         #region Stats
         public int Lives { get => lives; set => lives = value; }
