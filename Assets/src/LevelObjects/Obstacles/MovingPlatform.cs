@@ -29,6 +29,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
                 trigger.AddChild(shape);
                 trigger.Position = Vector3.Up;
                 AddChild(trigger);
+                Logger.StaticLogger.WriteAll($"Shape{shape}, shape's shape?{shape.Shape}");
             }
 
             trigger.BodyEntered += OnTriggerEnter;
@@ -37,22 +38,25 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
 
         protected override void Move(bool unlocked, float lerpFactor, double delta)
         {
+            // Confirmed working.
             // Capture velocity before and after our move.
             Vector3 oldPos = Position;
-            base.Move(unlocked, lerpFactor,delta);
+            base.Move(unlocked, lerpFactor, delta);
             Vector3 newPos = Position;
 
             Vector3 posDelta = newPos - oldPos;
 
-            foreach(PhysicsBody3D pb in attachedObjects)
+            foreach (PhysicsBody3D pb in attachedObjects)
             {
                 pb.Position += posDelta;
+                //Logger.StaticLogger.WriteAll($"Have captured obj of name {pb.Name}");
             }
         }
 
         private void OnTriggerExit(Node3D body)
         {
-            if (body is PhysicsBody3D pb)
+            Logger.StaticLogger.WriteAll($"Triggered by object {body.Name}");
+            if (body is PhysicsBody3D pb && body != this)
             {
                 var aoList = attachedObjects.ToList();
                 bool changed = false;
@@ -71,7 +75,8 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
 
         private void OnTriggerEnter(Node3D body)
         {
-            if (body is PhysicsBody3D pb)
+            Logger.StaticLogger.WriteAll($"Triggered by object {body.Name}");
+            if (body is PhysicsBody3D pb && body != this)
             {
                 var aoList = attachedObjects.ToList();
                 aoList.Add(pb);
