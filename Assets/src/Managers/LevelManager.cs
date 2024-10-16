@@ -85,6 +85,14 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         private void ELTCheck(Node3D other)
         {
+            if (PlayerManager.Instance.Equals(other))
+            {
+                CheckpointIndex = 0;
+                Discard();
+
+                var ex = new NotImplementedException("Aaa! Saving times/scores not implemented!");
+                Logger.StaticLogger.Write($"{ex.Message}");
+                throw ex;
             }
         }
     }
