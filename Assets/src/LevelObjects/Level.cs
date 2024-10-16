@@ -1,23 +1,19 @@
 ﻿using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.LevelObjects.Obstacles;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RollABall.Assets.src.LevelObjects
 {
     /// <summary>
     /// Manages all objects within a given level.
     /// </summary>
-    internal partial class Level:Node3D
+    internal partial class Level : Node3D
     {
         // Initialize with empty collection so we can .tolist later.
-        EndLevelTrigger[] triggers = [];
-        Checkpoint[] checkpoints = [];
-        MovingPlatform[] movingPlatforms = [];
+        public EndLevelTrigger[] triggers = [];
+        public Checkpoint[] checkpoints = [];
+        public MovingPlatform[] movingPlatforms = [];
 
         public override void _Ready()
         {
