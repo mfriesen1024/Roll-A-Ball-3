@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceadenttfhuyp"]
+
+[ext_resource type="Script" path="res://Assets/src/Managers/LevelManager.cs" id="1_goot0"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_whi3t"]
+size = Vector2(150, 150)
+
+[node name="levelMan" type="Node"]
+script = ExtResource("1_goot0")
+levels = Array[PackedScene]([null])
+levelTextures = Array[Texture2D]([SubResource("PlaceholderTexture2D_whi3t")])
