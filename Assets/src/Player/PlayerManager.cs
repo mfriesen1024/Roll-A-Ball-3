@@ -38,8 +38,8 @@ namespace RollABall.Assets.src.Player
             log.WriteAll($"Player died. Player has {Lives} lives left.");
             Lives--;
             UIManager.Instance.hud.Update();
-            if (Lives >= 0) { Logger.StaticLogger.Write("Level should be reloaded, but levelman not implemented!", LogLevel.warn); }
-            else { Logger.StaticLogger.Write("Should be gameover!", LogLevel.warn); }
+            if (Lives >= 0) { LevelManager.Instance.Load(); }
+            else { UIManager.Instance.State = UIState.LevelFailure; Lives = 3; }
         }
     }
 }
