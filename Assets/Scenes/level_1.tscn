@@ -1,16 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpeq542j7tttv"]
+[gd_scene load_steps=7 format=3 uid="uid://b10toohx6iroa"]
 
 [ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/Level1.blend" id="1_hlxvo"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="2_xk6uf"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingPlatform.cs" id="3_57kba"]
 [ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="3_ofj8s"]
 [ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="4_2try3"]
-[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/input_man.tscn" id="5_g3bja"]
+[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/Managers/input_man.tscn" id="5_g3bja"]
 
 [node name="Level1" instance=ExtResource("1_hlxvo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="KillPlane" parent="." index="1"]
 script = ExtResource("2_xk6uf")
+
+[node name="MP1" parent="." index="6"]
+script = ExtResource("3_57kba")
+Start = Vector3(-5, 2, -15)
+End = Vector3(-5, 2, -19)
+
+[node name="MP2" parent="." index="7"]
+script = ExtResource("3_57kba")
+Start = Vector3(5, 2, -19)
+End = Vector3(5, 2, -15)
 
 [node name="Playerman" parent="." index="15" instance=ExtResource("3_ofj8s")]
 
