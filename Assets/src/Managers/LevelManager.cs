@@ -15,7 +15,7 @@ namespace RollABall.Assets.src.Managers
         /// <summary>
         /// Singleton instance of the levelman.
         /// </summary>
-        public LevelManager Instance { get; private set; }
+        public static LevelManager Instance { get; private set; }
 
         LevelLoadHelper loadHelper = new();
 
