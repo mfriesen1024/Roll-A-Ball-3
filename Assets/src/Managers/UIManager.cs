@@ -93,7 +93,16 @@ namespace RollABall.Assets.src.Managers
             Button back = options.FindChild("return", true) as Button;
             back.Pressed += () => { State = UIState.Main; };
         }
-        void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control; }
+        void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control;
+            AddChild(levelSelect);
+
+            Button left = levelSelect.FindChild("left", true) as Button;
+            left.Pressed += () => { log.WriteAll($"Level select cycle left requested, but not implemented!", LogLevel.warn); };
+            Button right = levelSelect.FindChild("right",true) as Button;
+            right.Pressed += () => { log.WriteAll($"Level select cycle right requested, but not implemented!", LogLevel.warn); };
+            Button go = levelSelect.FindChild("go",true) as Button;
+            go.Pressed += () => { LevelManager.Instance.Load(); State = UIState.Loading; };
+        }
         void LoadingHelper()
         {
             loading = loadingScene.Instantiate() as Control;

@@ -66,6 +66,9 @@ namespace RollABall.Assets.src.Managers
             PlayerManager.Instance.Ball.Position = checkpoint.Position + checkpoint.offset;
             PlayerManager.Instance.Ball.LinearVelocity = Vector3.Zero;
 
+            // Tell the UIMan to deactivate loading screen.
+            UIManager.Instance.State = UIState.HUD;
+
             // Set the ELTs to end the level.
             foreach (EndLevelTrigger elt in activeLevel.triggers) { elt.BodyEntered += ELTCheck; }
         }
