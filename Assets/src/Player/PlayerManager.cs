@@ -35,6 +35,7 @@ namespace RollABall.Assets.src.Player
         /// </summary>
         public void OnDamage()
         {
+            log.WriteAll($"Player died. Player has {Lives} lives left.");
             Lives--;
             UIManager.Instance.hud.Update();
             if (Lives >= 0) { Logger.StaticLogger.Write("Level should be reloaded, but levelman not implemented!", LogLevel.warn); }
