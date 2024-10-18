@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://p6rvwvi83vep"]
+[gd_scene load_steps=8 format=3 uid="uid://p6rvwvi83vep"]
 
 [ext_resource type="Script" path="res://Assets/src/Managers/UIManager.cs" id="1_2rxmc"]
 [ext_resource type="PackedScene" uid="uid://dug5add7dwntf" path="res://Assets/Prefab/UIScreens/main_menu.tscn" id="2_44p63"]
 [ext_resource type="PackedScene" uid="uid://drmlvh40otwel" path="res://Assets/Prefab/UIScreens/options.tscn" id="3_vaesl"]
+[ext_resource type="PackedScene" uid="uid://dbjkmip7v8xf5" path="res://Assets/Prefab/UIScreens/level_select.tscn" id="4_jvffr"]
 [ext_resource type="PackedScene" uid="uid://d4blftxugi6xy" path="res://Assets/Prefab/UIScreens/loading.tscn" id="4_xsjft"]
 [ext_resource type="PackedScene" uid="uid://dqnvncekdgp34" path="res://Assets/Prefab/UIScreens/hud.tscn" id="5_n5n0e"]
 [ext_resource type="PackedScene" uid="uid://dwq5ly1x3qej0" path="res://Assets/Prefab/UIScreens/pause.tscn" id="6_tig4i"]
@@ -11,6 +12,7 @@
 script = ExtResource("1_2rxmc")
 mainMenuScene = ExtResource("2_44p63")
 optionsScene = ExtResource("3_vaesl")
+levelSelectScene = ExtResource("4_jvffr")
 loadingScene = ExtResource("4_xsjft")
 hudScene = ExtResource("5_n5n0e")
 pauseScene = ExtResource("6_tig4i")
