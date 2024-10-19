@@ -76,6 +76,8 @@ namespace RollABall.Assets.src.Managers
             mainMenu = mainMenuScene.Instantiate() as Control;
             AddChild(mainMenu);
 
+            GameManager.Instance.State = GameState.MenuOnly;
+
             Button play = mainMenu.FindChild("play", true) as Button;
             // This should be used, but currently, we dont have level selection implemented.
             play.Pressed += () => { State = UIState.LevelSelect; };
@@ -112,11 +114,15 @@ namespace RollABall.Assets.src.Managers
         {
             hud = hudScene.Instantiate() as HUD;
             AddChild(hud);
+
+            GameManager.Instance.State = GameState.Gameplay;
         }
         void PauseHelper()
         {
             pause = pauseScene.Instantiate() as Control;
             AddChild(pause);
+
+            GameManager.Instance.State = GameState.Pause;
 
             Button resume = pause.FindChild("resume", true) as Button;
             resume.Pressed += () => { State = UIState.HUD; };
