@@ -42,7 +42,7 @@ namespace RollABall.Assets.src.Managers
             SetGMSingleton();
             SetOtherSingletons();
 
-            postInit();
+            if(Instance == this) { postInit(); }
         }
 
         void OnSetState(GameState state)
