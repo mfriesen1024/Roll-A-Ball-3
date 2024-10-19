@@ -29,7 +29,19 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:KillPlane": {
+"generate/physics": true,
+"physics/body_type": 2,
+"physics/shape_type": 1
+},
+"PATH:Start": {
+"generate/physics": true,
+"physics/shape_type": 2
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1
 blender/nodes/visible=0
