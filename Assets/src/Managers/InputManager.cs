@@ -52,6 +52,7 @@ namespace RollABall.Assets.src.Managers
                 case Key.S:
                 case Key.D: HandleMoveInput(); break;
                 case Key.Escape: if (UIManager.Instance.State == UIState.HUD) { UIManager.Instance.State = UIState.Pause; } break;
+                case Key.Space: if(Input.IsPhysicalKeyPressed(Key.Space)) { controller.OnJump(); } break;
                 default: break;
             }
         }

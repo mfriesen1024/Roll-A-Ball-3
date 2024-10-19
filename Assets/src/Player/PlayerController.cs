@@ -17,10 +17,18 @@ namespace RollABall.Assets.src.Player
         [Export] float maxMoveSpeed = 10;
         [Export] float moveLerpMod = 1;
         [Export] float mouseSensitivityMod = 1f;
+        [Export] float jumpForce = 15;
         #endregion
         #region moveFields
+        private float groundCheckDistance = 0.6f;
         Vector3 moveVector3D = Vector3.Zero;
         Vector2 lookVector = Vector2.Zero;
+
+        bool grounded;
+        #endregion
+        #region tickSystem
+        [Export] int expensiveCheckInterval = 5;
+        int ecTicks = 1;
         #endregion
 
         public override void _Ready()
@@ -31,9 +39,15 @@ namespace RollABall.Assets.src.Player
 
         public override void _PhysicsProcess(double delta)
         {
+            ecTicks++;
+            bool tickCheck = ecTicks == expensiveCheckInterval;
+
             SetBallVelocity();
             SetLookRotations();
             UpdateOurPosition();
+            GroundCheck();
+
+            if (tickCheck) { ecTicks = 0; }
 
             void SetBallVelocity()
             {
@@ -61,6 +75,21 @@ namespace RollABall.Assets.src.Player
                 lookVector = Vector2.Zero; // Apparently we dont get an event when relative is zero.
             }
 
+            void GroundCheck()
+            {
+                if (tickCheck)
+                {
+                    RayCast3D rayCast = new RayCast3D();
+                    AddChild(rayCast);
+                    rayCast.Position = ball.Position;
+                    rayCast.TargetPosition = ball.Position - Vector3.Down * groundCheckDistance;
+
+                    grounded = rayCast.IsColliding();
+
+                    rayCast.QueueFree();
+                }
+            }
+
             void UpdateOurPosition()
             {
                 Position = ball.Position;
@@ -84,6 +113,11 @@ namespace RollABall.Assets.src.Player
         public void OnLook(Vector2 direction)
         {
             lookVector = direction;
+        }
+
+        internal void OnJump()
+        {
+            if (grounded) { ball.ApplyCentralForce(Vector3.Up * jumpForce); }
         }
     }
 }
