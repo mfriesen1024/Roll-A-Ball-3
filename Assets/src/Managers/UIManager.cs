@@ -42,6 +42,8 @@ namespace RollABall.Assets.src.Managers
 
         private void OnSetState(UIState value)
         {
+            log.WriteAll($"Got a state request of {value}!");
+
             HideAll();
             switch (value)
             {
