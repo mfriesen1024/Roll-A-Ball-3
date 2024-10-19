@@ -17,6 +17,7 @@ namespace RollABall.Assets.src.UI
             else { QueueFree(); return; }
 
             // TODO: sort out first update shenaniganry.
+            Update();
         }
         // Call this to force player updates.
         public void Update()
