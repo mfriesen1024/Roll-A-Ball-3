@@ -45,6 +45,9 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         public void Load()
         {
+            // If state isn't loading, set that now.
+            if(UIManager.Instance.State != UIState.Loading) { UIManager.Instance.State = UIState.Loading; }
+
             // Set the load helper to load the level and set it's parent async.
             loadHelper.LoadLevelAsync(levels[LevelIndex], Assign);
         }
@@ -100,6 +103,13 @@ namespace RollABall.Assets.src.Managers
                 Logger.StaticLogger.Write($"{ex.Message}");
                 throw ex;
             }
+        }
+
+        internal void Reload()
+        {
+            UIManager.Instance.State = UIState.Loading;
+            Discard();
+            Load();
         }
     }
 }

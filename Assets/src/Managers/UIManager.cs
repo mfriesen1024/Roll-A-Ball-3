@@ -111,7 +111,7 @@ namespace RollABall.Assets.src.Managers
             Button right = levelSelect.FindChild("right", true) as Button;
             right.Pressed += () => { log.WriteAll($"Level select cycle right requested, but not implemented!", LogLevel.warn); };
             Button go = levelSelect.FindChild("go", true) as Button;
-            go.Pressed += () => { LevelManager.Instance.Load(); State = UIState.Loading; };
+            go.Pressed += () => { LevelManager.Instance.Load(); };
         }
         void LoadingHelper()
         {

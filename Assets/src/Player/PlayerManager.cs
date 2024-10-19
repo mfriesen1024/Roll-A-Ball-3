@@ -38,7 +38,7 @@ namespace RollABall.Assets.src.Player
             log.WriteAll($"Player died. Player has {Lives} lives left.");
             Lives--;
             UIManager.Instance.hud.Update();
-            if (Lives >= 0) { LevelManager.Instance.Load(); }
+            if (Lives >= 0) { LevelManager.Instance.Reload(); }
             else { UIManager.Instance.State = UIState.LevelFailure; Lives = 3; }
         }
     }
