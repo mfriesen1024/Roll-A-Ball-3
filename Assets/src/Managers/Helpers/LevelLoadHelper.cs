@@ -17,13 +17,13 @@ namespace RollABall.Assets.src.Managers.Helpers
 
         public void LoadLevelAsync(PackedScene levelScene, Action<Level> callback)
         {
-            Load(levelScene, callback);
-
+            // Disabled async loading for now. We have a loading screen anyway.
             Task.Run(() =>
             {
                 //Load(levelScene, callback);
-                log.WriteAll($"Async loading is not currently enabled.");
             });
+
+            Load(levelScene, callback);
 
             void Load(PackedScene levelScene, Action<Level> callback)
             {
