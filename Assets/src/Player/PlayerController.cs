@@ -20,11 +20,12 @@ namespace RollABall.Assets.src.Player
         [Export] float jumpForce = 15;
         #endregion
         #region moveFields
-        private float groundCheckDistance = 0.6f;
+        private float groundCheckDistance = 1.2f;
         Vector3 moveVector3D = Vector3.Zero;
         Vector2 lookVector = Vector2.Zero;
 
         bool grounded;
+        bool shouldJump;
         #endregion
         #region tickSystem
         [Export] int expensiveCheckInterval = 5;
@@ -54,6 +55,7 @@ namespace RollABall.Assets.src.Player
                 Vector3 moveVelocityGoal = moveVector3D * maxMoveSpeed;
                 Vector3 newVelocity = ball.LinearVelocity.Lerp(moveVelocityGoal, (float)delta * moveLerpMod);
                 ball.LinearVelocity = newVelocity; // TODO: use a different velocity set method because threads.
+                if(shouldJump) { ball.AddConstantCentralForce(Vector3.Up*jumpForce); }
             }
 
             void SetLookRotations()
@@ -85,6 +87,9 @@ namespace RollABall.Assets.src.Player
                     rayCast.TargetPosition = ball.Position - Vector3.Down * groundCheckDistance;
 
                     grounded = rayCast.IsColliding();
+                    if (!grounded) { shouldJump = false; }
+
+                    playerManager.log.WriteAll($"Grounded:{grounded},ShouldJump:{shouldJump}");
 
                     rayCast.QueueFree();
                 }
@@ -117,7 +122,7 @@ namespace RollABall.Assets.src.Player
 
         internal void OnJump()
         {
-            if (grounded) { ball.ApplyCentralForce(Vector3.Up * jumpForce); }
+            shouldJump = grounded;
         }
     }
 }
