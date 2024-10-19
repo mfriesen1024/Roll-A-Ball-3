@@ -24,6 +24,8 @@ namespace RollABall.Assets.src.Managers
         [Export] PackedScene mainMenuScene, optionsScene, levelSelectScene, loadingScene, hudScene, pauseScene, levelCompleteScene, levelFailureScene;
         #endregion
 
+        bool hudEnabled = false;
+
         public override void _Ready()
         {
             if (Instance != null) { QueueFree(); return; }
@@ -31,6 +33,8 @@ namespace RollABall.Assets.src.Managers
             Instance = this;
             log = new Logger(true, true, "logs\\", "uiLog", "txt", true);
             GameManager.postInit += PostInit;
+
+            hud = hudScene.Instantiate() as HUD;
         }
 
         public void PostInit()
@@ -68,10 +72,11 @@ namespace RollABall.Assets.src.Managers
             if (options != null) { options.QueueFree(); options = null; }
             if (levelSelect != null) { levelSelect.QueueFree(); levelSelect = null; }
             if (loading != null) { loading.QueueFree(); loading = null; }
-            if (hud != null) { RemoveChild(hud); hud = null; }
+            if (hudEnabled) { RemoveChild(hud); hudEnabled = false; }
             if (pause != null) { pause.QueueFree(); pause = null; }
             if (levelComplete != null) { levelComplete.QueueFree(); levelComplete = null; }
             if (levelFailure != null) { levelFailure.QueueFree(); levelFailure = null; }
+            RemoveChild(hud);
         }
         void MainMenuHelper()
         {
@@ -114,8 +119,7 @@ namespace RollABall.Assets.src.Managers
         }
         void HudHelper()
         {
-            hud = hudScene.Instantiate() as HUD;
-            AddChild(hud);
+            AddChild(hud); hudEnabled = true;
 
             GameManager.Instance.State = GameState.Gameplay;
         }
@@ -131,8 +135,14 @@ namespace RollABall.Assets.src.Managers
             Button menu = pause.FindChild("menu", true) as Button;
             menu.Pressed += () => { State = UIState.Main; };
         }
-        void LevelCompleteHelper() { levelComplete = levelCompleteScene.Instantiate() as Control; }
-        void LevelFailureHelper() { levelFailure = levelFailureScene.Instantiate() as Control; }
+        void LevelCompleteHelper()
+        {
+            AddChild(levelComplete);
+        }
+        void LevelFailureHelper()
+        {
+            AddChild(levelFailure);
+        }
     }
 
     public enum UIState
