@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctl5lhf2861xw"]
+
+[ext_resource type="PackedScene" uid="uid://bxg3yfli1usjv" path="res://Assets/Arting/Model/Checkpoint.blend" id="1_m0bwr"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/Checkpoint.cs" id="2_pncq8"]
+
+[node name="Checkpoint" instance=ExtResource("1_m0bwr")]
+
+[node name="Trigger" parent="CheckpointCircle" index="0"]
+script = ExtResource("2_pncq8")
