@@ -74,12 +74,15 @@ namespace RollABall.Assets.src.Managers
         }
 
         /// <summary>
-        /// Discards the current level.
+        /// Discards the current level, if it exists.
         /// </summary>
         public void Discard()
         {
-            activeLevel.QueueFree();
-            activeLevel = null;
+            if(activeLevel != null)
+            {
+                activeLevel.QueueFree();
+                activeLevel = null;
+            }
         }
         #endregion
 
