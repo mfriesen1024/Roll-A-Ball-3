@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Assets/src/UI/HUD.cs" id="1_qlb61"]
 [ext_resource type="Texture2D" uid="uid://bim5v68d3wqnd" path="res://Assets/Arting/Tex/1upIcon.png" id="1_utme5"]
 
-[node name="HUDMain" type="Control"]
+[node name="HUDMain" type="Control" node_paths=PackedStringArray("lives", "time", "score")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qlb61")
+lives = NodePath("health/Label")
+time = NodePath("time/timeText")
+score = NodePath("score/scoreText")
 
 [node name="health" type="Control" parent="."]
 clip_contents = true
