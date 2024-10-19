@@ -17,18 +17,26 @@ namespace RollABall.Assets.src.Managers.Helpers
 
         public void LoadLevelAsync(PackedScene levelScene, Action<Level> callback)
         {
+            Load(levelScene, callback);
+
             Task.Run(() =>
+            {
+                //Load(levelScene, callback);
+                log.WriteAll($"Async loading is not currently enabled.");
+            });
+
+            void Load(PackedScene levelScene, Action<Level> callback)
             {
                 // Loading screen crap.
                 IncrementTasks();
 
                 // Load the level.
-                Level level = levelScene.Instantiate() as Level;
+                Level level = (Level)levelScene.Instantiate();
                 callback(level);
 
                 // Loading screen end stuff.
                 DecrementTaskCount();
-            });
+            }
         }
 
         private void IncrementTasks()
@@ -41,7 +49,7 @@ namespace RollABall.Assets.src.Managers.Helpers
         private void DecrementTaskCount()
         {
             activeLoadTasks--;
-            log.WriteAll($"Ended a loadtask, completing {totalLoadTasks-activeLoadTasks} of {totalLoadTasks}.");
+            log.WriteAll($"Ended a loadtask, completing {totalLoadTasks - activeLoadTasks} of {totalLoadTasks}.");
             if (activeLoadTasks == 0) { totalLoadTasks = 0; }
         }
     }

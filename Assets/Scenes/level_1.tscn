@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b10toohx6iroa"]
+[gd_scene load_steps=8 format=3 uid="uid://b10toohx6iroa"]
 
 [ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/Level1.blend" id="1_hlxvo"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_aik25"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="2_xk6uf"]
 [ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="3_ofj8s"]
 [ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="4_2try3"]
@@ -9,6 +10,7 @@
 
 [node name="Level1" instance=ExtResource("1_hlxvo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("2_aik25")
 
 [node name="KillPlane" parent="." index="1"]
 script = ExtResource("2_xk6uf")
