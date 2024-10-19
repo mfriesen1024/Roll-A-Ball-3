@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b10toohx6iroa"]
+[gd_scene load_steps=9 format=3 uid="uid://b10toohx6iroa"]
 
 [ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/Level1.blend" id="1_hlxvo"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_aik25"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="4_2try3"]
 [ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/Managers/input_man.tscn" id="5_g3bja"]
 [ext_resource type="PackedScene" uid="uid://bvudjw8wkxayq" path="res://Assets/Prefab/moving_platform.tscn" id="6_ddj86"]
+[ext_resource type="PackedScene" uid="uid://bxg3yfli1usjv" path="res://Assets/Arting/Model/Checkpoint.blend" id="8_jtsrq"]
 
 [node name="Level1" instance=ExtResource("1_hlxvo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -34,3 +35,6 @@ End = Vector3(-5, 2, -19)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -13)
 Start = Vector3(-4, -1, -13)
 End = Vector3(-4, 1, -13)
+
+[node name="Checkpoint" parent="." index="17" instance=ExtResource("8_jtsrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001, 0)
