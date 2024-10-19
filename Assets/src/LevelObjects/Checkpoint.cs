@@ -12,7 +12,7 @@ namespace RollABall.Assets.src.LevelObjects
     /// </summary>
     internal partial class Checkpoint:Area3D
     {
-        [Export] public Vector3 offset;
+        [Export] public Vector3 offset = new Vector3(0,1,0);
         public int index;
     }
 }
