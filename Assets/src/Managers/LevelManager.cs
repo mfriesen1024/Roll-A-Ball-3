@@ -46,14 +46,14 @@ namespace RollABall.Assets.src.Managers
         public void Load()
         {
             // Set the load helper to load the level and set it's parent async.
-            loadHelper.LoadLevelAsync(levels[LevelIndex], (Level level) => { activeLevel = level; AddChild(level); });
+            loadHelper.LoadLevelAsync(levels[LevelIndex], Assign);
         }
 
         private void Assign(Level level)
         {
             activeLevel = level;
             level.TreeEntered += OnLoadFinish;
-            AddChild(level);
+            CallDeferred("add_child", level);
         }
 
         private void OnLoadFinish()
