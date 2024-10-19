@@ -15,7 +15,7 @@ namespace RollABall.Assets.src.LevelObjects
         public Checkpoint[] checkpoints = [];
         public MovingPlatform[] movingPlatforms = [];
 
-        public override void _Ready()
+        public override void _EnterTree()
         {
             SetRefs();
 
@@ -25,7 +25,7 @@ namespace RollABall.Assets.src.LevelObjects
                 var cps = checkpoints.ToList();
                 var mps = movingPlatforms.ToList();
 
-                foreach (var c in GetChildren())
+                foreach (var c in FindChildren("*"))
                 {
                     Logger.StaticLogger.Write($"Node {c.Name} was detected. It has type {c.GetType()}.");
                     if (c is EndLevelTrigger) { elts.Add(c as EndLevelTrigger); }
