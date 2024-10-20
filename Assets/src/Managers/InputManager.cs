@@ -52,8 +52,15 @@ namespace RollABall.Assets.src.Managers
                 case Key.S:
                 case Key.D: HandleMoveInput(); break;
                 case Key.Escape: if (UIManager.Instance.State == UIState.HUD) { UIManager.Instance.State = UIState.Pause; } break;
+                case Key.Space: HandleJumpInput(); break;
                 default: break;
             }
+        }
+
+        private void HandleJumpInput()
+        {
+            inputLog.WriteAll($"Jump input!");
+            if (Input.IsPhysicalKeyPressed(Key.Space)) { controller.OnJump(); }
         }
 
         // Get a relative vector for the player's motion.

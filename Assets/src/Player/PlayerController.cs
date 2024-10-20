@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 namespace RollABall.Assets.src.Player
 {
@@ -11,16 +12,22 @@ namespace RollABall.Assets.src.Player
         [Export] PlayerManager playerManager;
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
+        [Export] Area3D groundCheck;
         Node3D camParent;
         #endregion
         #region speeds
         [Export] float maxMoveSpeed = 10;
         [Export] float moveLerpMod = 1;
         [Export] float mouseSensitivityMod = 1f;
+        [Export] float jumpForce = 75;
         #endregion
         #region moveFields
+        private float groundCheckDistance = 1.2f;
         Vector3 moveVector3D = Vector3.Zero;
         Vector2 lookVector = Vector2.Zero;
+
+        bool grounded;
+        bool shouldJump;
         #endregion
 
         public override void _Ready()
@@ -34,12 +41,14 @@ namespace RollABall.Assets.src.Player
             SetBallVelocity();
             SetLookRotations();
             UpdateOurPosition();
+            GroundCheck();
 
             void SetBallVelocity()
             {
                 Vector3 moveVelocityGoal = moveVector3D * maxMoveSpeed;
                 Vector3 newVelocity = ball.LinearVelocity.Lerp(moveVelocityGoal, (float)delta * moveLerpMod);
                 ball.LinearVelocity = newVelocity; // TODO: use a different velocity set method because threads.
+                if(shouldJump) { ball.ApplyCentralForce(Vector3.Up*jumpForce); }
             }
 
             void SetLookRotations()
@@ -59,6 +68,24 @@ namespace RollABall.Assets.src.Player
                 RotateY(-(float)delta * lookVector.X * mouseSensitivityMod);
 
                 lookVector = Vector2.Zero; // Apparently we dont get an event when relative is zero.
+            }
+
+            void GroundCheck()
+            {
+                var objects = groundCheck.GetOverlappingBodies();
+
+                bool grounded = false;
+
+                foreach(Node3D node in objects)
+                {
+                    if (node is StaticBody3D)
+                    {
+                        grounded = true;
+                    }
+                }
+
+                if (!grounded) { shouldJump = false; }
+                this.grounded = grounded;
             }
 
             void UpdateOurPosition()
@@ -84,6 +111,11 @@ namespace RollABall.Assets.src.Player
         public void OnLook(Vector2 direction)
         {
             lookVector = direction;
+        }
+
+        internal void OnJump()
+        {
+            shouldJump = grounded;
         }
     }
 }
