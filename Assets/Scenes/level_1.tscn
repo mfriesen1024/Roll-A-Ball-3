@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b10toohx6iroa"]
+[gd_scene load_steps=14 format=3 uid="uid://b10toohx6iroa"]
 
 [ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/Level1.blend" id="1_hlxvo"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_aik25"]
@@ -14,7 +14,13 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_d2n7c"]
 size = Vector3(2, 3, 2)
 
-[sub_resource type="PrismMesh" id="PrismMesh_qgmd2"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6pfo"]
+transparency = 1
+albedo_color = Color(0, 1, 0, 0.372549)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mssgn"]
+material = SubResource("StandardMaterial3D_r6pfo")
+size = Vector3(1.999, 3, 2)
 
 [node name="Level1" instance=ExtResource("1_hlxvo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -58,7 +64,7 @@ speed = 0.5
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
 
 [node name="ELT" type="Area3D" parent="." index="20"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -28)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -29)
 script = ExtResource("9_uca2j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ELT" index="0"]
@@ -95,5 +101,5 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1, 
 transform = Transform3D(0.965926, 0.12941, 0.224144, -0.258819, 0.482963, 0.836516, 0, -0.866025, 0.5, 0, 6, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="30"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -18)
-mesh = SubResource("PrismMesh_qgmd2")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -29)
+mesh = SubResource("BoxMesh_mssgn")
