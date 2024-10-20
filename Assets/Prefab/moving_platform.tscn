@@ -48,7 +48,6 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_qdoub")
 
 [node name="MovingPlatform" type="AnimatableBody3D" node_paths=PackedStringArray("trigger")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -15)
 script = ExtResource("1_lw8lu")
 trigger = NodePath("MPTrigger")
 

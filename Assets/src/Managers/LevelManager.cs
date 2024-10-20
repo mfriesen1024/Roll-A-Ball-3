@@ -94,7 +94,7 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         private void ELTCheck(Node3D other)
         {
-            if (PlayerManager.Instance.Equals(other))
+            if (PlayerManager.Instance.Ball.Equals(other))
             {
                 CheckpointIndex = 0;
                 Discard();
