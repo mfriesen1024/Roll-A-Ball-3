@@ -18,6 +18,7 @@ namespace RollABall.Assets.src.LevelObjects
         public override void _EnterTree()
         {
             SetRefs();
+            SetCheckpointIndices();
 
             void SetRefs()
             {
@@ -29,7 +30,7 @@ namespace RollABall.Assets.src.LevelObjects
                 {
                     Logger.StaticLogger.WriteAll($"Node {c.Name} was detected. It has type {c.GetType()}.");
 
-                    if(c.Name == "ELT") { Logger.StaticLogger.WriteAll($"Found ELT, is it real? {c is EndLevelTrigger}."); }
+                    if (c.Name == "ELT") { Logger.StaticLogger.WriteAll($"Found ELT, is it real? {c is EndLevelTrigger}."); }
 
                     if (c is EndLevelTrigger) { elts.Add(c as EndLevelTrigger); }
                     else if (c is Checkpoint) { cps.Add(c as Checkpoint); }
@@ -40,6 +41,15 @@ namespace RollABall.Assets.src.LevelObjects
                 triggers = elts.ToArray();
                 checkpoints = cps.ToArray();
                 movingPlatforms = mps.ToArray();
+            }
+
+            void SetCheckpointIndices()
+            {
+                for (int i = 0; i < checkpoints.Length; i++)
+                {
+                    Checkpoint cp = checkpoints[i];
+                    cp.index = i;
+                }
             }
         }
     }

@@ -46,7 +46,7 @@ namespace RollABall.Assets.src.Managers
         public void Load()
         {
             // If state isn't loading, set that now.
-            if(UIManager.Instance.State != UIState.Loading) { UIManager.Instance.State = UIState.Loading; }
+            if (UIManager.Instance.State != UIState.Loading) { UIManager.Instance.State = UIState.Loading; }
 
             // Set the load helper to load the level and set it's parent async.
             loadHelper.LoadLevelAsync(levels[LevelIndex], Assign);
@@ -74,6 +74,18 @@ namespace RollABall.Assets.src.Managers
 
             // Set the ELTs to end the level.
             foreach (EndLevelTrigger elt in activeLevel.triggers) { elt.BodyEntered += ELTCheck; }
+
+            // Set the checkpoints to set our local checkpoint.
+            foreach (Checkpoint cp in activeLevel.checkpoints)
+            {
+                cp.BodyEntered += (Node3D other) =>
+                {
+                    if (PlayerManager.Instance.Ball.Equals(other))
+                    {
+                        CheckpointIndex = cp.index;
+                    }
+                };
+            }
         }
 
         /// <summary>
@@ -81,7 +93,7 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         public void Discard()
         {
-            if(activeLevel != null)
+            if (activeLevel != null)
             {
                 activeLevel.QueueFree();
                 activeLevel = null;
