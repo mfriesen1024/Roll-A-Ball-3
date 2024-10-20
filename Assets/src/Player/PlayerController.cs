@@ -19,7 +19,7 @@ namespace RollABall.Assets.src.Player
         [Export] float maxMoveSpeed = 10;
         [Export] float moveLerpMod = 1;
         [Export] float mouseSensitivityMod = 1f;
-        [Export] float jumpForce = 15;
+        [Export] float jumpForce = 75;
         #endregion
         #region moveFields
         private float groundCheckDistance = 1.2f;
@@ -28,10 +28,6 @@ namespace RollABall.Assets.src.Player
 
         bool grounded;
         bool shouldJump;
-        #endregion
-        #region tickSystem
-        [Export] int expensiveCheckInterval = 5;
-        int ecTicks = 1;
         #endregion
 
         public override void _Ready()
@@ -42,22 +38,17 @@ namespace RollABall.Assets.src.Player
 
         public override void _PhysicsProcess(double delta)
         {
-            ecTicks++;
-            bool tickCheck = ecTicks == expensiveCheckInterval;
-
             SetBallVelocity();
             SetLookRotations();
             UpdateOurPosition();
             GroundCheck();
-
-            if (tickCheck) { ecTicks = 0; }
 
             void SetBallVelocity()
             {
                 Vector3 moveVelocityGoal = moveVector3D * maxMoveSpeed;
                 Vector3 newVelocity = ball.LinearVelocity.Lerp(moveVelocityGoal, (float)delta * moveLerpMod);
                 ball.LinearVelocity = newVelocity; // TODO: use a different velocity set method because threads.
-                if(shouldJump) { ball.AddConstantCentralForce(Vector3.Up*jumpForce); }
+                if(shouldJump) { ball.ApplyCentralForce(Vector3.Up*jumpForce); }
             }
 
             void SetLookRotations()
