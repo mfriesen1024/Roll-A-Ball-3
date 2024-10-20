@@ -34,26 +34,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -13)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -15)
 Start = Vector3(-5, 2, -15)
 End = Vector3(-5, 2, -19)
-speed = 2.0
+speed = 0.5
 
 [node name="EscalatorMP1" parent="." index="16" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 8, -13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -13)
 trigger = NodePath("../SideMP1/MPTrigger")
 Start = Vector3(-3, 1, -13)
 End = Vector3(-4, 2, -13)
-speed = 0.5
 
 [node name="EscalatorMP2" parent="." index="17" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 8, -13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -13)
 trigger = NodePath("../SideMP1/MPTrigger")
 Start = Vector3(3, 1, -13)
 End = Vector3(4, 2, -13)
-speed = 0.5
 
 [node name="SideMP2" parent="." index="18" instance=ExtResource("6_ddj86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -15)
 Start = Vector3(5, 1, -19)
 End = Vector3(5, 1, -14)
+speed = 0.5
 
 [node name="Checkpoint" parent="." index="19" instance=ExtResource("8_0l4wf")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
@@ -72,4 +71,4 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.001, -21)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
 Start = Vector3(0, 1, -15)
 End = Vector3(0, 1, -19)
-speed = 3.0
+speed = 0.5
