@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0j5wwopfqu1a"]
+[gd_scene load_steps=5 format=3 uid="uid://d0j5wwopfqu1a"]
+
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="1_6e3f3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_677f6"]
 size = Vector3(2, 0.1, 0.1)
@@ -12,6 +14,7 @@ material = SubResource("StandardMaterial3D_g68uk")
 size = Vector3(2, 0.1, 0.1)
 
 [node name="Trap" type="Area3D"]
+script = ExtResource("1_6e3f3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_677f6")
