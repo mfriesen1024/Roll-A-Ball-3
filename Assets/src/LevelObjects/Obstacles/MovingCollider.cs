@@ -45,9 +45,9 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
             // Only run if unlocked.
             if (unlocked)
             {
-                Logger.StaticLogger.WriteAll($"2 {Name}: Old Position was {Position}.");
+                Logger.StaticLogger.Write($"2 {Name}: Old Position was {Position}.");
                 Position = Start.Lerp(End, lerpFactor);
-                Logger.StaticLogger.WriteAll($"3 {Name}:New Position is {Position}.");
+                Logger.StaticLogger.Write($"3 {Name}:New Position is {Position}.");
             }
         }
 
@@ -65,7 +65,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
             if (lerpFactor == 1) { returning = true; }
             if (lerpFactor == 0) { returning = false; }
 
-            Logger.StaticLogger.WriteAll($"1 {Name}: Delta is {delta}, Speed is {speed}, Scaled delta is {scaledDelta}, Old lerp is {oldLerpFactor}, " +
+            Logger.StaticLogger.Write($"1 {Name}: Delta is {delta}, Speed is {speed}, Scaled delta is {scaledDelta}, Old lerp is {oldLerpFactor}, " +
                 $"New lerp is {lerpFactor} and Return state is {returning}.");
         }
     }
