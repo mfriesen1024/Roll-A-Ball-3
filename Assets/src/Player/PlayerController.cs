@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 namespace RollABall.Assets.src.Player
 {
@@ -11,6 +12,7 @@ namespace RollABall.Assets.src.Player
         [Export] PlayerManager playerManager;
         [Export] RigidBody3D ball;
         [Export] PlayerCam cam;
+        [Export] Area3D groundCheck;
         Node3D camParent;
         #endregion
         #region speeds
@@ -79,20 +81,20 @@ namespace RollABall.Assets.src.Player
 
             void GroundCheck()
             {
-                if (tickCheck)
+                var objects = groundCheck.GetOverlappingBodies();
+
+                bool grounded = false;
+
+                foreach(Node3D node in objects)
                 {
-                    RayCast3D rayCast = new RayCast3D();
-                    AddChild(rayCast);
-                    rayCast.Position = ball.Position;
-                    rayCast.TargetPosition = ball.Position - Vector3.Down * groundCheckDistance;
-
-                    grounded = rayCast.IsColliding();
-                    if (!grounded) { shouldJump = false; }
-
-                    playerManager.log.WriteAll($"Grounded:{grounded},ShouldJump:{shouldJump}");
-
-                    rayCast.QueueFree();
+                    if (node is StaticBody3D)
+                    {
+                        grounded = true;
+                    }
                 }
+
+                if (!grounded) { shouldJump = false; }
+                this.grounded = grounded;
             }
 
             void UpdateOurPosition()
