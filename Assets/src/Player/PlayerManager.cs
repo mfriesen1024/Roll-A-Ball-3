@@ -1,5 +1,6 @@
 ﻿using Godot;
 using KeystoneUtils.Logging;
+using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers;
 
 namespace RollABall.Assets.src.Player
@@ -40,6 +41,11 @@ namespace RollABall.Assets.src.Player
             UIManager.Instance.hud.Update();
             if (Lives >= 0) { LevelManager.Instance.Reload(); }
             else { UIManager.Instance.State = UIState.LevelFailure; Lives = 3; }
+        }
+
+        public void OnLoadCheckpoint(Checkpoint checkpoint)
+        {
+            controller.ResetTF(checkpoint);
         }
     }
 }

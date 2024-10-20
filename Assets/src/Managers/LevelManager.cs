@@ -66,8 +66,7 @@ namespace RollABall.Assets.src.Managers
 
             // Set the player's position to checkpoint position.
             Checkpoint checkpoint = activeLevel.checkpoints[CheckpointIndex];
-            PlayerManager.Instance.Ball.Position = checkpoint.Position + checkpoint.offset;
-            PlayerManager.Instance.Ball.LinearVelocity = Vector3.Zero;
+            PlayerManager.Instance.OnLoadCheckpoint(checkpoint);
 
             // Tell the UIMan to deactivate loading screen.
             UIManager.Instance.State = UIState.HUD;
