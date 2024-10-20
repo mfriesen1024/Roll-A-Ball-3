@@ -46,7 +46,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
             if (unlocked)
             {
                 Position = Start.Lerp(End, lerpFactor);
-                Logger.StaticLogger.WriteAll($"{Name}: LerpFactor is {lerpFactor}, Position is {Position}, Returnstate is {returning}, Delta is {delta}");
+                Logger.StaticLogger.WriteAll($"{Name}: LerpFactor is {lerpFactor}, Position is {Position}, Return state is {returning}, Delta is {delta}");
             }
         }
 
@@ -54,7 +54,8 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
         {
             float newDelta = (float)delta;
             // Set new lerp factor.
-            float scaledDelta = newDelta / speed;
+            float scaledDelta = newDelta * speed;
+            float oldLerpFactor = lerpFactor; // For logging purposes.
             if (returning) { lerpFactor-=scaledDelta; }
             else { lerpFactor+=newDelta; }
             lerpFactor = Mathf.Clamp(lerpFactor, 0, 1);
@@ -62,6 +63,9 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
             // Set returning bool.
             if (lerpFactor == 1) { returning = true; }
             if (lerpFactor == 0) { returning = false; }
+
+            Logger.StaticLogger.WriteAll($"Delta is {delta}, Speed is {speed}, Scaled delta is {scaledDelta}, Old lerp is {oldLerpFactor}, " +
+                $"New lerp is {lerpFactor} and Return state is {returning}.");
         }
     }
 }
