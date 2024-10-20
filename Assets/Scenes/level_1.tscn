@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b10toohx6iroa"]
+[gd_scene load_steps=12 format=3 uid="uid://b10toohx6iroa"]
 
 [ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/Level1.blend" id="1_hlxvo"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_aik25"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bvudjw8wkxayq" path="res://Assets/Prefab/moving_platform.tscn" id="6_ddj86"]
 [ext_resource type="PackedScene" uid="uid://ctl5lhf2861xw" path="res://Assets/Prefab/checkpoint.tscn" id="8_0l4wf"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/EndLevelTrigger.cs" id="9_uca2j"]
+[ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="10_5wfum"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d2n7c"]
 size = Vector3(2, 3, 2)
@@ -72,3 +73,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
 Start = Vector3(0, 1, -15)
 End = Vector3(0, 1, -19)
 speed = 0.5
+
+[node name="Trap" parent="." index="24" instance=ExtResource("10_5wfum")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+
+[node name="Trap2" parent="." index="25" instance=ExtResource("10_5wfum")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -17)
+
+[node name="Trap3" parent="." index="26" instance=ExtResource("10_5wfum")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -22)
+
+[node name="Trap4" parent="." index="27" instance=ExtResource("10_5wfum")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25)
+
+[node name="Trap5" parent="." index="28" instance=ExtResource("10_5wfum")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 1, -21)
+
+[node name="Trap6" parent="." index="29" instance=ExtResource("10_5wfum")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1, -21)
