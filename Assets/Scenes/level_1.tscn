@@ -72,3 +72,4 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.001, -21)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
 Start = Vector3(0, 1, -15)
 End = Vector3(0, 1, -19)
+speed = 3.0

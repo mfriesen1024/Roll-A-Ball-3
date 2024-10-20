@@ -46,7 +46,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
             if (unlocked)
             {
                 Position = Start.Lerp(End, lerpFactor);
-                Logger.StaticLogger.WriteAll($"{Name}: LerpFactor is {lerpFactor}, Position is {Position}");
+                Logger.StaticLogger.WriteAll($"{Name}: LerpFactor is {lerpFactor}, Position is {Position}, Returnstate is {returning}");
             }
         }
 
