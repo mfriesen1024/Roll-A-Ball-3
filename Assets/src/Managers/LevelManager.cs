@@ -99,8 +99,10 @@ namespace RollABall.Assets.src.Managers
                 CheckpointIndex = 0;
                 Discard();
 
+                UIManager.Instance.State = UIState.LevelComplete;
+
                 var ex = new NotImplementedException("Aaa! Saving times/scores not implemented!");
-                Logger.StaticLogger.Write($"{ex.Message}");
+                Logger.StaticLogger.WriteAll($"{ex.Message}", LogLevel.warn);
                 throw ex;
             }
         }
