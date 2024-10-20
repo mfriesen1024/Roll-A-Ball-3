@@ -51,8 +51,8 @@ End = Vector3(4, 2, -13)
 
 [node name="SideMP2" parent="." index="18" instance=ExtResource("6_ddj86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -15)
-Start = Vector3(5, 1, -19)
-End = Vector3(5, 1, -14)
+Start = Vector3(5, 2, -19)
+End = Vector3(5, 2, -15)
 speed = 0.5
 
 [node name="Checkpoint" parent="." index="19" instance=ExtResource("8_0l4wf")]

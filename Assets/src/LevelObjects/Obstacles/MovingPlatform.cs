@@ -56,7 +56,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
         private void OnTriggerExit(Node3D body)
         {
             Logger.StaticLogger.Write($"Triggered by object {body.Name}");
-            if (body is PhysicsBody3D pb && body != this)
+            if (body is PhysicsBody3D pb && body is not StaticBody3D && body != this)
             {
                 var aoList = attachedObjects.ToList();
                 bool changed = false;
@@ -76,7 +76,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
         private void OnTriggerEnter(Node3D body)
         {
             Logger.StaticLogger.Write($"Triggered by object {body.Name}");
-            if (body is PhysicsBody3D pb && body != this)
+            if (body is PhysicsBody3D pb && body is not StaticBody3D && body != this)
             {
                 var aoList = attachedObjects.ToList();
                 aoList.Add(pb);
