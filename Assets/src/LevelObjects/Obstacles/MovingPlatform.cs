@@ -29,7 +29,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
                 trigger.AddChild(shape);
                 trigger.Position = Vector3.Up;
                 AddChild(trigger);
-                Logger.StaticLogger.WriteAll($"Shape{shape}, shape's shape?{shape.Shape}");
+                Logger.StaticLogger.Write($"Shape{shape}, shape's shape?{shape.Shape}");
             }
 
             trigger.BodyEntered += OnTriggerEnter;
@@ -55,7 +55,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
 
         private void OnTriggerExit(Node3D body)
         {
-            Logger.StaticLogger.WriteAll($"Triggered by object {body.Name}");
+            Logger.StaticLogger.Write($"Triggered by object {body.Name}");
             if (body is PhysicsBody3D pb && body != this)
             {
                 var aoList = attachedObjects.ToList();
@@ -75,7 +75,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
 
         private void OnTriggerEnter(Node3D body)
         {
-            Logger.StaticLogger.WriteAll($"Triggered by object {body.Name}");
+            Logger.StaticLogger.Write($"Triggered by object {body.Name}");
             if (body is PhysicsBody3D pb && body != this)
             {
                 var aoList = attachedObjects.ToList();
