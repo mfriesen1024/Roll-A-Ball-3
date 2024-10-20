@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxosgomfi3hf7"]
+[gd_scene load_steps=13 format=3 uid="uid://cxosgomfi3hf7"]
 
 [ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="1_ne63p"]
 [ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="2_p5spi"]
-[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/input_man.tscn" id="3_gbshr"]
+[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/Managers/input_man.tscn" id="3_gbshr"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingPlatform.cs" id="4_xyvir"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikp3l"]
 size = Vector3(10, 0.1, 10)
@@ -22,6 +23,10 @@ albedo_texture = SubResource("NoiseTexture2D_lpls6")
 material = SubResource("StandardMaterial3D_v5cp2")
 size = Vector3(10, 0.1, 10)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0qj1w"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j7lsh"]
+
 [node name="TestScene" type="Node3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -39,3 +44,16 @@ mesh = SubResource("BoxMesh_p1ppr")
 script = ExtResource("2_p5spi")
 inputManPrefab = ExtResource("3_gbshr")
 playerManPrefab = ExtResource("1_ne63p")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("4_xyvir")
+trigger = NodePath("")
+Start = Vector3(0, -1.4, -1)
+End = Vector3(0, -1.4, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+shape = SubResource("BoxShape3D_0qj1w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+mesh = SubResource("BoxMesh_j7lsh")

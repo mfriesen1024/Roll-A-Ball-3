@@ -1,5 +1,6 @@
 ﻿using Godot;
 using KeystoneUtils.Logging;
+using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers;
 
 namespace RollABall.Assets.src.Player
@@ -16,7 +17,6 @@ namespace RollABall.Assets.src.Player
         [Export] public PlayerController controller;
         public RigidBody3D Ball { get => ball; set => ball = value; }
         [Export] RigidBody3D ball;
-        [Export] PlayerCam cam;
         #endregion
         #region Stats
         public int Lives { get => lives; set => lives = value; }
@@ -36,10 +36,16 @@ namespace RollABall.Assets.src.Player
         /// </summary>
         public void OnDamage()
         {
+            log.WriteAll($"Player died. Player has {Lives} lives left.");
             Lives--;
             UIManager.Instance.hud.Update();
-            if (Lives >= 0) { Logger.StaticLogger.Write("Level should be reloaded, but levelman not implemented!", LogLevel.warn); }
-            else { Logger.StaticLogger.Write("Should be gameover!", LogLevel.warn); }
+            if (Lives >= 0) { LevelManager.Instance.Reload(); }
+            else { UIManager.Instance.State = UIState.LevelFailure; Lives = 3; }
+        }
+
+        public void OnLoadCheckpoint(Checkpoint checkpoint)
+        {
+            controller.ResetTF(checkpoint);
         }
     }
 }

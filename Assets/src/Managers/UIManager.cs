@@ -24,6 +24,8 @@ namespace RollABall.Assets.src.Managers
         [Export] PackedScene mainMenuScene, optionsScene, levelSelectScene, loadingScene, hudScene, pauseScene, levelCompleteScene, levelFailureScene;
         #endregion
 
+        bool hudEnabled = false;
+
         public override void _Ready()
         {
             if (Instance != null) { QueueFree(); return; }
@@ -31,6 +33,8 @@ namespace RollABall.Assets.src.Managers
             Instance = this;
             log = new Logger(true, true, "logs\\", "uiLog", "txt", true);
             GameManager.postInit += PostInit;
+
+            hud = hudScene.Instantiate() as HUD;
         }
 
         public void PostInit()
@@ -68,7 +72,7 @@ namespace RollABall.Assets.src.Managers
             if (options != null) { options.QueueFree(); options = null; }
             if (levelSelect != null) { levelSelect.QueueFree(); levelSelect = null; }
             if (loading != null) { loading.QueueFree(); loading = null; }
-            if (hud != null) { RemoveChild(hud); hud = null; }
+            if (hudEnabled) { RemoveChild(hud); hudEnabled = false; }
             if (pause != null) { pause.QueueFree(); pause = null; }
             if (levelComplete != null) { levelComplete.QueueFree(); levelComplete = null; }
             if (levelFailure != null) { levelFailure.QueueFree(); levelFailure = null; }
@@ -77,6 +81,8 @@ namespace RollABall.Assets.src.Managers
         {
             mainMenu = mainMenuScene.Instantiate() as Control;
             AddChild(mainMenu);
+
+            GameManager.Instance.State = GameState.MenuOnly;
 
             Button play = mainMenu.FindChild("play", true) as Button;
             // This should be used, but currently, we dont have level selection implemented.
@@ -95,7 +101,18 @@ namespace RollABall.Assets.src.Managers
             Button back = options.FindChild("return", true) as Button;
             back.Pressed += () => { State = UIState.Main; };
         }
-        void LevelSelectHelper() { levelSelect = levelSelectScene.Instantiate() as Control; }
+        void LevelSelectHelper()
+        {
+            levelSelect = levelSelectScene.Instantiate() as Control;
+            AddChild(levelSelect);
+
+            Button left = levelSelect.FindChild("left", true) as Button;
+            left.Pressed += () => { log.WriteAll($"Level select cycle left requested, but not implemented!", LogLevel.warn); };
+            Button right = levelSelect.FindChild("right", true) as Button;
+            right.Pressed += () => { log.WriteAll($"Level select cycle right requested, but not implemented!", LogLevel.warn); };
+            Button go = levelSelect.FindChild("go", true) as Button;
+            go.Pressed += () => { LevelManager.Instance.Load(); };
+        }
         void LoadingHelper()
         {
             loading = loadingScene.Instantiate() as Control;
@@ -103,21 +120,30 @@ namespace RollABall.Assets.src.Managers
         }
         void HudHelper()
         {
-            hud = hudScene.Instantiate() as HUD;
-            AddChild(hud);
+            AddChild(hud); hudEnabled = true;
+
+            GameManager.Instance.State = GameState.Gameplay;
         }
         void PauseHelper()
         {
             pause = pauseScene.Instantiate() as Control;
             AddChild(pause);
 
+            GameManager.Instance.State = GameState.Pause;
+
             Button resume = pause.FindChild("resume", true) as Button;
             resume.Pressed += () => { State = UIState.HUD; };
             Button menu = pause.FindChild("menu", true) as Button;
             menu.Pressed += () => { State = UIState.Main; };
         }
-        void LevelCompleteHelper() { levelComplete = levelCompleteScene.Instantiate() as Control; }
-        void LevelFailureHelper() { levelFailure = levelFailureScene.Instantiate() as Control; }
+        void LevelCompleteHelper()
+        {
+            AddChild(levelComplete);
+        }
+        void LevelFailureHelper()
+        {
+            AddChild(levelFailure);
+        }
     }
 
     public enum UIState

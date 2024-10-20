@@ -1,5 +1,7 @@
 using Godot;
 using Godot.Collections;
+using RollABall.Assets.src.LevelObjects;
+using System;
 
 namespace RollABall.Assets.src.Player
 {
@@ -116,6 +118,15 @@ namespace RollABall.Assets.src.Player
         internal void OnJump()
         {
             shouldJump = grounded;
+        }
+
+        internal void ResetTF(Checkpoint checkpoint)
+        {
+            ball.Position = checkpoint.Position + checkpoint.offset;
+            ball.LinearVelocity = Vector3.Zero;
+            ball.AngularVelocity = Vector3.Zero;
+            camParent.Basis = Basis.Identity;
+            Basis = Basis.Identity;
         }
     }
 }

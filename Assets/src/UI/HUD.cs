@@ -10,13 +10,14 @@ namespace RollABall.Assets.src.UI
         [Export] Label lives, time, score;
         #endregion
 
-        public override void _EnterTree()
+        public override void _Ready()
         {
             // Set singleton
             if (Instance == null) { Instance = this; }
             else { QueueFree(); return; }
 
             // TODO: sort out first update shenaniganry.
+            Update();
         }
         // Call this to force player updates.
         public void Update()
