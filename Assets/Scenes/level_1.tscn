@@ -49,11 +49,11 @@ End = Vector3(5, 1, -14)
 [node name="Checkpoint" parent="." index="18" instance=ExtResource("8_0l4wf")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
 
-[node name="Area3D" type="Area3D" parent="." index="20"]
+[node name="ELT" type="Area3D" parent="." index="20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -28)
 script = ExtResource("9_uca2j")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ELT" index="0"]
 shape = SubResource("BoxShape3D_d2n7c")
 
 [node name="Checkpoint2" parent="." index="21" instance=ExtResource("8_0l4wf")]

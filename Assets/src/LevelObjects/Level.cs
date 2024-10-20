@@ -27,7 +27,10 @@ namespace RollABall.Assets.src.LevelObjects
 
                 foreach (var c in FindChildren("*"))
                 {
-                    Logger.StaticLogger.Write($"Node {c.Name} was detected. It has type {c.GetType()}.");
+                    Logger.StaticLogger.WriteAll($"Node {c.Name} was detected. It has type {c.GetType()}.");
+
+                    if(c.Name == "ELT") { Logger.StaticLogger.WriteAll($"Found ELT, is it real? {c is EndLevelTrigger}."); }
+
                     if (c is EndLevelTrigger) { elts.Add(c as EndLevelTrigger); }
                     else if (c is Checkpoint) { cps.Add(c as Checkpoint); }
                     else if (c is MovingPlatform) { mps.Add(c as MovingPlatform); }
