@@ -47,7 +47,7 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
             {
                 Logger.StaticLogger.WriteAll($"2 {Name}: Old Position was {Position}.");
                 Position = Start.Lerp(End, lerpFactor);
-                Logger.StaticLogger.WriteAll($"3 {Name}: LerpFactor is {lerpFactor}, Position is {Position}, Return state is {returning}, Delta is {delta}");
+                Logger.StaticLogger.WriteAll($"3 {Name}:New Position is {Position}.");
             }
         }
 
