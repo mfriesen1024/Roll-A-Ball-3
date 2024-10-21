@@ -55,6 +55,7 @@ namespace RollABall.Assets.src.Managers
         private void Assign(Level level)
         {
             activeLevel = level;
+            level.ProcessMode = ProcessModeEnum.Pausable;
             level.TreeEntered += OnLoadFinish;
             CallDeferred("add_child", level);
         }
@@ -108,7 +109,6 @@ namespace RollABall.Assets.src.Managers
             if (PlayerManager.Instance.Ball.Equals(other))
             {
                 CheckpointIndex = 0;
-                Discard();
 
                 UIManager.Instance.State = UIState.LevelComplete;
 
@@ -123,6 +123,20 @@ namespace RollABall.Assets.src.Managers
             UIManager.Instance.State = UIState.Loading;
             Discard();
             Load();
+        }
+
+        internal void Pause()
+        {
+            try            {
+                GetTree().Paused = true;
+            }            catch (NullReferenceException ignored) { }
+        }
+
+        internal void Unpause()
+        {
+            try            {
+                GetTree().Paused = false;
+            }            catch (NullReferenceException ignored) { }
         }
     }
 }

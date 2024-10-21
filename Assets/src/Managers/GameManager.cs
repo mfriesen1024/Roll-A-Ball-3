@@ -53,15 +53,18 @@ namespace RollABall.Assets.src.Managers
                 case GameState.MenuOnly:
                     Input.MouseMode = Input.MouseModeEnum.Visible;
                     // unpause.
+                    LevelManager.Unpause();
                     LevelManager.Discard();
                     break;
                 case GameState.Pause: 
                     Input.MouseMode = Input.MouseModeEnum.Visible;
                     // pause specific things here.
+                    LevelManager.Pause();
                     break;
                 case GameState.Gameplay:
                     Input.MouseMode = Input.MouseModeEnum.Captured;
                     // unpause.
+                    LevelManager.Unpause();
                     break;
                 default:
                     string s = $"State {state} is not implemented in GM! This bad!";
@@ -95,7 +98,10 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         internal void StartQuit()
         {
-            throw new NotImplementedException();
+            Logger.StaticLogger.WriteAll($"StartQuit called, but its not implemented.",LogLevel.warn);
+
+            // Call this last.
+            GetTree().Quit();
         }
         #endregion
     }

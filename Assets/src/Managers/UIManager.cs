@@ -67,7 +67,6 @@ namespace RollABall.Assets.src.Managers
 
         void HideAll()
         {
-            PrintTreePretty();
             if (mainMenu != null) { mainMenu.QueueFree(); mainMenu = null; }
             if (options != null) { options.QueueFree(); options = null; }
             if (levelSelect != null) { levelSelect.QueueFree(); levelSelect = null; }
@@ -138,11 +137,21 @@ namespace RollABall.Assets.src.Managers
         }
         void LevelCompleteHelper()
         {
+            GameManager.Instance.State = GameState.Pause;
+            levelComplete = levelCompleteScene.Instantiate() as Control;
             AddChild(levelComplete);
+
+            Button menu = levelComplete.FindChild("menu", true) as Button;
+            menu.Pressed += () => { State = UIState.Main; };
         }
         void LevelFailureHelper()
         {
+            GameManager.Instance.State = GameState.Pause;
+            levelFailure = levelFailureScene.Instantiate() as Control;
             AddChild(levelFailure);
+
+            Button menu = levelFailure.FindChild("menu", true) as Button;
+            menu.Pressed += () => { State = UIState.Main; };
         }
     }
 

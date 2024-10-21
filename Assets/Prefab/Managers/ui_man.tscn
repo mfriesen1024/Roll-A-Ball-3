@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bkuuyp2ypnydr" path="res://Assets/Prefab/UIScreens/level_failure.tscn" id="9_kmrl3"]
 
 [node name="UIMan" type="Node"]
+process_mode = 3
 script = ExtResource("1_2rxmc")
 mainMenuScene = ExtResource("2_44p63")
 optionsScene = ExtResource("3_vaesl")
