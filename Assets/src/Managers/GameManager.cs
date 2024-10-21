@@ -95,7 +95,10 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         internal void StartQuit()
         {
-            throw new NotImplementedException();
+            Logger.StaticLogger.WriteAll($"StartQuit called, but its not implemented.",LogLevel.warn);
+
+            // Call this last.
+            GetTree().Quit();
         }
         #endregion
     }
