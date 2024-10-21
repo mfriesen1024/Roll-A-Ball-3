@@ -1,5 +1,7 @@
 ﻿using Godot;
+using RollABall.Assets.src.Managers;
 using RollABall.Assets.src.Player;
+using System;
 
 namespace RollABall.Assets.src.UI
 {
@@ -19,10 +21,15 @@ namespace RollABall.Assets.src.UI
             // TODO: sort out first update shenaniganry.
             Update();
         }
+        public override void _Process(double delta)
+        {
+            DateTime timerTime = LevelManager.Instance.Timer;
+            time.Text = $"{timerTime.Hour}:{timerTime.Minute}:{timerTime.Second}:{timerTime.Millisecond}";
+        }
         // Call this to force player updates.
         public void Update()
         {
-            lives.Text = $"x{PlayerManager.Instance.Lives}";
+            lives.Text = $"x{PlayerManager.Instance.Lives}";            
         }
     }
 }

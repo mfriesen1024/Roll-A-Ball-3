@@ -12,6 +12,7 @@ namespace RollABall.Assets.src.Managers
     /// </summary>
     internal partial class LevelManager : Node
     {
+        #region Refs
         /// <summary>
         /// Singleton instance of the levelman.
         /// </summary>
@@ -23,6 +24,12 @@ namespace RollABall.Assets.src.Managers
         [Export] Texture2D[] levelTextures;
 
         public Level activeLevel { get; private set; }
+        #endregion
+        #region updateRefs
+        public DateTime startTime { get; private set; }
+        public DateTime Timer { get { return GetTimerTime(); } }
+
+        #endregion
 
         /// <summary>
         /// Used to set the level to be loaded on a load request.
@@ -86,6 +93,8 @@ namespace RollABall.Assets.src.Managers
                     }
                 };
             }
+
+            startTime = DateTime.Now;
         }
 
         /// <summary>
@@ -137,6 +146,11 @@ namespace RollABall.Assets.src.Managers
             try            {
                 GetTree().Paused = false;
             }            catch (NullReferenceException ignored) { }
+        }
+
+        private DateTime GetTimerTime()
+        {
+            return new DateTime(DateTime.Now.Ticks-startTime.Ticks);            
         }
     }
 }
