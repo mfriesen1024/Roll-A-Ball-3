@@ -136,21 +136,25 @@ namespace RollABall.Assets.src.Managers
 
         internal void Pause()
         {
-            try            {
+            try
+            {
                 GetTree().Paused = true;
-            }            catch (NullReferenceException ignored) { }
+            }
+            catch (NullReferenceException ignored) { }
         }
 
         internal void Unpause()
         {
-            try            {
+            try
+            {
                 GetTree().Paused = false;
-            }            catch (NullReferenceException ignored) { }
+            }
+            catch (NullReferenceException ignored) { }
         }
 
         private DateTime GetTimerTime()
         {
-            return new DateTime(DateTime.Now.Ticks-startTime.Ticks);            
+            return new DateTime(DateTime.Now.Ticks-startTime.Ticks);
         }
     }
 }

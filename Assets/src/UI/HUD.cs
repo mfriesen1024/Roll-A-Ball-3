@@ -29,7 +29,7 @@ namespace RollABall.Assets.src.UI
         // Call this to force player updates.
         public void Update()
         {
-            lives.Text = $"x{PlayerManager.Instance.Lives}";            
+            lives.Text = $"x{PlayerManager.Instance.Lives}";
         }
     }
 }
