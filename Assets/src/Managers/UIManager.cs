@@ -151,7 +151,7 @@ namespace RollABall.Assets.src.Managers
             levelFailure = levelFailureScene.Instantiate() as Control;
             AddChild(levelFailure);
 
-            Button menu = levelComplete.FindChild("menu", true) as Button;
+            Button menu = levelFailure.FindChild("menu", true) as Button;
             menu.Pressed += () => { State = UIState.Main; };
         }
     }
