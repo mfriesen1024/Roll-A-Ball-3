@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using KeystoneUtils.Logging;
 using RollABall.Assets.src.LevelObjects;
 using System;
 
@@ -74,20 +75,23 @@ namespace RollABall.Assets.src.Player
 
             void GroundCheck()
             {
-                var objects = groundCheck.GetOverlappingBodies();
-
-                bool grounded = false;
-
-                foreach(Node3D node in objects)
+                try
                 {
-                    if (node is StaticBody3D)
-                    {
-                        grounded = true;
-                    }
-                }
+                    var objects = groundCheck.GetOverlappingBodies();
 
-                if (!grounded) { shouldJump = false; }
-                this.grounded = grounded;
+                    bool grounded = false;
+
+                    foreach (Node3D node in objects)
+                    {
+                        if (node is StaticBody3D)
+                        {
+                            grounded = true;
+                        }
+                    }
+
+                    if (!grounded) { shouldJump = false; }
+                    this.grounded = grounded;
+                } catch (Exception e) { playerManager.log.WriteAll($"{e.GetType()}: {e.Message} {e.StackTrace}", LogLevel.error); }
             }
 
             void UpdateOurPosition()
