@@ -138,6 +138,7 @@ namespace RollABall.Assets.src.Managers
         }
         void LevelCompleteHelper()
         {
+            GameManager.Instance.State = GameState.Pause;
             levelComplete = levelCompleteScene.Instantiate() as Control;
             AddChild(levelComplete);
 
@@ -146,6 +147,7 @@ namespace RollABall.Assets.src.Managers
         }
         void LevelFailureHelper()
         {
+            GameManager.Instance.State = GameState.Pause;
             levelFailure = levelFailureScene.Instantiate() as Control;
             AddChild(levelFailure);
 
