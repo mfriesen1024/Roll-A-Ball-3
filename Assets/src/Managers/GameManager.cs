@@ -64,6 +64,7 @@ namespace RollABall.Assets.src.Managers
                 case GameState.Gameplay:
                     Input.MouseMode = Input.MouseModeEnum.Captured;
                     // unpause.
+                    LevelManager.Unpause();
                     break;
                 default:
                     string s = $"State {state} is not implemented in GM! This bad!";
