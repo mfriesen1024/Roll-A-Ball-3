@@ -31,5 +31,13 @@ namespace RollABall.Assets.src.UI
         {
             lives.Text = $"x{PlayerManager.Instance.Lives}";
         }
+
+        private string ForceStringLength(string s, int length)
+        {
+            while(s.Length < length)
+            {
+                s = "0"+s;
+            }return s;
+        }
     }
 }
