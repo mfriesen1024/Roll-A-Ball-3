@@ -55,6 +55,7 @@ namespace RollABall.Assets.src.Managers
         private void Assign(Level level)
         {
             activeLevel = level;
+            level.ProcessMode = ProcessModeEnum.Pausable;
             level.TreeEntered += OnLoadFinish;
             CallDeferred("add_child", level);
         }
