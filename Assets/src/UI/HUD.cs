@@ -24,7 +24,10 @@ namespace RollABall.Assets.src.UI
         public override void _Process(double delta)
         {
             DateTime timerTime = LevelManager.Instance.Timer;
-            time.Text = $"{timerTime.Hour}:{timerTime.Minute}:{timerTime.Second}:{timerTime.Millisecond}";
+            time.Text = $"{ForceStringLength(timerTime.Hour)}:" +
+                $"{ForceStringLength(timerTime.Minute)}:" +
+                $"{ForceStringLength(timerTime.Second)}:" +
+                $"{ForceStringLength(timerTime.Millisecond)}";
         }
         // Call this to force player updates.
         public void Update()
@@ -32,8 +35,9 @@ namespace RollABall.Assets.src.UI
             lives.Text = $"x{PlayerManager.Instance.Lives}";
         }
 
-        private string ForceStringLength(string s, int length)
+        private string ForceStringLength(object o, int length = 2)
         {
+            string s = o.ToString();
             while(s.Length < length)
             {
                 s = "0"+s;
