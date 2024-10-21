@@ -17,3 +17,4 @@ mono_crash.*.json
 /logs
 *.blend1
 *.blend2
+/Build
