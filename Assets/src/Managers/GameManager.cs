@@ -53,11 +53,13 @@ namespace RollABall.Assets.src.Managers
                 case GameState.MenuOnly:
                     Input.MouseMode = Input.MouseModeEnum.Visible;
                     // unpause.
+                    LevelManager.Unpause();
                     LevelManager.Discard();
                     break;
                 case GameState.Pause: 
                     Input.MouseMode = Input.MouseModeEnum.Visible;
                     // pause specific things here.
+                    LevelManager.Pause();
                     break;
                 case GameState.Gameplay:
                     Input.MouseMode = Input.MouseModeEnum.Captured;

@@ -124,5 +124,21 @@ namespace RollABall.Assets.src.Managers
             Discard();
             Load();
         }
+
+        internal void Pause()
+        {
+            try            {
+                activeLevel.PrintTree();
+                activeLevel.GetTree().Paused = true;
+            }            catch (NullReferenceException ignored) { }
+        }
+
+        internal void Unpause()
+        {
+            try            {
+                activeLevel.PrintTree();
+                activeLevel.GetTree().Paused = false;
+            }            catch (NullReferenceException ignored) { }
+        }
     }
 }
