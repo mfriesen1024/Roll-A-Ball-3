@@ -128,7 +128,6 @@ namespace RollABall.Assets.src.Managers
         internal void Pause()
         {
             try            {
-                activeLevel.PrintTree();
                 GetTree().Paused = true;
             }            catch (NullReferenceException ignored) { }
         }
@@ -136,7 +135,6 @@ namespace RollABall.Assets.src.Managers
         internal void Unpause()
         {
             try            {
-                activeLevel.PrintTree();
                 GetTree().Paused = false;
             }            catch (NullReferenceException ignored) { }
         }

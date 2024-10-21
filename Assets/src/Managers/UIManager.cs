@@ -67,7 +67,6 @@ namespace RollABall.Assets.src.Managers
 
         void HideAll()
         {
-            PrintTreePretty();
             if (mainMenu != null) { mainMenu.QueueFree(); mainMenu = null; }
             if (options != null) { options.QueueFree(); options = null; }
             if (levelSelect != null) { levelSelect.QueueFree(); levelSelect = null; }
