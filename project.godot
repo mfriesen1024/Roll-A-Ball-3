@@ -13,7 +13,7 @@ config_version=5
 config/name="Roll A Ball"
 run/main_scene="res://Assets/Scenes/entry.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/Arting/Tex/1upIcon.png"
 
 [dotnet]
 
