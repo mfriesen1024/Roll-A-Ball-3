@@ -109,7 +109,6 @@ namespace RollABall.Assets.src.Managers
             if (PlayerManager.Instance.Ball.Equals(other))
             {
                 CheckpointIndex = 0;
-                Discard();
 
                 UIManager.Instance.State = UIState.LevelComplete;
 
