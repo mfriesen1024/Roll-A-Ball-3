@@ -138,11 +138,19 @@ namespace RollABall.Assets.src.Managers
         }
         void LevelCompleteHelper()
         {
+            levelComplete = levelCompleteScene.Instantiate() as Control;
             AddChild(levelComplete);
+
+            Button menu = levelComplete.FindChild("menu", true) as Button;
+            menu.Pressed += () => { State = UIState.Main; };
         }
         void LevelFailureHelper()
         {
+            levelFailure = levelFailureScene.Instantiate() as Control;
             AddChild(levelFailure);
+
+            Button menu = levelComplete.FindChild("menu", true) as Button;
+            menu.Pressed += () => { State = UIState.Main; };
         }
     }
 
