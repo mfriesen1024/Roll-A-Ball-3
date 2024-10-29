@@ -42,6 +42,7 @@ namespace RollABall.Assets.src.Managers
         {
             SetGMSingleton();
             SetOtherSingletons();
+            DataManager.OnStartup();
 
             if(Instance == this) { postInit(); }
         }
@@ -99,7 +100,9 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         internal void StartQuit()
         {
-            Logger.StaticLogger.WriteAll($"StartQuit called, but its not implemented.",LogLevel.warn);
+            Logger.StaticLogger.WriteAll($"Quitting!",LogLevel.info);
+
+            DataManager.OnShutdown();
 
             // Call this last.
             GetTree().Quit();
