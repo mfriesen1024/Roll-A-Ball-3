@@ -54,7 +54,15 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         public void LoadCP()
         {
+            PlaythroughSave run = GameManager.Instance.DataManager.RunData;
 
+            // Load values.
+            LevelIndex = run.level;
+            CheckpointIndex = run.checkpoint;
+            PlayerManager.Instance.Lives = run.lives;
+
+            // Load level.
+            Load();
         }
         /// <summary>
         /// Loads the level with index of LevelIndex, and spawns the player at the checkpoint with CheckpointIndex.
