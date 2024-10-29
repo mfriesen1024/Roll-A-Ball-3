@@ -86,7 +86,7 @@ namespace RollABall.Assets.src.Managers
             Button play = mainMenu.FindChild("play", true) as Button;
             play.Pressed += () => { State = UIState.LevelSelect; };
             Button load = mainMenu.FindChild("load",true) as Button;
-            load.Pressed += () => { LevelManager.Instance.LoadCP(); };
+            load.Pressed += () => { LevelManager.Instance.LoadCheckpoint(); };
             Button options = mainMenu.FindChild("options", true) as Button;
             options.Pressed += () => { State = UIState.Options; };
             Button exit = mainMenu.FindChild("exit", true) as Button;

@@ -52,7 +52,7 @@ namespace RollABall.Assets.src.Managers
         /// <summary>
         /// Loads whatever checkpoint the datamanager has saved.
         /// </summary>
-        public void LoadCP()
+        public void LoadCheckpoint()
         {
             PlaythroughSave run = GameManager.Instance.DataManager.RunData;
 
