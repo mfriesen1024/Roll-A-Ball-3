@@ -84,9 +84,9 @@ namespace RollABall.Assets.src.Managers
             GameManager.Instance.State = GameState.MenuOnly;
 
             Button play = mainMenu.FindChild("play", true) as Button;
-            // This should be used, but currently, we dont have level selection implemented.
             play.Pressed += () => { State = UIState.LevelSelect; };
-            //play.Pressed += () => { State = UIState.HUD; };
+            Button load = mainMenu.FindChild("load",true) as Button;
+            load.Pressed += () => { LevelManager.Instance.LoadCP(); };
             Button options = mainMenu.FindChild("options", true) as Button;
             options.Pressed += () => { State = UIState.Options; };
             Button exit = mainMenu.FindChild("exit", true) as Button;

@@ -50,6 +50,13 @@ namespace RollABall.Assets.src.Managers
 
         #region loading bunk
         /// <summary>
+        /// Loads whatever checkpoint the datamanager has saved.
+        /// </summary>
+        public void LoadCP()
+        {
+
+        }
+        /// <summary>
         /// Loads the level with index of LevelIndex, and spawns the player at the checkpoint with CheckpointIndex.
         /// </summary>
         public void Load()
