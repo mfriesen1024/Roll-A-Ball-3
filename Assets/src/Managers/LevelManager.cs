@@ -92,7 +92,7 @@ namespace RollABall.Assets.src.Managers
                     if (PlayerManager.Instance.Ball.Equals(other))
                     {
                         CheckpointIndex = cp.index;
-                        GameManager.Instance.DataManager.SavePlaythrough(LevelIndex, CheckpointIndex, PlayerManager.Instance.Lives);
+                        GameManager.Instance.DataManager.RecordPlaythrough(LevelIndex, CheckpointIndex, PlayerManager.Instance.Lives);
                     }
                 };
             }
