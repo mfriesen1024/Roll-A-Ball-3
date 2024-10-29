@@ -45,6 +45,14 @@ namespace RollABall.Assets.src.Managers
             DataManager.OnStartup();
 
             if(Instance == this) { postInit(); }
+
+            // Now that we're initialized, we'll handle our own quit requests.
+            GetTree().AutoAcceptQuit = false;
+        }
+
+        public override void _Notification(int what)
+        {
+            if(what == NotificationWMCloseRequest) { try { StartQuit(); } catch { } }
         }
 
         void OnSetState(GameState state)
