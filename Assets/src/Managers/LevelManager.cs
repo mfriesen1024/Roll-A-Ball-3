@@ -124,10 +124,6 @@ namespace RollABall.Assets.src.Managers
 
                 GameManager.Instance.DataManager.Save(new ScoreSave() { score=0, time=Timer.Ticks });
                 return;
-
-                var ex = new NotImplementedException("Aaa! Saving times/scores not implemented!");
-                Logger.StaticLogger.WriteAll($"{ex.Message}", LogLevel.warn);
-                throw ex;
             }
         }
 
