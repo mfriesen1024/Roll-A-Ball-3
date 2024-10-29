@@ -16,7 +16,7 @@ namespace RollABall.Assets.src.Data
 
         int unlockedLevel = 0;
 
-        ProgressionSave IBinarySerializable<ProgressionSave>.FromBinary(byte[] data)
+        public ProgressionSave FromBinary(byte[] data)
         {
             ProgressionSave save = new()
             {
@@ -31,7 +31,7 @@ namespace RollABall.Assets.src.Data
             return reqBytes;
         }
 
-        byte[] IBinarySerializable<ProgressionSave>.ToBinary(ProgressionSave data)
+        public byte[] ToBinary(ProgressionSave data)
         {
             byte[] bytes = [.. BitConverter.GetBytes(data.unlockedLevel)];
             return bytes;
