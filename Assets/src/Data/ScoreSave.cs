@@ -10,7 +10,7 @@ namespace RollABall.Assets.src.Data
     /// <summary>
     /// Represents a score/time the player set for a level.
     /// </summary>
-    internal class ScoreSave : IBinarySerializable<ScoreSave>
+    public class ScoreSave : IBinarySerializable<ScoreSave>
     {
         const int reqBytes = 12;
         public int score = 0;

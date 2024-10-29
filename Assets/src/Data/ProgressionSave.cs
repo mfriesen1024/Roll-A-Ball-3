@@ -10,11 +10,11 @@ namespace RollABall.Assets.src.Data
     /// <summary>
     /// Saves anything that gets unlocked (levels for example)
     /// </summary>
-    internal class ProgressionSave : IBinarySerializable<ProgressionSave>
+    public class ProgressionSave : IBinarySerializable<ProgressionSave>
     {
         const int reqBytes = 4;
 
-        int unlockedLevel = 0;
+        public int unlockedLevel = 0;
 
         public ProgressionSave FromBinary(byte[] data)
         {

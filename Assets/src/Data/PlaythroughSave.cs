@@ -10,7 +10,7 @@ namespace RollABall.Assets.src.Data
     /// <summary>
     /// Saves the player's progression for a given "run", but nothing that should persist between runs.
     /// </summary>
-    internal class PlaythroughSave:IBinarySerializable<PlaythroughSave>
+    public class PlaythroughSave:IBinarySerializable<PlaythroughSave>
     {
         const byte reqBytes = 12;
         public int level=0;

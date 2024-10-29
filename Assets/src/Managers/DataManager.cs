@@ -5,17 +5,24 @@ using System.IO;
 
 namespace RollABall.Assets.src.Managers
 {
-    internal class DataManager
+    public class DataManager
     {
+        #region paths
         string dataPath = "data\\";
         string savesPath = "saves\\";
         string scoresPath = "scores\\";
         string runFName = "run.save";
         string progressionFName = "progression.save";
+        #endregion
 
+        #region data
         // Data objects.
         private PlaythroughSave runData = new();
         private ProgressionSave progression = new();
+
+        public PlaythroughSave RunData { get => runData; private set => runData = value; }
+        public ProgressionSave Progression { get => progression; private set => progression = value; }
+        #endregion
 
         public void SaveScore(ScoreSave save)
         {
