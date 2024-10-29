@@ -2,6 +2,7 @@
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers;
+using RollABall.Assets.src.UI;
 
 namespace RollABall.Assets.src.Player
 {
@@ -40,7 +41,7 @@ namespace RollABall.Assets.src.Player
             Lives--;
             UIManager.Instance.hud.Update();
             if (Lives >= 0) { LevelManager.Instance.Reload(); }
-            else { UIManager.Instance.State = UIState.LevelFailure; Lives = 3; }
+            else { Lives = 3; HUD.Instance.Update(); UIManager.Instance.State = UIState.LevelFailure; }
         }
 
         public void OnLoadCheckpoint(Checkpoint checkpoint)

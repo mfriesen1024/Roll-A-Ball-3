@@ -4,6 +4,7 @@ using RollABall.Assets.src.Data;
 using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers.Helpers;
 using RollABall.Assets.src.Player;
+using RollABall.Assets.src.UI;
 using System;
 
 namespace RollABall.Assets.src.Managers
@@ -121,9 +122,11 @@ namespace RollABall.Assets.src.Managers
             {
                 CheckpointIndex = 0;
 
+                PlayerManager.Instance.Lives = 3; HUD.Instance.Update();
                 UIManager.Instance.State = UIState.LevelComplete;
 
                 GameManager.Instance.DataManager.SaveScore(new ScoreSave() { score=0, time=Timer.Ticks });
+
                 return;
             }
         }
