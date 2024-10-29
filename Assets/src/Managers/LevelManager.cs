@@ -1,8 +1,10 @@
 ﻿using Godot;
 using KeystoneUtils.Logging;
+using RollABall.Assets.src.Data;
 using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers.Helpers;
 using RollABall.Assets.src.Player;
+using RollABall.Assets.src.UI;
 using System;
 
 namespace RollABall.Assets.src.Managers
@@ -48,6 +50,21 @@ namespace RollABall.Assets.src.Managers
 
         #region loading bunk
         /// <summary>
+        /// Loads whatever checkpoint the datamanager has saved.
+        /// </summary>
+        public void LoadCheckpoint()
+        {
+            PlaythroughSave run = GameManager.Instance.DataManager.RunData;
+
+            // Load values.
+            LevelIndex = run.level;
+            CheckpointIndex = run.checkpoint;
+            PlayerManager.Instance.Lives = run.lives;
+
+            // Load level.
+            Load();
+        }
+        /// <summary>
         /// Loads the level with index of LevelIndex, and spawns the player at the checkpoint with CheckpointIndex.
         /// </summary>
         public void Load()
@@ -90,6 +107,7 @@ namespace RollABall.Assets.src.Managers
                     if (PlayerManager.Instance.Ball.Equals(other))
                     {
                         CheckpointIndex = cp.index;
+                        GameManager.Instance.DataManager.RecordPlaythrough(LevelIndex, CheckpointIndex, PlayerManager.Instance.Lives);
                     }
                 };
             }
@@ -119,11 +137,12 @@ namespace RollABall.Assets.src.Managers
             {
                 CheckpointIndex = 0;
 
+                PlayerManager.Instance.Lives = 3; HUD.Instance.Update();
                 UIManager.Instance.State = UIState.LevelComplete;
 
-                var ex = new NotImplementedException("Aaa! Saving times/scores not implemented!");
-                Logger.StaticLogger.WriteAll($"{ex.Message}", LogLevel.warn);
-                throw ex;
+                GameManager.Instance.DataManager.SaveScore(new ScoreSave() { score=0, time=Timer.Ticks });
+
+                return;
             }
         }
 

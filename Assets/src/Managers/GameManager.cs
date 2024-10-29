@@ -27,22 +27,32 @@ namespace RollABall.Assets.src.Managers
         private GameState state;
 
         #region managerRefs
-        public static InputManager InputManager { get; private set; }
+        public InputManager InputManager { get; private set; }
         [Export] PackedScene inputManPrefab;
-        public static PlayerManager PlayerManager { get; private set; }
+        public PlayerManager PlayerManager { get; private set; }
         [Export] PackedScene playerManPrefab;
-        public static UIManager UIManager { get; private set; }
+        public UIManager UIManager { get; private set; }
         [Export] PackedScene uiManPrefab;
-        public static LevelManager LevelManager { get; private set; }
+        public LevelManager LevelManager { get; private set; }
         [Export] PackedScene levelManPrefab;
+        public DataManager DataManager { get; private set; } = new();
         #endregion
 
         public override void _Ready()
         {
             SetGMSingleton();
             SetOtherSingletons();
+            DataManager.OnStartup();
 
             if(Instance == this) { postInit(); }
+
+            // Now that we're initialized, we'll handle our own quit requests.
+            GetTree().AutoAcceptQuit = false;
+        }
+
+        public override void _Notification(int what)
+        {
+            if(what == NotificationWMCloseRequest) { try { StartQuit(); } catch { } }
         }
 
         void OnSetState(GameState state)
@@ -98,7 +108,9 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         internal void StartQuit()
         {
-            Logger.StaticLogger.WriteAll($"StartQuit called, but its not implemented.",LogLevel.warn);
+            Logger.StaticLogger.WriteAll($"Quitting!",LogLevel.info);
+
+            DataManager.OnShutdown();
 
             // Call this last.
             GetTree().Quit();
