@@ -18,13 +18,30 @@ namespace RollABall.Assets.src.Managers
         string savesPath = "saves\\";
         string scoresPath = "scores\\";
 
-        public void Save(ScoreSave save)
+        public void SaveScore(ScoreSave save)
         {
             string fName = GetUniqueFileName(savesPath+scoresPath, "","score");
 
             IBinarySerializable<ScoreSave> data = save;
 
             File.WriteAllBytesAsync(fName, data.ToBinary(save));
+        }
+
+        public void SavePlaythrough(int level, int checkpoint, int lives)
+        {
+            // Define vars
+            string ptFName = "run.save";
+
+            IBinarySerializable<PlaythroughSave> blerg1 = new PlaythroughSave();
+
+            // Get previous saves.
+            PlaythroughSave playthrough = new();
+
+            playthrough.checkpoint=checkpoint;
+            playthrough.level=level;
+            playthrough.lives=lives;
+
+            File.WriteAllBytesAsync(savesPath+ptFName, blerg1.ToBinary(playthrough));
         }
 
         string GetUniqueFileName(string path, string name, object extension)

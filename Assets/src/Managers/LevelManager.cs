@@ -91,6 +91,7 @@ namespace RollABall.Assets.src.Managers
                     if (PlayerManager.Instance.Ball.Equals(other))
                     {
                         CheckpointIndex = cp.index;
+                        GameManager.Instance.DataManager.SavePlaythrough(LevelIndex, CheckpointIndex, PlayerManager.Instance.Lives);
                     }
                 };
             }
@@ -122,7 +123,7 @@ namespace RollABall.Assets.src.Managers
 
                 UIManager.Instance.State = UIState.LevelComplete;
 
-                GameManager.Instance.DataManager.Save(new ScoreSave() { score=0, time=Timer.Ticks });
+                GameManager.Instance.DataManager.SaveScore(new ScoreSave() { score=0, time=Timer.Ticks });
                 return;
             }
         }

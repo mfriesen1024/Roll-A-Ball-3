@@ -12,16 +12,18 @@ namespace RollABall.Assets.src.Data
     /// </summary>
     internal class PlaythroughSave:IBinarySerializable<PlaythroughSave>
     {
-        const byte reqBytes = 8;
+        const byte reqBytes = 12;
         public int level;
         public int checkpoint;
+        public int lives;
 
         public PlaythroughSave FromBinary(byte[] data)
         {
             PlaythroughSave save = new()
             {
                 level = BitConverter.ToInt32(data),
-                checkpoint = BitConverter.ToInt32(data, 4)
+                checkpoint = BitConverter.ToInt32(data, 4),
+                lives = BitConverter.ToInt32(data,8)
             };
 
             return save;
@@ -29,7 +31,7 @@ namespace RollABall.Assets.src.Data
 
         public byte[] ToBinary(PlaythroughSave data)
         {
-            byte[] bytes = [.. BitConverter.GetBytes(data.level), .. BitConverter.GetBytes(data.checkpoint)];
+            byte[] bytes = [.. BitConverter.GetBytes(data.level), .. BitConverter.GetBytes(data.checkpoint),.. BitConverter.GetBytes(data.lives)];
             return bytes;
         }
 
