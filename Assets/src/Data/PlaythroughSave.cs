@@ -13,9 +13,9 @@ namespace RollABall.Assets.src.Data
     internal class PlaythroughSave:IBinarySerializable<PlaythroughSave>
     {
         const byte reqBytes = 12;
-        public int level;
-        public int checkpoint;
-        public int lives;
+        public int level=0;
+        public int checkpoint=0;
+        public int lives=3;
 
         public PlaythroughSave FromBinary(byte[] data)
         {
