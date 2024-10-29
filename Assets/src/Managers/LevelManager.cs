@@ -1,5 +1,6 @@
 ﻿using Godot;
 using KeystoneUtils.Logging;
+using RollABall.Assets.src.Data;
 using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers.Helpers;
 using RollABall.Assets.src.Player;
@@ -120,6 +121,9 @@ namespace RollABall.Assets.src.Managers
                 CheckpointIndex = 0;
 
                 UIManager.Instance.State = UIState.LevelComplete;
+
+                GameManager.Instance.DataManager.Save(new ScoreSave() { score=0, time=Timer.Ticks });
+                return;
 
                 var ex = new NotImplementedException("Aaa! Saving times/scores not implemented!");
                 Logger.StaticLogger.WriteAll($"{ex.Message}", LogLevel.warn);
