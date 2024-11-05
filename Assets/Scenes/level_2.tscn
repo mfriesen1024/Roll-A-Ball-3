@@ -7,6 +7,72 @@
 [node name="Level2" instance=ExtResource("1_3hlm8")]
 script = ExtResource("2_xwbe8")
 
+[node name="Cube" parent="LevelColliders" index="0"]
+visible = false
+
+[node name="Cube_001" parent="LevelColliders" index="1"]
+visible = false
+
+[node name="Cube_002" parent="LevelColliders" index="2"]
+visible = false
+
+[node name="Cube_003" parent="LevelColliders" index="3"]
+visible = false
+
+[node name="Cube_004" parent="LevelColliders" index="4"]
+visible = false
+
+[node name="Cube_005" parent="LevelColliders" index="5"]
+visible = false
+
+[node name="Cube_006" parent="LevelColliders" index="6"]
+visible = false
+
+[node name="Cube_007" parent="LevelColliders" index="7"]
+visible = false
+
+[node name="Cube_008" parent="LevelColliders" index="8"]
+visible = false
+
+[node name="Cube_009" parent="LevelColliders" index="9"]
+visible = false
+
+[node name="Cube_010" parent="LevelColliders" index="10"]
+visible = false
+
+[node name="Cube_011" parent="LevelColliders" index="11"]
+visible = false
+
+[node name="Cube_012" parent="LevelColliders" index="12"]
+visible = false
+
+[node name="Cube_013" parent="LevelColliders" index="13"]
+visible = false
+
+[node name="Cube_014" parent="LevelColliders" index="14"]
+visible = false
+
+[node name="Cube_015" parent="LevelColliders" index="15"]
+visible = false
+
+[node name="Cube_016" parent="LevelColliders" index="16"]
+visible = false
+
+[node name="Cube_017" parent="LevelColliders" index="17"]
+visible = false
+
+[node name="Cube_018" parent="LevelColliders" index="18"]
+visible = false
+
+[node name="Cube_019" parent="LevelColliders" index="19"]
+visible = false
+
+[node name="Cube_020" parent="LevelColliders" index="20"]
+visible = false
+
+[node name="Cube_021" parent="LevelColliders" index="21"]
+visible = false
+
 [node name="Checkpoint" parent="." index="2" instance=ExtResource("3_dwvw0")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
 offset = Vector3(0, 1, 0)
