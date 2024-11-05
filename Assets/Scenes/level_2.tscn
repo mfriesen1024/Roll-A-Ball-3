@@ -1,11 +1,72 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgs2box3ugel8"]
+[gd_scene load_steps=11 format=4 uid="uid://dgs2box3ugel8"]
 
 [ext_resource type="PackedScene" uid="uid://poomls081br5" path="res://Assets/Arting/Model/Level2.blend" id="1_3hlm8"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_xwbe8"]
 [ext_resource type="PackedScene" uid="uid://ctl5lhf2861xw" path="res://Assets/Prefab/checkpoint.tscn" id="3_dwvw0"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/EndLevelTrigger.cs" id="3_t17hr"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="4_shnge"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fagrh"]
+resource_name = "You are die"
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.1365, 0.91, 0.278308, 0.501961)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_j4r6y"]
+material = SubResource("StandardMaterial3D_fagrh")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnsoj"]
+resource_name = "You are die"
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.906395, 0.153298, 0.133623, 0.5)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0q7kn"]
+_surfaces = [{
+"aabb": AABB(-6, 0, -14, 12, 1e-05, 26),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAFAAMAAgAEAAUA"),
+"name": "You are die",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAAAAAACxEwAA//8AALETAAAAAAAAAAAAAP//AAAAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d8dh7"]
+resource_name = "Level2_Plane_003"
+_surfaces = [{
+"aabb": AABB(-6, 0, -14, 12, 1e-05, 26),
+"attribute_data": PackedByteArray("AAD///////8AAAAA//8AAAAAAAD//wAA"),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAFAAMAAgAEAAUA"),
+"material": SubResource("StandardMaterial3D_bnsoj"),
+"name": "You are die",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////vwAAAACxE/+///8AALET/78AAAAAAAD/P///AAAAAP8/////f////3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_0q7kn")
 
 [node name="Level2" instance=ExtResource("1_3hlm8")]
 script = ExtResource("2_xwbe8")
+
+[node name="ELT" parent="MiscColliders" index="5"]
+script = ExtResource("3_t17hr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MiscColliders/ELT" index="1"]
+mesh = SubResource("BoxMesh_j4r6y")
+
+[node name="KillPlane" parent="MiscColliders" index="9"]
+script = ExtResource("4_shnge")
 
 [node name="Cube" parent="LevelColliders" index="0"]
 visible = false
@@ -76,3 +137,6 @@ visible = false
 [node name="Checkpoint" parent="." index="2" instance=ExtResource("3_dwvw0")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
 offset = Vector3(0, 1, 0)
+
+[node name="KillPlaneVisual" parent="Visuals" index="21"]
+mesh = SubResource("ArrayMesh_d8dh7")
