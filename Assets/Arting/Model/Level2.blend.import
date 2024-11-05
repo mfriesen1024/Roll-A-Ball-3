@@ -34,75 +34,153 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "nodes": {
-"PATH:Boiler1": {
+"PATH:LevelColliders/Cube": {
 "generate/physics": true
 },
-"PATH:Boiler2": {
+"PATH:LevelColliders/Cube_001": {
 "generate/physics": true
 },
-"PATH:Boiler3": {
+"PATH:LevelColliders/Cube_002": {
 "generate/physics": true
 },
-"PATH:Boiler4": {
+"PATH:LevelColliders/Cube_003": {
 "generate/physics": true
 },
-"PATH:Cylinder": {
+"PATH:LevelColliders/Cube_004": {
 "generate/physics": true
 },
-"PATH:Cylinder_001": {
+"PATH:LevelColliders/Cube_005": {
 "generate/physics": true
 },
-"PATH:Cylinder_002": {
+"PATH:LevelColliders/Cube_006": {
 "generate/physics": true
 },
-"PATH:Cylinder_005": {
+"PATH:LevelColliders/Cube_007": {
 "generate/physics": true
 },
-"PATH:Cylinder_007": {
+"PATH:LevelColliders/Cube_008": {
 "generate/physics": true
 },
-"PATH:Cylinder_008": {
+"PATH:LevelColliders/Cube_009": {
 "generate/physics": true
 },
-"PATH:Cylinder_009": {
+"PATH:LevelColliders/Cube_010": {
 "generate/physics": true
 },
-"PATH:Cylinder_010": {
+"PATH:LevelColliders/Cube_011": {
 "generate/physics": true
 },
-"PATH:Cylinder_011": {
+"PATH:LevelColliders/Cube_012": {
 "generate/physics": true
 },
-"PATH:Cylinder_012": {
+"PATH:LevelColliders/Cube_013": {
 "generate/physics": true
 },
-"PATH:Cylinder_013": {
+"PATH:LevelColliders/Cube_014": {
 "generate/physics": true
 },
-"PATH:Cylinder_014": {
+"PATH:LevelColliders/Cube_015": {
 "generate/physics": true
 },
-"PATH:Cylinder_015": {
+"PATH:LevelColliders/Cube_016": {
 "generate/physics": true
 },
-"PATH:Sphere": {
+"PATH:LevelColliders/Cube_017": {
 "generate/physics": true
 },
-"PATH:Sphere_001": {
+"PATH:LevelColliders/Cube_018": {
 "generate/physics": true
 },
-"PATH:Sphere_002": {
+"PATH:LevelColliders/Cube_019": {
 "generate/physics": true
 },
-"PATH:Sphere_003": {
+"PATH:LevelColliders/Cube_020": {
 "generate/physics": true
 },
-"PATH:Sphere_004": {
+"PATH:LevelColliders/Cube_021": {
 "generate/physics": true
 },
-"PATH:Start": {
+"PATH:LevelColliders/Cylinder_004": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_008": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_010": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_012": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_014": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_016": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_017": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_018": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_019": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_025": {
+"generate/physics": true
+},
+"PATH:LevelColliders/Cylinder_030": {
+"generate/physics": true
+},
+"PATH:MiscColliders/Boiler1": {
+"generate/physics": true
+},
+"PATH:MiscColliders/Boiler2": {
+"generate/physics": true
+},
+"PATH:MiscColliders/Boiler3": {
+"generate/physics": true
+},
+"PATH:MiscColliders/Boiler4": {
+"generate/physics": true
+},
+"PATH:MiscColliders/Ceiling": {
+"generate/physics": true
+},
+"PATH:MiscColliders/ELT": {
 "generate/physics": true,
-"physics/shape_type": 2
+"physics/body_type": 2
+},
+"PATH:MiscColliders/EndSculpture3": {
+"generate/physics": true
+},
+"PATH:MiscColliders/EndSculptureB": {
+"generate/physics": true
+},
+"PATH:MiscColliders/EndSculptureT": {
+"generate/physics": true
+},
+"PATH:MiscColliders/KillPlane": {
+"generate/physics": true,
+"physics/body_type": 2
+},
+"PATH:MiscColliders/Railing": {
+"generate/physics": true
+},
+"PATH:MiscColliders/Start": {
+"generate/physics": true
+},
+"PATH:MiscColliders/Walkway": {
+"generate/physics": true
+},
+"PATH:MiscColliders/Wall": {
+"generate/physics": true,
+"physics/shape_type": 1
+},
+"PATH:MiscColliders/Wall_001": {
+"generate/physics": true,
+"physics/shape_type": 1
 }
 }
 }
