@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgs2box3ugel8"]
+[gd_scene load_steps=14 format=3 uid="uid://dgs2box3ugel8"]
 
 [ext_resource type="PackedScene" uid="uid://poomls081br5" path="res://Assets/Arting/Model/Level2.blend" id="1_3hlm8"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_xwbe8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="4_shnge"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingCollider.cs" id="5_2hxdk"]
 [ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="6_1kv1r"]
+[ext_resource type="Environment" uid="uid://h262xythlf06" path="res://Assets/Resources/env.tres" id="8_8g8pm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fagrh"]
 resource_name = "You are die"
@@ -174,3 +175,6 @@ shape = SubResource("BoxShape3D_731tq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Trap6" index="1"]
 mesh = SubResource("BoxMesh_o33iq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="8"]
+environment = ExtResource("8_8g8pm")
