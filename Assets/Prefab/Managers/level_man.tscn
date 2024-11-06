@@ -10,5 +10,5 @@ size = Vector2(150, 150)
 [node name="levelMan" type="Node"]
 process_mode = 3
 script = ExtResource("1_goot0")
-levels = Array[PackedScene]([ExtResource("2_a7mxs"), ExtResource("3_3jaxf")])
+levels = Array[PackedScene]([ExtResource("3_3jaxf"), ExtResource("2_a7mxs")])
 levelTextures = Array[Texture2D]([SubResource("PlaceholderTexture2D_whi3t"), SubResource("PlaceholderTexture2D_whi3t")])
