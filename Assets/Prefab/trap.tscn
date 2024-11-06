@@ -8,7 +8,7 @@ size = Vector3(2, 0.1, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8y6xy"]
 material = ExtResource("2_8mo8a")
-size = Vector3(2, 0.1, 0.1)
+size = Vector3(2, 0.2, 0.2)
 
 [node name="Trap" type="Area3D"]
 script = ExtResource("1_6e3f3")
