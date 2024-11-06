@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=4 uid="uid://dgs2box3ugel8"]
+[gd_scene load_steps=16 format=4 uid="uid://dgs2box3ugel8"]
 
 [ext_resource type="PackedScene" uid="uid://poomls081br5" path="res://Assets/Arting/Model/Level2.blend" id="1_3hlm8"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_xwbe8"]
 [ext_resource type="PackedScene" uid="uid://ctl5lhf2861xw" path="res://Assets/Prefab/checkpoint.tscn" id="3_dwvw0"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/EndLevelTrigger.cs" id="3_t17hr"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="4_shnge"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingCollider.cs" id="5_2hxdk"]
 [ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="6_1kv1r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fagrh"]
@@ -71,6 +72,10 @@ size = Vector3(3, 0.1, 0.1)
 [node name="Level2" instance=ExtResource("1_3hlm8")]
 script = ExtResource("2_xwbe8")
 
+[node name="Checkpoint" parent="." index="0" instance=ExtResource("3_dwvw0")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
+offset = Vector3(0, 1, 0)
+
 [node name="ELT" parent="MiscColliders" index="5"]
 script = ExtResource("3_t17hr")
 
@@ -80,11 +85,22 @@ mesh = SubResource("BoxMesh_j4r6y")
 [node name="KillPlane" parent="MiscColliders" index="9"]
 script = ExtResource("4_shnge")
 
-[node name="Checkpoint" parent="MiscColliders" index="16" instance=ExtResource("3_dwvw0")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2, -2, -32)
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MiscColliders/Walkway" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -15)
+script = ExtResource("5_2hxdk")
+Start = Vector3(0, 0, -9)
+End = Vector3(0, 3, -15)
+speed = 0.5
 
-[node name="Checkpoint2" parent="MiscColliders" index="17" instance=ExtResource("3_dwvw0")]
+[node name="Trap" parent="MiscColliders/Walkway/AnimatableBody3D" index="0" instance=ExtResource("6_1kv1r")]
+
+[node name="Checkpoint2" parent="MiscColliders" index="16" instance=ExtResource("3_dwvw0")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 3, 2.001, -28)
+offset = Vector3(0, 0, 0)
+
+[node name="Checkpoint" parent="MiscColliders" index="17" instance=ExtResource("3_dwvw0")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2, -2, -32)
+offset = Vector3(0, 2, 0)
 
 [node name="Trap" parent="MiscColliders" index="18" instance=ExtResource("6_1kv1r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -2, -35)
@@ -157,10 +173,6 @@ visible = false
 
 [node name="Cube_021" parent="LevelColliders" index="21"]
 visible = false
-
-[node name="Checkpoint" parent="." index="2" instance=ExtResource("3_dwvw0")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
-offset = Vector3(0, 1, 0)
 
 [node name="KillPlaneVisual" parent="Visuals" index="21"]
 mesh = SubResource("ArrayMesh_d8dh7")
