@@ -100,7 +100,7 @@ offset = Vector3(0, 0, 0)
 
 [node name="Checkpoint" parent="MiscColliders" index="17" instance=ExtResource("3_dwvw0")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2, -2, -32)
-offset = Vector3(0, 2, 0)
+offset = Vector3(0, 0.25, 0)
 
 [node name="Trap" parent="MiscColliders" index="18" instance=ExtResource("6_1kv1r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -2, -35)
