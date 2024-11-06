@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingCollider.cs" id="5_2hxdk"]
 [ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="6_1kv1r"]
 [ext_resource type="Environment" uid="uid://h262xythlf06" path="res://Assets/Resources/env.tres" id="8_8g8pm"]
+[ext_resource type="Material" uid="uid://dw1ysen4om8y6" path="res://Assets/Resources/trapMaterial.tres" id="8_dl70w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fagrh"]
 resource_name = "You are die"
@@ -23,12 +24,8 @@ size = Vector3(2, 2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_731tq"]
 size = Vector3(3, 0.1, 0.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g68uk"]
-transparency = 1
-albedo_color = Color(1, 0.239216, 0.239216, 0.258824)
-
 [sub_resource type="BoxMesh" id="BoxMesh_o33iq"]
-material = SubResource("StandardMaterial3D_g68uk")
+material = ExtResource("8_dl70w")
 size = Vector3(3, 0.1, 0.1)
 
 [node name="Level2" instance=ExtResource("1_3hlm8")]
