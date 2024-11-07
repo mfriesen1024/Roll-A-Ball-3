@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=4 uid="uid://dgs2box3ugel8"]
+[gd_scene load_steps=23 format=4 uid="uid://dgs2box3ugel8"]
 
-[ext_resource type="PackedScene" uid="uid://poomls081br5" path="res://Assets/Arting/Model/Level2.blend" id="1_3hlm8"]
+[ext_resource type="PackedScene" uid="uid://poomls081br5" path="res://Assets/Arting/Model/Level1.blend" id="1_3hlm8"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_xwbe8"]
 [ext_resource type="PackedScene" uid="uid://ctl5lhf2861xw" path="res://Assets/Prefab/checkpoint.tscn" id="3_dwvw0"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/EndLevelTrigger.cs" id="3_t17hr"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingCollider.cs" id="5_2hxdk"]
 [ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="6_1kv1r"]
 [ext_resource type="Environment" uid="uid://8c40pgo4ba1v" path="res://Assets/Resources/env.tres" id="8_8g8pm"]
-[ext_resource type="Material" path="res://Assets/Resources/trapMaterial.tres" id="8_dl70w"]
+[ext_resource type="Material" uid="uid://dw1ysen4om8y6" path="res://Assets/Resources/trapMaterial.tres" id="8_dl70w"]
 [ext_resource type="Texture2D" uid="uid://dpoja625eafw5" path="res://Assets/Arting/Tex/KillPlaneTex.png" id="8_o2f2o"]
 [ext_resource type="Texture2D" uid="uid://dq0te7jlvq1xc" path="res://Assets/Arting/Tex/KillPlaneEmit.png" id="9_q4pbn"]
 
@@ -57,6 +57,82 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2hxfe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybiq6"]
+resource_name = "LightBar"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.896244, 0.797738, 1)
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.906332, 0.896244, 0.797738, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nioyd"]
+_surfaces = [{
+"aabb": AABB(-0.25, -0.25, -1, 0.5, 0.5, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAEAAAACAAMABwABAAMAAgAHAAMABAAAAAEAAgAAAAQABwAFAAEABAABAAUAAgAGAAcAAgAEAAYABgAFAAcABgAEAAUA"),
+"name": "LightBar",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP////8AAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAP///////wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nlfin"]
+resource_name = "Level1_Cube_011"
+_surfaces = [{
+"aabb": AABB(-0.25, -0.25, -1, 0.5, 0.5, 2),
+"attribute_data": PackedByteArray("/1////8f/z//XwAA/5////+fAAD/3/8//1//v/8f/3//X/+//5//v/+f/7//3/9//1//P/9f/z//X/8//5//P/+f/z//n/8//1//f/9f/3//X/9//5//f/+f/3//n/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAAJAAMAAAAGAAkACAAVAAoACAATABUAFAARABcAFAAOABEADQAEAA8ADQACAAQABwAMABIABwABAAwAFgAFAAsAFgAQAAUA"),
+"material": SubResource("StandardMaterial3D_ybiq6"),
+"name": "LightBar",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAAAA////vwAAAAD///+/AAD/////VNUAAP//////vwAA////////AAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//AAD//wAAVNUAAP//AAD//wAA//8AAP////8AAP///7///wAA////v///AAD//1TV/////////7///////////////////1TV//8AAAAA/7///wAAAAD/////AAAAAFTV/////wAA////////AAD///////8AAFTVVNVU1QAA/3//////VNVU1f//////f/+/VNVU1QAA/3//v/+/VNVU1f+//7//f/+/AAD/f/////+qKqoq//////9//7+qKqoqAAD/f/+//7+qKqoq/7//v/9//7+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_nioyd")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dj8so"]
+resource_name = "Level1_Cube_011"
+_surfaces = [{
+"aabb": AABB(-0.25, -0.25, -1, 0.5, 0.5, 2),
+"attribute_data": PackedByteArray("/1////8f/z//XwAA/5////+fAAD/3/8//1//v/8f/3//X/+//5//v/+f/7//3/9//1//P/9f/z//X/8//5//P/+f/z//n/8//1//f/9f/3//X/9//5//f/+f/3//n/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAAJAAMAAAAGAAkACAAVAAoACAATABUAFAARABcAFAAOABEADQAEAA8ADQACAAQABwAMABIABwABAAwAFgAFAAsAFgAQAAUA"),
+"material": SubResource("StandardMaterial3D_ybiq6"),
+"name": "LightBar",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAAAA////vwAAAAD///+/AAD/////VNUAAP//////vwAA////////AAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//AAD//wAAVNUAAP//AAD//wAA//8AAP////8AAP///7///wAA////v///AAD//1TV/////////7///////////////////1TV//8AAAAA/7///wAAAAD/////AAAAAFTV/////wAA////////AAD///////8AAFTVVNVU1QAA/3//////VNVU1f//////f/+/VNVU1QAA/3//v/+/VNVU1f+//7//f/+/AAD/f/////+qKqoq//////9//7+qKqoqAAD/f/+//7+qKqoq/7//v/9//7+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_nioyd")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bgk6s"]
+resource_name = "Level1_Cube_011"
+_surfaces = [{
+"aabb": AABB(-0.25, -0.25, -1, 0.5, 0.5, 2),
+"attribute_data": PackedByteArray("/1////8f/z//XwAA/5////+fAAD/3/8//1//v/8f/3//X/+//5//v/+f/7//3/9//1//P/9f/z//X/8//5//P/+f/z//n/8//1//f/9f/3//X/9//5//f/+f/3//n/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAAJAAMAAAAGAAkACAAVAAoACAATABUAFAARABcAFAAOABEADQAEAA8ADQACAAQABwAMABIABwABAAwAFgAFAAsAFgAQAAUA"),
+"material": SubResource("StandardMaterial3D_ybiq6"),
+"name": "LightBar",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAAAA////vwAAAAD///+/AAD/////VNUAAP//////vwAA////////AAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//AAD//wAAVNUAAP//AAD//wAA//8AAP////8AAP///7///wAA////v///AAD//1TV/////////7///////////////////1TV//8AAAAA/7///wAAAAD/////AAAAAFTV/////wAA////////AAD///////8AAFTVVNVU1QAA/3//////VNVU1f//////f/+/VNVU1QAA/3//v/+/VNVU1f+//7//f/+/AAD/f/////+qKqoq//////9//7+qKqoqAAD/f/+//7+qKqoq/7//v/9//7+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_nioyd")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_731tq"]
 size = Vector3(3, 0.1, 0.1)
@@ -203,6 +279,27 @@ visible = false
 
 [node name="KillPlaneVisual" parent="Visuals" index="21"]
 mesh = SubResource("ArrayMesh_j7xli")
+
+[node name="LightBar" parent="Visuals" index="22"]
+mesh = SubResource("ArrayMesh_nlfin")
+
+[node name="LightBar_001" parent="Visuals" index="23"]
+mesh = SubResource("ArrayMesh_dj8so")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Visuals/LightBar_001" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.906332, 0.896244, 0.797738, 1)
+spot_range = 15.0
+spot_angle = 60.0
+
+[node name="LightBar_002" parent="Visuals" index="24"]
+mesh = SubResource("ArrayMesh_bgk6s")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Visuals/LightBar_002" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.906332, 0.896244, 0.797738, 1)
+spot_range = 15.0
+spot_angle = 60.0
 
 [node name="Trap3" type="Area3D" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1, -49)
