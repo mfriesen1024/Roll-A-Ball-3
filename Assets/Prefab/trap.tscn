@@ -1,17 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0j5wwopfqu1a"]
 
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="1_6e3f3"]
+[ext_resource type="Material" uid="uid://dw1ysen4om8y6" path="res://Assets/Resources/trapMaterial.tres" id="2_8mo8a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_677f6"]
 size = Vector3(2, 0.1, 0.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g68uk"]
-transparency = 1
-albedo_color = Color(1, 0.239216, 0.239216, 0.258824)
-
 [sub_resource type="BoxMesh" id="BoxMesh_8y6xy"]
-material = SubResource("StandardMaterial3D_g68uk")
-size = Vector3(2, 0.1, 0.1)
+material = ExtResource("2_8mo8a")
+size = Vector3(2, 0.2, 0.2)
 
 [node name="Trap" type="Area3D"]
 script = ExtResource("1_6e3f3")

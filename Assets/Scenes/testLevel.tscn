@@ -1,0 +1,189 @@
+[gd_scene load_steps=20 format=4 uid="uid://b10toohx6iroa"]
+
+[ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/Level1.blend" id="1_hlxvo"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_aik25"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="2_xk6uf"]
+[ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="3_ofj8s"]
+[ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="4_2try3"]
+[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/Managers/input_man.tscn" id="5_g3bja"]
+[ext_resource type="PackedScene" uid="uid://bvudjw8wkxayq" path="res://Assets/Prefab/moving_platform.tscn" id="6_ddj86"]
+[ext_resource type="PackedScene" uid="uid://ctl5lhf2861xw" path="res://Assets/Prefab/checkpoint.tscn" id="8_0l4wf"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/EndLevelTrigger.cs" id="9_uca2j"]
+[ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="10_5wfum"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qolwu"]
+resource_name = "Material"
+transparency = 4
+albedo_color = Color(0.301131, 0.301131, 0.301131, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0p73h"]
+_surfaces = [{
+"aabb": AABB(-1, -0.5, -1, 2, 1.5, 2.00001),
+"format": 34896613377,
+"index_count": 108,
+"index_data": PackedByteArray("AAASABEAAAACABIAAwAHAAEAAwAJAAcACgATABUACgAEABMAAAAIAAIAAAAGAAgAAQAZABYAAQAHABkAEgAQAA0AEgAVABAAFgAPAAwAFgAZAA8AFQAOABAAFQATAA4AEQANAAwAEQASAA0AFgADAAEAFgAXAAMAGgAFAAsAGgAYAAUADAAUABEADAAPABQAFwALAAMAFwAaAAsADAAXABYADAANABcAEAAYABoAEAAOABgAEQAGAAAAEQAUAAYADQAaABcADQAQABoAAgAVABIAAgAKABUA"),
+"lods": [1e-10, PackedByteArray("AAAXAAwAAAACABcADAAXAAMADAADAAEAAwAHAAEAAwAJAAcACgAEABMACgATAA4ACgAOABcAAgAKABcAFwAOABgAFwAYAAUAFwAFAAsAFwALAAMAAAAIAAIAAAAGAAgAAQAZAAwAAQAHABkADAAZAA8ADAAPABQADAAUAAYADAAGAAAA")],
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 27,
+"vertex_data": PackedByteArray("AABVVf7/AAD//1VV/v8AAAAAVVUAAAAA//9VVQAAAAAAAAAAAAAAAP//AAAAAAAAAAD///7/AAD//////v8AAAAA//8AAAAA/////wAAAAAAAKoqAAAAAP//qioAAAAA/39VVf7/AAD/f1VVAAAAAP9/AAAAAAAA/3////7/AAD/f6oqAAAAAP9fVVX+/wAA/19VVQAAAAD/XwAAAAAAAP9f///+/wAA/1+qKgAAAAD/n1VV/v8AAP+fVVUAAAAA/58AAAAAAAD/n////v8AAP+fqioAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hmybs"]
+resource_name = "Level1_Plane"
+_surfaces = [{
+"aabb": AABB(-1, -0.5, -1, 2, 1.5, 2.00001),
+"attribute_data": PackedByteArray("te3/v/9//7+17f+/kaT/f7Xt////f///te3/vyPJ/7+17f9/kaT/v7Xt//8jyf//////v/////8jyf+/I8n/v/9//38jyf//I8n/f/9//7/a9v+/2vb//7Xt/9//f//fte3/3yPJ/9/////fI8n/39r2/9+17f/X/3//17Xt/9cjyf/X////1yPJ/9fa9v/Xte3/5/9//+e17f/nI8n/5////+cjyf/n2vb/5w=="),
+"format": 34896613399,
+"index_count": 108,
+"index_data": PackedByteArray("AQAgAB4AAQAHACAACQAQAAMACQATABAAFAAhACMAFAAMACEAAgASAAgAAgAPABIABAApACQABAARACkAHwAcABgAHwAjABwAJAAbABYAJAApABsAIwAaABwAIwAhABoAHgAZABcAHgAgABkAJQALAAUAJQAnAAsAKgANABUAKgAoAA0AFgAiAB0AFgAbACIAJgAVAAoAJgAqABUAFwAnACUAFwAZACcAHAAoACoAHAAaACgAHQAOAAAAHQAiAA4AGAAqACYAGAAcACoABgAjAB8ABgAUACMA"),
+"lods": [1e-10, PackedByteArray("AQAnABcAAQAHACcAFwAnAAsAFwALAAUACQAQAAMACQATABAAFAAMACEAFAAhABoAFAAaACYABgAUACYAJgAaACgAJgAoAA0AJgANABUAJgAVAAoAAgASAAgAAgAPABIABAApABYABAARACkAFgApABsAFgAbACIAFgAiAA4AFgAOAAAA")],
+"material": SubResource("StandardMaterial3D_qolwu"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(1.75, 2, 0, 0),
+"vertex_count": 43,
+"vertex_data": PackedByteArray("AABVVf7///8AAFVV/v9U1QAAVVX+/1TV//9VVf7/VNX//1VV/v//////VVX+/1TVAABVVQAA//8AAFVVAABU1QAAVVUAAFTV//9VVQAAVNX//1VVAAD/////VVUAAFTVAAAAAAAA/////wAAAAD//wAA///+////AAD///7/VNX//////v9U1f/////+////AAD//wAAVNX/////AABU1QAAqioAAP////+qKgAA////f1VV/v////9/VVX+/1TV/39VVQAA////f1VVAABU1f9/AAAAAP///3////7/////f6oqAAD///9fVVX+/////19VVf7/VNX/X1VVAAD///9fVVUAAFTV/18AAAAA////X////v////9fqioAAP///59VVf7/////n1VV/v9U1f+fVVUAAP///59VVQAAVNX/nwAAAAD///+f///+/////5+qKgAA////v/8/VNWqKqqqVFVUVaqq/7//P1TVqir/P/+/VNWqKqqqVFVUVaqq/z//v1TVqir/P/+//z//v/+//z+qqlVVVFWqqv+//z+qqlRVVFWqqv8//7//P/+//7//P1TVqir/P/+/VNWqKv8//7//v/8//z//v/+//z9U1aoq/z//v1TVqir/P/+//7//P/8//7//v/8/VNWqKv8//79U1aoq/z//v/+//z//P/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_0p73h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7d3t"]
+resource_name = "Material"
+transparency = 4
+albedo_color = Color(0.301131, 0.301131, 0.301131, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jlmuk"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1.16667, 2, 2, 2.16668),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAIAAAABAAMABAAJAAgABAAFAAkABgAFAAQABgAHAAUAAQAKAAsAAQAAAAoABwAOAA8ABwAGAA4AAgANAAwAAgADAA0A"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AACAvwAAgL8AAIA/AACAvwAAgD8AAIA/AACAvwAAgL8AAIC/AACAvwAAgD8AAIC/AACAPwAAgL8AAIA/AACAPwAAgD8AAIA/AACAPwAAgL8AAIC/AACAPwAAgD8AAIC/qqoqPwAAgL8AAIA/qqoqPwAAgD8AAIA/qqoqvwAAgL8AAIA/qqoqvwAAgD8AAIA/AACAvwAAgL9VVZW/AACAvwAAgD9VVZW/AACAPwAAgL9VVZW/AACAPwAAgD9VVZW/")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iyda8"]
+resource_name = "Level1_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1.16667, 2, 2, 2.16668),
+"attribute_data": PackedByteArray("AADAPgAAgD8AAMA+AACAPwAAID8AAIA/AAAgPwAAgD8AAMA+AABAPwAAID8AAEA/AADAPgAAgD4AAMA+AACAPgAAID8AAIA+AAAgPwAAgD4AAMA+AAAAPwAAID8AAAA/AADAPgAAgD4AACA/AACAPgAAwD4AAIA/AAAgPwAAgD8AAMA+AABAPwAAID8AAEA/AADAPgAAAD8AACA/AAAAPw=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AQAFAAQAAQADAAUABwANAAwABwAJAA0ACgAIAAYACgALAAgAAgAOAA8AAgAAAA4ACwASABMACwAKABIABAARABAABAAFABEA"),
+"material": SubResource("StandardMaterial3D_s7d3t"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AACAvwAAgL8AAIA/AACAvwAAgL8AAIA/AACAvwAAgD8AAIA/AACAvwAAgD8AAIA/AACAvwAAgL8AAIC/AACAvwAAgD8AAIC/AACAPwAAgL8AAIA/AACAPwAAgL8AAIA/AACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AACAPwAAgL8AAIC/AACAPwAAgD8AAIC/qqoqPwAAgL8AAIA/qqoqPwAAgD8AAIA/qqoqvwAAgL8AAIA/qqoqvwAAgD8AAIA/AACAvwAAgL9VVZW/AACAvwAAgD9VVZW/AACAPwAAgL9VVZW/AACAPwAAgD9VVZW//////////z////9//38AAP////////8/////f/9/AAD///9//38AAP///3//fwAAAAD/f/9/AAD/////////PwAA/3//fwAA/////////z8AAP9//38AAAAA/3//fwAA/////////z//////////P/////////8//////////z////9/////v////3////+/AAD/f////78AAP9/////vw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_jlmuk")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d2n7c"]
+size = Vector3(2, 3, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6pfo"]
+transparency = 1
+albedo_color = Color(0, 1, 0, 0.372549)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mssgn"]
+material = SubResource("StandardMaterial3D_r6pfo")
+size = Vector3(1.999, 3, 2)
+
+[node name="Level1" instance=ExtResource("1_hlxvo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("2_aik25")
+
+[node name="Start" parent="." index="0"]
+mesh = SubResource("ArrayMesh_hmybs")
+
+[node name="KillPlane" parent="." index="1"]
+script = ExtResource("2_xk6uf")
+
+[node name="Bounds" parent="." index="2"]
+mesh = SubResource("ArrayMesh_iyda8")
+
+[node name="Playerman" parent="." index="12" instance=ExtResource("3_ofj8s")]
+
+[node name="Node" type="Node" parent="." index="13"]
+script = ExtResource("4_2try3")
+inputManPrefab = ExtResource("5_g3bja")
+playerManPrefab = ExtResource("3_ofj8s")
+
+[node name="SideMP1" parent="." index="14" instance=ExtResource("6_ddj86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -15)
+Start = Vector3(-5, 2, -15)
+End = Vector3(-5, 2, -19)
+speed = 0.5
+
+[node name="EscalatorMP1" parent="." index="15" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -13)
+trigger = NodePath("../SideMP1/MPTrigger")
+Start = Vector3(-3, 1, -13)
+End = Vector3(-4, 2, -13)
+
+[node name="EscalatorMP2" parent="." index="16" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -13)
+trigger = NodePath("../SideMP1/MPTrigger")
+Start = Vector3(3, 1, -13)
+End = Vector3(4, 2, -13)
+
+[node name="SideMP2" parent="." index="17" instance=ExtResource("6_ddj86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -15)
+Start = Vector3(5, 2, -19)
+End = Vector3(5, 2, -15)
+speed = 0.5
+
+[node name="Checkpoint" parent="." index="18" instance=ExtResource("8_0l4wf")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
+
+[node name="ELT" type="Area3D" parent="." index="20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -29)
+script = ExtResource("9_uca2j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ELT" index="0"]
+shape = SubResource("BoxShape3D_d2n7c")
+
+[node name="Checkpoint2" parent="." index="21" instance=ExtResource("8_0l4wf")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.001, -21)
+
+[node name="MidMP1" parent="." index="22" instance=ExtResource("6_ddj86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
+Start = Vector3(0, 1, -15)
+End = Vector3(0, 1, -19)
+speed = 0.5
+
+[node name="Trap" parent="." index="23" instance=ExtResource("10_5wfum")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+
+[node name="Trap2" parent="." index="24" instance=ExtResource("10_5wfum")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -17)
+
+[node name="Trap3" parent="." index="25" instance=ExtResource("10_5wfum")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -22)
+
+[node name="Trap4" parent="." index="26" instance=ExtResource("10_5wfum")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25)
+
+[node name="Trap5" parent="." index="27" instance=ExtResource("10_5wfum")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 1, -21)
+
+[node name="Trap6" parent="." index="28" instance=ExtResource("10_5wfum")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1, -21)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="29"]
+transform = Transform3D(0.965926, 0.12941, 0.224144, -0.258819, 0.482963, 0.836516, 0, -0.866025, 0.5, 0, 6, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -29)
+mesh = SubResource("BoxMesh_mssgn")
