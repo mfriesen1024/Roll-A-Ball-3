@@ -65,6 +65,7 @@ albedo_color = Color(0.906332, 0.896244, 0.797738, 1)
 roughness = 0.5
 emission_enabled = true
 emission = Color(0.906332, 0.896244, 0.797738, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_nioyd"]
 _surfaces = [{
@@ -289,6 +290,7 @@ mesh = SubResource("ArrayMesh_dj8so")
 [node name="SpotLight3D" type="SpotLight3D" parent="Visuals/LightBar_001" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 light_color = Color(0.906332, 0.896244, 0.797738, 1)
+light_energy = 0.5
 spot_range = 15.0
 spot_angle = 60.0
 
@@ -298,6 +300,7 @@ mesh = SubResource("ArrayMesh_bgk6s")
 [node name="SpotLight3D" type="SpotLight3D" parent="Visuals/LightBar_002" index="1"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 light_color = Color(0.906332, 0.896244, 0.797738, 1)
+light_energy = 0.5
 spot_range = 15.0
 spot_angle = 60.0
 
