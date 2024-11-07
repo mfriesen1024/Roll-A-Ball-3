@@ -1,189 +1,248 @@
-[gd_scene load_steps=20 format=4 uid="uid://b10toohx6iroa"]
+[gd_scene load_steps=18 format=4 uid="uid://dgs2box3ugel8"]
 
-[ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/Level1.blend" id="1_hlxvo"]
-[ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_aik25"]
-[ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="2_xk6uf"]
-[ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="3_ofj8s"]
-[ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="4_2try3"]
-[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/Managers/input_man.tscn" id="5_g3bja"]
-[ext_resource type="PackedScene" uid="uid://bvudjw8wkxayq" path="res://Assets/Prefab/moving_platform.tscn" id="6_ddj86"]
-[ext_resource type="PackedScene" uid="uid://ctl5lhf2861xw" path="res://Assets/Prefab/checkpoint.tscn" id="8_0l4wf"]
-[ext_resource type="Script" path="res://Assets/src/LevelObjects/EndLevelTrigger.cs" id="9_uca2j"]
-[ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="10_5wfum"]
+[ext_resource type="PackedScene" uid="uid://poomls081br5" path="res://Assets/Arting/Model/Level2.blend" id="1_3hlm8"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_xwbe8"]
+[ext_resource type="PackedScene" uid="uid://ctl5lhf2861xw" path="res://Assets/Prefab/checkpoint.tscn" id="3_dwvw0"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/EndLevelTrigger.cs" id="3_t17hr"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="4_shnge"]
+[ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingCollider.cs" id="5_2hxdk"]
+[ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="6_1kv1r"]
+[ext_resource type="Environment" uid="uid://8c40pgo4ba1v" path="res://Assets/Resources/env.tres" id="8_8g8pm"]
+[ext_resource type="Material" path="res://Assets/Resources/trapMaterial.tres" id="8_dl70w"]
+[ext_resource type="Texture2D" uid="uid://dpoja625eafw5" path="res://Assets/Arting/Tex/KillPlaneTex.png" id="8_o2f2o"]
+[ext_resource type="Texture2D" uid="uid://dq0te7jlvq1xc" path="res://Assets/Arting/Tex/KillPlaneEmit.png" id="9_q4pbn"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qolwu"]
-resource_name = "Material"
-transparency = 4
-albedo_color = Color(0.301131, 0.301131, 0.301131, 1)
-roughness = 0.5
+[sub_resource type="FogMaterial" id="FogMaterial_jaahr"]
+density = 4.0
+emission = Color(0.1, 0.1, 0.1, 1)
+edge_fade = 1.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_0p73h"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wy0rd"]
+resource_name = "Lava"
+cull_mode = 2
+albedo_texture = ExtResource("8_o2f2o")
+metallic = 0.25
+roughness = 0.1
+emission_enabled = true
+emission_texture = ExtResource("9_q4pbn")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2hxfe"]
 _surfaces = [{
-"aabb": AABB(-1, -0.5, -1, 2, 1.5, 2.00001),
+"aabb": AABB(-6, 0, -35, 12, 1e-05, 65),
 "format": 34896613377,
-"index_count": 108,
-"index_data": PackedByteArray("AAASABEAAAACABIAAwAHAAEAAwAJAAcACgATABUACgAEABMAAAAIAAIAAAAGAAgAAQAZABYAAQAHABkAEgAQAA0AEgAVABAAFgAPAAwAFgAZAA8AFQAOABAAFQATAA4AEQANAAwAEQASAA0AFgADAAEAFgAXAAMAGgAFAAsAGgAYAAUADAAUABEADAAPABQAFwALAAMAFwAaAAsADAAXABYADAANABcAEAAYABoAEAAOABgAEQAGAAAAEQAUAAYADQAaABcADQAQABoAAgAVABIAAgAKABUA"),
-"lods": [1e-10, PackedByteArray("AAAXAAwAAAACABcADAAXAAMADAADAAEAAwAHAAEAAwAJAAcACgAEABMACgATAA4ACgAOABcAAgAKABcAFwAOABgAFwAYAAUAFwAFAAsAFwALAAMAAAAIAAIAAAAGAAgAAQAZAAwAAQAHABkADAAZAA8ADAAPABQADAAUAAYADAAGAAAA")],
-"name": "Material",
+"index_count": 30,
+"index_data": PackedByteArray("BgADAAsABgACAAMAAgAFAAMAAgAEAAUABwAGAAsABwALAAoACAAHAAoACAAKAAkAAAAIAAkAAAAJAAEA"),
+"name": "Lava",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 27,
-"vertex_data": PackedByteArray("AABVVf7/AAD//1VV/v8AAAAAVVUAAAAA//9VVQAAAAAAAAAAAAAAAP//AAAAAAAAAAD///7/AAD//////v8AAAAA//8AAAAA/////wAAAAAAAKoqAAAAAP//qioAAAAA/39VVf7/AAD/f1VVAAAAAP9/AAAAAAAA/3////7/AAD/f6oqAAAAAP9fVVX+/wAA/19VVQAAAAD/XwAAAAAAAP9f///+/wAA/1+qKgAAAAD/n1VV/v8AAP+fVVUAAAAA/58AAAAAAAD/n////v8AAP+fqioAAAAA")
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAAAAAACxEwAA//8AALETAAAAAAAAAAAAAP//AAAAAAAAAAAAAMROAAAAAAAA2IkAAAAAAADrxAAA//8AAOvEAAD//wAA2IkAAP//AADETgAA")
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_hmybs"]
-resource_name = "Level1_Plane"
+[sub_resource type="ArrayMesh" id="ArrayMesh_j7xli"]
+resource_name = "Level2_Plane_003"
 _surfaces = [{
-"aabb": AABB(-1, -0.5, -1, 2, 1.5, 2.00001),
-"attribute_data": PackedByteArray("te3/v/9//7+17f+/kaT/f7Xt////f///te3/vyPJ/7+17f9/kaT/v7Xt//8jyf//////v/////8jyf+/I8n/v/9//38jyf//I8n/f/9//7/a9v+/2vb//7Xt/9//f//fte3/3yPJ/9/////fI8n/39r2/9+17f/X/3//17Xt/9cjyf/X////1yPJ/9fa9v/Xte3/5/9//+e17f/nI8n/5////+cjyf/n2vb/5w=="),
+"aabb": AABB(-6, 0, -35, 12, 1e-05, 65),
+"attribute_data": PackedByteArray("iq+SJMVXkiQAAJIkxVeSJAAAAADFVwAAAABIkgAA//+Kr///iq9IksVXSJLFV///xVf//8VXSJI="),
 "format": 34896613399,
-"index_count": 108,
-"index_data": PackedByteArray("AQAgAB4AAQAHACAACQAQAAMACQATABAAFAAhACMAFAAMACEAAgASAAgAAgAPABIABAApACQABAARACkAHwAcABgAHwAjABwAJAAbABYAJAApABsAIwAaABwAIwAhABoAHgAZABcAHgAgABkAJQALAAUAJQAnAAsAKgANABUAKgAoAA0AFgAiAB0AFgAbACIAJgAVAAoAJgAqABUAFwAnACUAFwAZACcAHAAoACoAHAAaACgAHQAOAAAAHQAiAA4AGAAqACYAGAAcACoABgAjAB8ABgAUACMA"),
-"lods": [1e-10, PackedByteArray("AQAnABcAAQAHACcAFwAnAAsAFwALAAUACQAQAAMACQATABAAFAAMACEAFAAhABoAFAAaACYABgAUACYAJgAaACgAJgAoAA0AJgANABUAJgAVAAoAAgASAAgAAgAPABIABAApABYABAARACkAFgApABsAFgAbACIAFgAiAA4AFgAOAAAA")],
-"material": SubResource("StandardMaterial3D_qolwu"),
-"name": "Material",
-"primitive": 3,
-"uv_scale": Vector4(1.75, 2, 0, 0),
-"vertex_count": 43,
-"vertex_data": PackedByteArray("AABVVf7///8AAFVV/v9U1QAAVVX+/1TV//9VVf7/VNX//1VV/v//////VVX+/1TVAABVVQAA//8AAFVVAABU1QAAVVUAAFTV//9VVQAAVNX//1VVAAD/////VVUAAFTVAAAAAAAA/////wAAAAD//wAA///+////AAD///7/VNX//////v9U1f/////+////AAD//wAAVNX/////AABU1QAAqioAAP////+qKgAA////f1VV/v////9/VVX+/1TV/39VVQAA////f1VVAABU1f9/AAAAAP///3////7/////f6oqAAD///9fVVX+/////19VVf7/VNX/X1VVAAD///9fVVUAAFTV/18AAAAA////X////v////9fqioAAP///59VVf7/////n1VV/v9U1f+fVVUAAP///59VVQAAVNX/nwAAAAD///+f///+/////5+qKgAA////v/8/VNWqKqqqVFVUVaqq/7//P1TVqir/P/+/VNWqKqqqVFVUVaqq/z//v1TVqir/P/+//z//v/+//z+qqlVVVFWqqv+//z+qqlRVVFWqqv8//7//P/+//7//P1TVqir/P/+/VNWqKv8//7//v/8//z//v/+//z9U1aoq/z//v1TVqir/P/+//7//P/8//7//v/8/VNWqKv8//79U1aoq/z//v/+//z//P/+/")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_0p73h")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7d3t"]
-resource_name = "Material"
-transparency = 4
-albedo_color = Color(0.301131, 0.301131, 0.301131, 1)
-roughness = 0.5
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_jlmuk"]
-_surfaces = [{
-"aabb": AABB(-1, -1, -1.16667, 2, 2, 2.16668),
-"format": 34359742465,
-"index_count": 36,
-"index_data": PackedByteArray("AAADAAIAAAABAAMABAAJAAgABAAFAAkABgAFAAQABgAHAAUAAQAKAAsAAQAAAAoABwAOAA8ABwAGAA4AAgANAAwAAgADAA0A"),
-"name": "Material",
+"index_count": 30,
+"index_data": PackedByteArray("BgADAA0ABwAGAA0ABwANAAsABgACAAMAAgAFAAMAAgAEAAUAAAAKAAEAAAAJAAoACQAMAAoACQAIAAwA"),
+"material": SubResource("StandardMaterial3D_wy0rd"),
+"name": "Lava",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 16,
-"vertex_data": PackedByteArray("AACAvwAAgL8AAIA/AACAvwAAgD8AAIA/AACAvwAAgL8AAIC/AACAvwAAgD8AAIC/AACAPwAAgL8AAIA/AACAPwAAgD8AAIA/AACAPwAAgL8AAIC/AACAPwAAgD8AAIC/qqoqPwAAgL8AAIA/qqoqPwAAgD8AAIA/qqoqvwAAgL8AAIA/qqoqvwAAgD8AAIA/AACAvwAAgL9VVZW/AACAvwAAgD9VVZW/AACAPwAAgL9VVZW/AACAPwAAgD9VVZW/")
+"vertex_count": 14,
+"vertex_data": PackedByteArray("AAAAAP///////wAA/////wAAAACxE/+///8AALET/78AAAAAAAD/v///AAAAAP+/AAAAAMRO/78AAAAA2In/vwAAAADYif//AAAAAOvE/////wAA68T/////AADYif+///8AANiJ/////wAAxE7/v/9//7//f/+/////f////3////9/////f////3////9//3//v/9//7//f/+/////f/9//7////9/")
 }]
 blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2hxfe")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_iyda8"]
-resource_name = "Level1_Cube_001"
-_surfaces = [{
-"aabb": AABB(-1, -1, -1.16667, 2, 2, 2.16668),
-"attribute_data": PackedByteArray("AADAPgAAgD8AAMA+AACAPwAAID8AAIA/AAAgPwAAgD8AAMA+AABAPwAAID8AAEA/AADAPgAAgD4AAMA+AACAPgAAID8AAIA+AAAgPwAAgD4AAMA+AAAAPwAAID8AAAA/AADAPgAAgD4AACA/AACAPgAAwD4AAIA/AAAgPwAAgD8AAMA+AABAPwAAID8AAEA/AADAPgAAAD8AACA/AAAAPw=="),
-"format": 34359742487,
-"index_count": 36,
-"index_data": PackedByteArray("AQAFAAQAAQADAAUABwANAAwABwAJAA0ACgAIAAYACgALAAgAAgAOAA8AAgAAAA4ACwASABMACwAKABIABAARABAABAAFABEA"),
-"material": SubResource("StandardMaterial3D_s7d3t"),
-"name": "Material",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 20,
-"vertex_data": PackedByteArray("AACAvwAAgL8AAIA/AACAvwAAgL8AAIA/AACAvwAAgD8AAIA/AACAvwAAgD8AAIA/AACAvwAAgL8AAIC/AACAvwAAgD8AAIC/AACAPwAAgL8AAIA/AACAPwAAgL8AAIA/AACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AACAPwAAgL8AAIC/AACAPwAAgD8AAIC/qqoqPwAAgL8AAIA/qqoqPwAAgD8AAIA/qqoqvwAAgL8AAIA/qqoqvwAAgD8AAIA/AACAvwAAgL9VVZW/AACAvwAAgD9VVZW/AACAPwAAgL9VVZW/AACAPwAAgD9VVZW//////////z////9//38AAP////////8/////f/9/AAD///9//38AAP///3//fwAAAAD/f/9/AAD/////////PwAA/3//fwAA/////////z8AAP9//38AAAAA/3//fwAA/////////z//////////P/////////8//////////z////9/////v////3////+/AAD/f////78AAP9/////vw==")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_jlmuk")
+[sub_resource type="BoxShape3D" id="BoxShape3D_731tq"]
+size = Vector3(3, 0.1, 0.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_d2n7c"]
-size = Vector3(2, 3, 2)
+[sub_resource type="BoxMesh" id="BoxMesh_o33iq"]
+material = ExtResource("8_dl70w")
+size = Vector3(3, 0.2, 0.2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6pfo"]
-transparency = 1
-albedo_color = Color(0, 1, 0, 0.372549)
+[node name="Level2" instance=ExtResource("1_3hlm8")]
+script = ExtResource("2_xwbe8")
 
-[sub_resource type="BoxMesh" id="BoxMesh_mssgn"]
-material = SubResource("StandardMaterial3D_r6pfo")
-size = Vector3(1.999, 3, 2)
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.001, 0)
+light_energy = 0.5
+spot_range = 10.0
+spot_angle = 60.0
 
-[node name="Level1" instance=ExtResource("1_hlxvo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-script = ExtResource("2_aik25")
+[node name="SpotLight3D2" type="SpotLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.501, -20)
+light_color = Color(1, 0.975, 0.85, 1)
+light_energy = 0.5
+spot_range = 10.0
+spot_angle = 60.0
 
-[node name="Start" parent="." index="0"]
-mesh = SubResource("ArrayMesh_hmybs")
+[node name="SpotLight3D3" type="SpotLight3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.501, -36)
+light_color = Color(1, 0.975, 0.85, 1)
+light_energy = 0.5
+spot_range = 10.0
+spot_angle = 60.0
 
-[node name="KillPlane" parent="." index="1"]
-script = ExtResource("2_xk6uf")
+[node name="SpotLight3D4" type="SpotLight3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.501, -52)
+light_color = Color(1, 0.975, 0.85, 1)
+light_energy = 0.5
+spot_range = 10.0
+spot_angle = 60.0
 
-[node name="Bounds" parent="." index="2"]
-mesh = SubResource("ArrayMesh_iyda8")
-
-[node name="Playerman" parent="." index="12" instance=ExtResource("3_ofj8s")]
-
-[node name="Node" type="Node" parent="." index="13"]
-script = ExtResource("4_2try3")
-inputManPrefab = ExtResource("5_g3bja")
-playerManPrefab = ExtResource("3_ofj8s")
-
-[node name="SideMP1" parent="." index="14" instance=ExtResource("6_ddj86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -15)
-Start = Vector3(-5, 2, -15)
-End = Vector3(-5, 2, -19)
-speed = 0.5
-
-[node name="EscalatorMP1" parent="." index="15" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -13)
-trigger = NodePath("../SideMP1/MPTrigger")
-Start = Vector3(-3, 1, -13)
-End = Vector3(-4, 2, -13)
-
-[node name="EscalatorMP2" parent="." index="16" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -13)
-trigger = NodePath("../SideMP1/MPTrigger")
-Start = Vector3(3, 1, -13)
-End = Vector3(4, 2, -13)
-
-[node name="SideMP2" parent="." index="17" instance=ExtResource("6_ddj86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -15)
-Start = Vector3(5, 2, -19)
-End = Vector3(5, 2, -15)
-speed = 0.5
-
-[node name="Checkpoint" parent="." index="18" instance=ExtResource("8_0l4wf")]
+[node name="Checkpoint" parent="." index="4" instance=ExtResource("3_dwvw0")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
+offset = Vector3(0, 1, 0)
 
-[node name="ELT" type="Area3D" parent="." index="20"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -29)
-script = ExtResource("9_uca2j")
+[node name="ELT" parent="MiscColliders" index="6"]
+script = ExtResource("3_t17hr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ELT" index="0"]
-shape = SubResource("BoxShape3D_d2n7c")
+[node name="FogVolume" type="FogVolume" parent="MiscColliders/ELT" index="1"]
+size = Vector3(1.8, 1.8, 1.8)
+material = SubResource("FogMaterial_jaahr")
 
-[node name="Checkpoint2" parent="." index="21" instance=ExtResource("8_0l4wf")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.001, -21)
+[node name="KillPlane" parent="MiscColliders" index="11"]
+script = ExtResource("4_shnge")
 
-[node name="MidMP1" parent="." index="22" instance=ExtResource("6_ddj86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
-Start = Vector3(0, 1, -15)
-End = Vector3(0, 1, -19)
+[node name="MP_Placeholder" parent="MiscColliders" index="12"]
+visible = false
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MiscColliders/Walkway" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -15)
+script = ExtResource("5_2hxdk")
+Start = Vector3(0, 0, -9)
+End = Vector3(0, 3, -15)
 speed = 0.5
 
-[node name="Trap" parent="." index="23" instance=ExtResource("10_5wfum")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+[node name="Trap" parent="MiscColliders/Walkway/AnimatableBody3D" index="0" instance=ExtResource("6_1kv1r")]
 
-[node name="Trap2" parent="." index="24" instance=ExtResource("10_5wfum")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -17)
+[node name="Checkpoint2" parent="MiscColliders" index="16" instance=ExtResource("3_dwvw0")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 3, 2.001, -28)
+offset = Vector3(0, 0, 0)
 
-[node name="Trap3" parent="." index="25" instance=ExtResource("10_5wfum")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -22)
+[node name="Checkpoint" parent="MiscColliders" index="17" instance=ExtResource("3_dwvw0")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2, -2, -32)
+offset = Vector3(0, 0.25, 0)
 
-[node name="Trap4" parent="." index="26" instance=ExtResource("10_5wfum")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25)
+[node name="Trap" parent="MiscColliders" index="18" instance=ExtResource("6_1kv1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -2, -35)
 
-[node name="Trap5" parent="." index="27" instance=ExtResource("10_5wfum")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 1, -21)
+[node name="Trap2" parent="MiscColliders" index="19" instance=ExtResource("6_1kv1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -2, -29)
 
-[node name="Trap6" parent="." index="28" instance=ExtResource("10_5wfum")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1, -21)
+[node name="Cube" parent="LevelColliders" index="0"]
+visible = false
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="29"]
-transform = Transform3D(0.965926, 0.12941, 0.224144, -0.258819, 0.482963, 0.836516, 0, -0.866025, 0.5, 0, 6, 0)
+[node name="Cube_001" parent="LevelColliders" index="1"]
+visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="30"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -29)
-mesh = SubResource("BoxMesh_mssgn")
+[node name="Cube_002" parent="LevelColliders" index="2"]
+visible = false
+
+[node name="Cube_003" parent="LevelColliders" index="3"]
+visible = false
+
+[node name="Cube_004" parent="LevelColliders" index="4"]
+visible = false
+
+[node name="Cube_005" parent="LevelColliders" index="5"]
+visible = false
+
+[node name="Cube_006" parent="LevelColliders" index="6"]
+visible = false
+
+[node name="Cube_007" parent="LevelColliders" index="7"]
+visible = false
+
+[node name="Cube_008" parent="LevelColliders" index="8"]
+visible = false
+
+[node name="Cube_009" parent="LevelColliders" index="9"]
+visible = false
+
+[node name="Cube_010" parent="LevelColliders" index="10"]
+visible = false
+
+[node name="Cube_011" parent="LevelColliders" index="11"]
+visible = false
+
+[node name="Cube_012" parent="LevelColliders" index="12"]
+visible = false
+
+[node name="Cube_013" parent="LevelColliders" index="13"]
+visible = false
+
+[node name="Cube_014" parent="LevelColliders" index="14"]
+visible = false
+
+[node name="Cube_015" parent="LevelColliders" index="15"]
+visible = false
+
+[node name="Cube_016" parent="LevelColliders" index="16"]
+visible = false
+
+[node name="Cube_017" parent="LevelColliders" index="17"]
+visible = false
+
+[node name="Cube_018" parent="LevelColliders" index="18"]
+visible = false
+
+[node name="Cube_019" parent="LevelColliders" index="19"]
+visible = false
+
+[node name="Cube_020" parent="LevelColliders" index="20"]
+visible = false
+
+[node name="Cube_021" parent="LevelColliders" index="21"]
+visible = false
+
+[node name="KillPlaneVisual" parent="Visuals" index="21"]
+mesh = SubResource("ArrayMesh_j7xli")
+
+[node name="Trap3" type="Area3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1, -49)
+script = ExtResource("4_shnge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trap3" index="0"]
+shape = SubResource("BoxShape3D_731tq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Trap3" index="1"]
+mesh = SubResource("BoxMesh_o33iq")
+
+[node name="Trap4" type="Area3D" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1, -53)
+script = ExtResource("4_shnge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trap4" index="0"]
+shape = SubResource("BoxShape3D_731tq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Trap4" index="1"]
+mesh = SubResource("BoxMesh_o33iq")
+
+[node name="Trap5" type="Area3D" parent="." index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -1, -49)
+script = ExtResource("4_shnge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trap5" index="0"]
+shape = SubResource("BoxShape3D_731tq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Trap5" index="1"]
+mesh = SubResource("BoxMesh_o33iq")
+
+[node name="Trap6" type="Area3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -1, -53)
+script = ExtResource("4_shnge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trap6" index="0"]
+shape = SubResource("BoxShape3D_731tq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Trap6" index="1"]
+mesh = SubResource("BoxMesh_o33iq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="12"]
+environment = ExtResource("8_8g8pm")
