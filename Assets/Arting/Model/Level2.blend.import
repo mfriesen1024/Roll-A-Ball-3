@@ -148,9 +148,18 @@ _subresources={
 "PATH:MiscColliders/Ceiling": {
 "generate/physics": true
 },
+"PATH:MiscColliders/Conveyor": {
+"generate/physics": true
+},
 "PATH:MiscColliders/ELT": {
 "generate/physics": true,
 "physics/body_type": 2
+},
+"PATH:MiscColliders/ELTBool": {
+"import/skip_import": true
+},
+"PATH:MiscColliders/ELTSculpture": {
+"generate/physics": true
 },
 "PATH:MiscColliders/EndSculpture3": {
 "generate/physics": true
