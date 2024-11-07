@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgs2box3ugel8"]
+[gd_scene load_steps=19 format=4 uid="uid://dgs2box3ugel8"]
 
 [ext_resource type="PackedScene" uid="uid://poomls081br5" path="res://Assets/Arting/Model/Level2.blend" id="1_3hlm8"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_xwbe8"]
@@ -7,8 +7,10 @@
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="4_shnge"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingCollider.cs" id="5_2hxdk"]
 [ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="6_1kv1r"]
-[ext_resource type="Environment" uid="uid://h262xythlf06" path="res://Assets/Resources/env.tres" id="8_8g8pm"]
-[ext_resource type="Material" uid="uid://dw1ysen4om8y6" path="res://Assets/Resources/trapMaterial.tres" id="8_dl70w"]
+[ext_resource type="Environment" path="res://Assets/Resources/env.tres" id="8_8g8pm"]
+[ext_resource type="Material" path="res://Assets/Resources/trapMaterial.tres" id="8_dl70w"]
+[ext_resource type="Texture2D" uid="uid://dpoja625eafw5" path="res://Assets/Arting/Tex/KillPlaneTex.png" id="8_o2f2o"]
+[ext_resource type="Texture2D" uid="uid://dq0te7jlvq1xc" path="res://Assets/Arting/Tex/KillPlaneEmit.png" id="9_q4pbn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fagrh"]
 resource_name = "You are die"
@@ -20,6 +22,47 @@ roughness = 0.5
 [sub_resource type="BoxMesh" id="BoxMesh_j4r6y"]
 material = SubResource("StandardMaterial3D_fagrh")
 size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wy0rd"]
+resource_name = "Lava"
+cull_mode = 2
+albedo_texture = ExtResource("8_o2f2o")
+metallic = 0.25
+roughness = 0.1
+emission_enabled = true
+emission_texture = ExtResource("9_q4pbn")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2hxfe"]
+_surfaces = [{
+"aabb": AABB(-6, 0, -35, 12, 1e-05, 65),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("BgADAAsABgACAAMAAgAFAAMAAgAEAAUABwAGAAsABwALAAoACAAHAAoACAAKAAkAAAAIAAkAAAAJAAEA"),
+"name": "Lava",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAAAAAACxEwAA//8AALETAAAAAAAAAAAAAP//AAAAAAAAAAAAAMROAAAAAAAA2IkAAAAAAADrxAAA//8AAOvEAAD//wAA2IkAAP//AADETgAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_j7xli"]
+resource_name = "Level2_Plane_003"
+_surfaces = [{
+"aabb": AABB(-6, 0, -35, 12, 1e-05, 65),
+"attribute_data": PackedByteArray("iq+SJMVXkiQAAJIkxVeSJAAAAADFVwAAAABIkgAA//+Kr///iq9IksVXSJLFV///xVf//8VXSJI="),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray("BgADAA0ABwAGAA0ABwANAAsABgACAAMAAgAFAAMAAgAEAAUAAAAKAAEAAAAJAAoACQAMAAoACQAIAAwA"),
+"material": SubResource("StandardMaterial3D_wy0rd"),
+"name": "Lava",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("AAAAAP///////wAA/////wAAAACxE/+///8AALET/78AAAAAAAD/v///AAAAAP+/AAAAAMRO/78AAAAA2In/vwAAAADYif//AAAAAOvE/////wAA68T/////AADYif+///8AANiJ/////wAAxE7/v/9//7//f/+/////f////3////9/////f////3////9//3//v/9//7//f/+/////f/9//7////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2hxfe")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_731tq"]
 size = Vector3(3, 0.1, 0.1)
@@ -62,13 +105,13 @@ spot_angle = 60.0
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
 offset = Vector3(0, 1, 0)
 
-[node name="ELT" parent="MiscColliders" index="5"]
+[node name="ELT" parent="MiscColliders" index="6"]
 script = ExtResource("3_t17hr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MiscColliders/ELT" index="1"]
 mesh = SubResource("BoxMesh_j4r6y")
 
-[node name="KillPlane" parent="MiscColliders" index="9"]
+[node name="KillPlane" parent="MiscColliders" index="11"]
 script = ExtResource("4_shnge")
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="MiscColliders/Walkway" index="1"]
@@ -159,6 +202,9 @@ visible = false
 
 [node name="Cube_021" parent="LevelColliders" index="21"]
 visible = false
+
+[node name="KillPlaneVisual" parent="Visuals" index="21"]
+mesh = SubResource("ArrayMesh_j7xli")
 
 [node name="Trap3" type="Area3D" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1, -49)
