@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://dgs2box3ugel8"]
+[gd_scene load_steps=18 format=4 uid="uid://dgs2box3ugel8"]
 
 [ext_resource type="PackedScene" uid="uid://poomls081br5" path="res://Assets/Arting/Model/Level2.blend" id="1_3hlm8"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_xwbe8"]
@@ -7,21 +7,15 @@
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="4_shnge"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Obstacles/MovingCollider.cs" id="5_2hxdk"]
 [ext_resource type="PackedScene" uid="uid://d0j5wwopfqu1a" path="res://Assets/Prefab/trap.tscn" id="6_1kv1r"]
-[ext_resource type="Environment" path="res://Assets/Resources/env.tres" id="8_8g8pm"]
+[ext_resource type="Environment" uid="uid://8c40pgo4ba1v" path="res://Assets/Resources/env.tres" id="8_8g8pm"]
 [ext_resource type="Material" path="res://Assets/Resources/trapMaterial.tres" id="8_dl70w"]
 [ext_resource type="Texture2D" uid="uid://dpoja625eafw5" path="res://Assets/Arting/Tex/KillPlaneTex.png" id="8_o2f2o"]
 [ext_resource type="Texture2D" uid="uid://dq0te7jlvq1xc" path="res://Assets/Arting/Tex/KillPlaneEmit.png" id="9_q4pbn"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fagrh"]
-resource_name = "You are die"
-transparency = 1
-cull_mode = 2
-albedo_color = Color(0.1365, 0.91, 0.278308, 0.501961)
-roughness = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_j4r6y"]
-material = SubResource("StandardMaterial3D_fagrh")
-size = Vector3(2, 2, 2)
+[sub_resource type="FogMaterial" id="FogMaterial_jaahr"]
+density = 4.0
+emission = Color(0.1, 0.1, 0.1, 1)
+edge_fade = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wy0rd"]
 resource_name = "Lava"
@@ -108,8 +102,9 @@ offset = Vector3(0, 1, 0)
 [node name="ELT" parent="MiscColliders" index="6"]
 script = ExtResource("3_t17hr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MiscColliders/ELT" index="1"]
-mesh = SubResource("BoxMesh_j4r6y")
+[node name="FogVolume" type="FogVolume" parent="MiscColliders/ELT" index="1"]
+size = Vector3(1.8, 1.8, 1.8)
+material = SubResource("FogMaterial_jaahr")
 
 [node name="KillPlane" parent="MiscColliders" index="11"]
 script = ExtResource("4_shnge")
