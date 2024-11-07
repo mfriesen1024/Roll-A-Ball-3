@@ -114,6 +114,9 @@ mesh = SubResource("BoxMesh_j4r6y")
 [node name="KillPlane" parent="MiscColliders" index="11"]
 script = ExtResource("4_shnge")
 
+[node name="MP_Placeholder" parent="MiscColliders" index="12"]
+visible = false
+
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="MiscColliders/Walkway" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -15)
 script = ExtResource("5_2hxdk")
