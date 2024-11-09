@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.Player;
 using System;
@@ -48,6 +48,12 @@ namespace RollABall.Assets.src.Managers
 
             // Now that we're initialized, we'll handle our own quit requests.
             GetTree().AutoAcceptQuit = false;
+        }
+
+        private void _PostInit()
+        {
+            // Set our main log to not debug. This should be commented out on dev/test branches.
+            Logger.StaticLogger.allowDebug = false;
         }
 
         public override void _Notification(int what)
