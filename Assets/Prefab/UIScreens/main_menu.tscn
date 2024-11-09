@@ -48,6 +48,7 @@ size_flags_vertical = 3
 
 [node name="options" type="Button" parent="container"]
 layout_mode = 2
+disabled = true
 text = "Options"
 
 [node name="e3" type="Control" parent="container"]
