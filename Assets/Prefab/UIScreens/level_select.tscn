@@ -91,6 +91,6 @@ expand_mode = 5
 
 [node name="Label2" type="Label" parent="Panel/container"]
 layout_mode = 2
-text = "Sample Text"
+text = "01 - Foundry"
 horizontal_alignment = 1
 vertical_alignment = 1
