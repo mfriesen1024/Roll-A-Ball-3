@@ -13,7 +13,11 @@ config_version=5
 config/name="Roll A Ball"
 run/main_scene="res://Assets/Scenes/entry.tscn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+run/max_fps=120
+boot_splash/show_image=false
+boot_splash/image="res://Assets/Arting/Tex/1upIcon.png"
 config/icon="res://Assets/Arting/Tex/1upIcon.png"
+boot_splash/minimum_display_time=500
 
 [dotnet]
 
