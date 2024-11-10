@@ -1,11 +1,8 @@
-[gd_scene load_steps=20 format=4 uid="uid://b10toohx6iroa"]
+[gd_scene load_steps=17 format=4 uid="uid://b10toohx6iroa"]
 
-[ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/Level1.blend" id="1_hlxvo"]
+[ext_resource type="PackedScene" uid="uid://b6qoxlf2l8oct" path="res://Assets/Arting/Model/TestLevel.blend" id="1_hlxvo"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_aik25"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/KillTrigger.cs" id="2_xk6uf"]
-[ext_resource type="PackedScene" uid="uid://bufig8w0mugb4" path="res://Assets/Prefab/Player.tscn" id="3_ofj8s"]
-[ext_resource type="Script" path="res://Assets/src/Managers/GameManager.cs" id="4_2try3"]
-[ext_resource type="PackedScene" uid="uid://gb1n331ueuak" path="res://Assets/Prefab/Managers/input_man.tscn" id="5_g3bja"]
 [ext_resource type="PackedScene" uid="uid://bvudjw8wkxayq" path="res://Assets/Prefab/moving_platform.tscn" id="6_ddj86"]
 [ext_resource type="PackedScene" uid="uid://ctl5lhf2861xw" path="res://Assets/Prefab/checkpoint.tscn" id="8_0l4wf"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/EndLevelTrigger.cs" id="9_uca2j"]
@@ -113,77 +110,70 @@ script = ExtResource("2_xk6uf")
 [node name="Bounds" parent="." index="2"]
 mesh = SubResource("ArrayMesh_iyda8")
 
-[node name="Playerman" parent="." index="12" instance=ExtResource("3_ofj8s")]
-
-[node name="Node" type="Node" parent="." index="13"]
-script = ExtResource("4_2try3")
-inputManPrefab = ExtResource("5_g3bja")
-playerManPrefab = ExtResource("3_ofj8s")
-
-[node name="SideMP1" parent="." index="14" instance=ExtResource("6_ddj86")]
+[node name="SideMP1" parent="." index="12" instance=ExtResource("6_ddj86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -15)
 Start = Vector3(-5, 2, -15)
 End = Vector3(-5, 2, -19)
 speed = 0.5
 
-[node name="EscalatorMP1" parent="." index="15" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
+[node name="EscalatorMP1" parent="." index="13" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -13)
 trigger = NodePath("../SideMP1/MPTrigger")
 Start = Vector3(-3, 1, -13)
 End = Vector3(-4, 2, -13)
 
-[node name="EscalatorMP2" parent="." index="16" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
+[node name="EscalatorMP2" parent="." index="14" node_paths=PackedStringArray("trigger") instance=ExtResource("6_ddj86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -13)
 trigger = NodePath("../SideMP1/MPTrigger")
 Start = Vector3(3, 1, -13)
 End = Vector3(4, 2, -13)
 
-[node name="SideMP2" parent="." index="17" instance=ExtResource("6_ddj86")]
+[node name="SideMP2" parent="." index="15" instance=ExtResource("6_ddj86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -15)
 Start = Vector3(5, 2, -19)
 End = Vector3(5, 2, -15)
 speed = 0.5
 
-[node name="Checkpoint" parent="." index="18" instance=ExtResource("8_0l4wf")]
+[node name="Checkpoint" parent="." index="16" instance=ExtResource("8_0l4wf")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.001, 0)
 
-[node name="ELT" type="Area3D" parent="." index="20"]
+[node name="ELT" type="Area3D" parent="." index="18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -29)
 script = ExtResource("9_uca2j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ELT" index="0"]
 shape = SubResource("BoxShape3D_d2n7c")
 
-[node name="Checkpoint2" parent="." index="21" instance=ExtResource("8_0l4wf")]
+[node name="Checkpoint2" parent="." index="19" instance=ExtResource("8_0l4wf")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.001, -21)
 
-[node name="MidMP1" parent="." index="22" instance=ExtResource("6_ddj86")]
+[node name="MidMP1" parent="." index="20" instance=ExtResource("6_ddj86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
 Start = Vector3(0, 1, -15)
 End = Vector3(0, 1, -19)
 speed = 0.5
 
-[node name="Trap" parent="." index="23" instance=ExtResource("10_5wfum")]
+[node name="Trap" parent="." index="21" instance=ExtResource("10_5wfum")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
 
-[node name="Trap2" parent="." index="24" instance=ExtResource("10_5wfum")]
+[node name="Trap2" parent="." index="22" instance=ExtResource("10_5wfum")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -17)
 
-[node name="Trap3" parent="." index="25" instance=ExtResource("10_5wfum")]
+[node name="Trap3" parent="." index="23" instance=ExtResource("10_5wfum")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -22)
 
-[node name="Trap4" parent="." index="26" instance=ExtResource("10_5wfum")]
+[node name="Trap4" parent="." index="24" instance=ExtResource("10_5wfum")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25)
 
-[node name="Trap5" parent="." index="27" instance=ExtResource("10_5wfum")]
+[node name="Trap5" parent="." index="25" instance=ExtResource("10_5wfum")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 1, -21)
 
-[node name="Trap6" parent="." index="28" instance=ExtResource("10_5wfum")]
+[node name="Trap6" parent="." index="26" instance=ExtResource("10_5wfum")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1, -21)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="29"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="27"]
 transform = Transform3D(0.965926, 0.12941, 0.224144, -0.258819, 0.482963, 0.836516, 0, -0.866025, 0.5, 0, 6, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="30"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="28"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -29)
 mesh = SubResource("BoxMesh_mssgn")
