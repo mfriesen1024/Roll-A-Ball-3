@@ -108,12 +108,12 @@ namespace RollABall.Assets.src.Managers
 
             Button left = levelSelect.FindChild("left", true) as Button;
             Button right = levelSelect.FindChild("right", true) as Button;
-            left.Pressed += () => { if (levelMan.LevelIndex > 0) { levelMan.LevelIndex--; ShowLevel(left,right); } };
+            left.Pressed += () => { if (levelMan.LevelIndex > 0) { levelMan.LevelIndex--; ShowLevel(left, right); } };
             right.Pressed += () => { if (levelMan.LevelIndex < levelMan.Levels.Length - 1) { levelMan.LevelIndex++; ShowLevel(left, right); } };
             Button go = levelSelect.FindChild("go", true) as Button;
             go.Pressed += levelMan.Load;
 
-            ShowLevel(left,right);
+            ShowLevel(left, right);
         }
         void LoadingHelper()
         {
@@ -163,11 +163,11 @@ namespace RollABall.Assets.src.Managers
             int levelIndex = levelMan.LevelIndex;
 
             // Disable buttons if level not available.
-            if (levelIndex == 0) { left.Disabled = true; }
-            if(levelIndex <= levelMan.Levels.Length) { right.Disabled = true; }
+            left.Disabled = levelIndex == 0;
+            right.Disabled = levelIndex >= levelMan.Levels.Length - 1;
 
             Label text = levelSelect.FindChild("name", true) as Label;
-            TextureRect preview = levelSelect.FindChild("preview",true) as TextureRect;
+            TextureRect preview = levelSelect.FindChild("preview", true) as TextureRect;
 
             text.Text = levelMan.LevelNames[levelIndex];
             preview.Texture = levelMan.LevelTextures[levelIndex];
