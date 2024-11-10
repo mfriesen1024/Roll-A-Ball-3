@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.Data;
 using RollABall.Assets.src.LevelObjects;
@@ -23,14 +23,18 @@ namespace RollABall.Assets.src.Managers
         LevelLoadHelper loadHelper = new();
 
         [Export] PackedScene[] levels;
-        [Export] Texture2D[] levelTextures;
+
+        // description stuff.
+        [Export]  Texture2D[] levelTextures;
+        [Export]  string[] levelNames;
+        public Texture2D[] LevelTextures { get => levelTextures; private set => levelTextures = value; }
+        public string[] LevelNames { get => levelNames; private set => levelNames = value; }
 
         public Level activeLevel { get; private set; }
         #endregion
         #region updateRefs
         public DateTime startTime { get; private set; }
         public DateTime Timer { get { return GetTimerTime(); } }
-
         #endregion
 
         /// <summary>

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ceadenttfhuyp"]
 
 [ext_resource type="Script" path="res://Assets/src/Managers/LevelManager.cs" id="1_goot0"]
-[ext_resource type="PackedScene" uid="uid://b10toohx6iroa" path="res://Assets/Scenes/level_1.tscn" id="2_a7mxs"]
-[ext_resource type="PackedScene" uid="uid://dgs2box3ugel8" path="res://Assets/Scenes/level_2.tscn" id="3_3jaxf"]
+[ext_resource type="PackedScene" uid="uid://b10toohx6iroa" path="res://Assets/Scenes/testLevel.tscn" id="2_a7mxs"]
+[ext_resource type="PackedScene" uid="uid://dgs2box3ugel8" path="res://Assets/Scenes/level_1.tscn" id="3_3jaxf"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_whi3t"]
 size = Vector2(150, 150)
@@ -12,3 +12,4 @@ process_mode = 3
 script = ExtResource("1_goot0")
 levels = Array[PackedScene]([ExtResource("3_3jaxf"), ExtResource("2_a7mxs")])
 levelTextures = Array[Texture2D]([SubResource("PlaceholderTexture2D_whi3t"), SubResource("PlaceholderTexture2D_whi3t")])
+levelNames = PackedStringArray("Foundry", "test level")

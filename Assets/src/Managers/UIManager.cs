@@ -85,7 +85,7 @@ namespace RollABall.Assets.src.Managers
 
             Button play = mainMenu.FindChild("play", true) as Button;
             play.Pressed += () => { State = UIState.LevelSelect; };
-            Button load = mainMenu.FindChild("load",true) as Button;
+            Button load = mainMenu.FindChild("load", true) as Button;
             load.Pressed += () => { LevelManager.Instance.LoadCheckpoint(); };
             Button options = mainMenu.FindChild("options", true) as Button;
             options.Pressed += () => { State = UIState.Options; };
@@ -104,6 +104,8 @@ namespace RollABall.Assets.src.Managers
         {
             levelSelect = levelSelectScene.Instantiate() as Control;
             AddChild(levelSelect);
+
+            ShowLevel();
 
             Button left = levelSelect.FindChild("left", true) as Button;
             left.Pressed += () => { log.WriteAll($"Level select cycle left requested, but not implemented!", LogLevel.warn); };
@@ -152,6 +154,17 @@ namespace RollABall.Assets.src.Managers
 
             Button menu = levelFailure.FindChild("menu", true) as Button;
             menu.Pressed += () => { State = UIState.Main; };
+        }
+
+        void ShowLevel()
+        {
+            int levelIndex = LevelManager.Instance.LevelIndex;
+
+            Label text = levelSelect.FindChild("name", true) as Label;
+            TextureRect preview = levelSelect.FindChild("preview",true) as TextureRect;
+
+            text.Text = LevelManager.Instance.LevelNames[levelIndex];
+            preview.Texture = LevelManager.Instance.LevelTextures[levelIndex];
         }
     }
 
