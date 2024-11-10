@@ -102,16 +102,16 @@ namespace RollABall.Assets.src.Managers
         }
         void LevelSelectHelper()
         {
-            LevelManager instance = LevelManager.Instance;
+            LevelManager levelMan = LevelManager.Instance;
             levelSelect = levelSelectScene.Instantiate() as Control;
             AddChild(levelSelect);
 
             Button left = levelSelect.FindChild("left", true) as Button;
             Button right = levelSelect.FindChild("right", true) as Button;
-            left.Pressed += () => { if (instance.LevelIndex > 0) { instance.LevelIndex--; ShowLevel(left,right); } };
-            right.Pressed += () => { if (instance.LevelIndex < instance.Levels.Length - 1) { instance.LevelIndex++; ShowLevel(left, right); } };
+            left.Pressed += () => { if (levelMan.LevelIndex > 0) { levelMan.LevelIndex--; ShowLevel(left,right); } };
+            right.Pressed += () => { if (levelMan.LevelIndex < levelMan.Levels.Length - 1) { levelMan.LevelIndex++; ShowLevel(left, right); } };
             Button go = levelSelect.FindChild("go", true) as Button;
-            go.Pressed += instance.Load;
+            go.Pressed += levelMan.Load;
 
             ShowLevel(left,right);
         }
@@ -159,13 +159,18 @@ namespace RollABall.Assets.src.Managers
 
         void ShowLevel(Button left, Button right)
         {
-            int levelIndex = LevelManager.Instance.LevelIndex;
+            LevelManager levelMan = LevelManager.Instance;
+            int levelIndex = levelMan.LevelIndex;
+
+            // Disable buttons if level not available.
+            if (levelIndex == 0) { left.Disabled = true; }
+            if(levelIndex <= levelMan.Levels.Length) { right.Disabled = true; }
 
             Label text = levelSelect.FindChild("name", true) as Label;
             TextureRect preview = levelSelect.FindChild("preview",true) as TextureRect;
 
-            text.Text = LevelManager.Instance.LevelNames[levelIndex];
-            preview.Texture = LevelManager.Instance.LevelTextures[levelIndex];
+            text.Text = levelMan.LevelNames[levelIndex];
+            preview.Texture = levelMan.LevelTextures[levelIndex];
         }
     }
 
