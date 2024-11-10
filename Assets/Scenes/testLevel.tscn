@@ -177,3 +177,6 @@ transform = Transform3D(0.965926, 0.12941, 0.224144, -0.258819, 0.482963, 0.8365
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="28"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -29)
 mesh = SubResource("BoxMesh_mssgn")
+
+[node name="previewCam" type="Camera3D" parent="." index="30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

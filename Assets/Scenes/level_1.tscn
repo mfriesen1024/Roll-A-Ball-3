@@ -346,3 +346,6 @@ mesh = SubResource("BoxMesh_o33iq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="12"]
 environment = ExtResource("8_8g8pm")
+
+[node name="previewCam" type="Camera3D" parent="." index="13"]
+transform = Transform3D(0.707107, 0.183013, -0.683013, 0, 0.965926, 0.258819, 0.707107, -0.183013, 0.683013, -4, 5, -13)
