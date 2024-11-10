@@ -102,17 +102,18 @@ namespace RollABall.Assets.src.Managers
         }
         void LevelSelectHelper()
         {
+            LevelManager instance = LevelManager.Instance;
             levelSelect = levelSelectScene.Instantiate() as Control;
             AddChild(levelSelect);
 
-            ShowLevel();
-
             Button left = levelSelect.FindChild("left", true) as Button;
-            left.Pressed += () => { log.WriteAll($"Level select cycle left requested, but not implemented!", LogLevel.warn); };
             Button right = levelSelect.FindChild("right", true) as Button;
-            right.Pressed += () => { log.WriteAll($"Level select cycle right requested, but not implemented!", LogLevel.warn); };
+            left.Pressed += () => { if (instance.LevelIndex > 0) { instance.LevelIndex--; ShowLevel(left,right); } };
+            right.Pressed += () => { if (instance.LevelIndex < instance.Levels.Length - 1) { instance.LevelIndex++; ShowLevel(left, right); } };
             Button go = levelSelect.FindChild("go", true) as Button;
-            go.Pressed += () => { LevelManager.Instance.Load(); };
+            go.Pressed += instance.Load;
+
+            ShowLevel(left,right);
         }
         void LoadingHelper()
         {
@@ -156,7 +157,7 @@ namespace RollABall.Assets.src.Managers
             menu.Pressed += () => { State = UIState.Main; };
         }
 
-        void ShowLevel()
+        void ShowLevel(Button left, Button right)
         {
             int levelIndex = LevelManager.Instance.LevelIndex;
 

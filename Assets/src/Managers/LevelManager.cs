@@ -23,6 +23,7 @@ namespace RollABall.Assets.src.Managers
         LevelLoadHelper loadHelper = new();
 
         [Export] PackedScene[] levels;
+        public PackedScene[] Levels { get => levels; private set => levels = value; }
 
         // description stuff.
         [Export]  Texture2D[] levelTextures;
