@@ -1,5 +1,6 @@
 using Godot;
 using KeystoneUtils.Logging;
+using RollABall.Assets.src.Player;
 using RollABall.Assets.src.UI;
 using System;
 
@@ -33,7 +34,7 @@ namespace RollABall.Assets.src.Managers
 
             Instance = this;
             log = new Logger(true, true, "logs\\", "uiLog", "txt", true);
-            GameManager.postInit += PostInit;
+            GameManager.PostInit += PostInit;
 
             hud = hudScene.Instantiate() as HUD;
         }
@@ -145,6 +146,9 @@ namespace RollABall.Assets.src.Managers
             levelComplete = levelCompleteScene.Instantiate() as Control;
             AddChild(levelComplete);
 
+            // When the level ends, whether by completion or failure, set checkpoint to 0, and save the run.
+            levelMan.CheckpointIndex = 0;
+
             Button menu = levelComplete.FindChild("menu", true) as Button;
             menu.Pressed += () => { State = UIState.Main; };
         }
@@ -153,6 +157,9 @@ namespace RollABall.Assets.src.Managers
             GameManager.Instance.State = GameState.Pause;
             levelFailure = levelFailureScene.Instantiate() as Control;
             AddChild(levelFailure);
+
+            // When the level ends, whether by completion or failure, set checkpoint to 0 and save the run.
+            levelMan.CheckpointIndex = 0;
 
             Button menu = levelFailure.FindChild("menu", true) as Button;
             menu.Pressed += () => { State = UIState.Main; };

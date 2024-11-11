@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.Player;
 using System;
@@ -14,7 +14,7 @@ namespace RollABall.Assets.src.Managers
         /// <summary>
         /// Called after the ready callback, intended to allow managers to get references to each other after initialization finishes.
         /// </summary>
-        public static Action postInit = delegate { };
+        public static Action PostInit = delegate { };
         /// <summary>
         /// Singleton instance.
         /// </summary>
@@ -44,7 +44,9 @@ namespace RollABall.Assets.src.Managers
             SetOtherSingletons();
             DataManager.OnStartup();
 
-            if(Instance == this) { postInit(); }
+            Init();
+
+            if(Instance == this) { PostInit(); }
 
             // Now that we're initialized, we'll handle our own quit requests.
             GetTree().AutoAcceptQuit = false;
@@ -65,6 +67,8 @@ namespace RollABall.Assets.src.Managers
                     // unpause.
                     LevelManager.Unpause();
                     LevelManager.Discard();
+                    // record run.
+                    DataManager.RecordPlaythrough(LevelManager.LevelIndex, LevelManager.CheckpointIndex, PlayerManager.Instance.Lives);
                     break;
                 case GameState.Pause: 
                     Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -103,6 +107,14 @@ namespace RollABall.Assets.src.Managers
             else { QueueFree(); return; }
         }
 
+        private void Init()
+        {
+            // Load data from previous run. This could probably be encapsulated into another initialization action.
+            PlayerManager.Lives = DataManager.RunData.lives;
+            LevelManager.LevelIndex = DataManager.RunData.level;
+            LevelManager.CheckpointIndex = DataManager.RunData.checkpoint;
+        }
+
         /// <summary>
         /// We'll use this to start a shutdown sequence, allowing for persistent objects to be saved.
         /// </summary>
@@ -110,6 +122,7 @@ namespace RollABall.Assets.src.Managers
         {
             Logger.StaticLogger.WriteAll($"Quitting!",LogLevel.info);
 
+            // Handle data things.
             DataManager.OnShutdown();
 
             // Call this last.
