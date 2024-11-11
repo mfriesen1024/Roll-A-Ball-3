@@ -12,6 +12,7 @@ namespace RollABall.Assets.src.Managers
     {
         #region refs
         GameManager gameManager;
+        LevelManager levelMan;
         public static UIManager Instance { get; private set; }
         public UIState State { get => state; set { OnSetState(value); state = value; } }
         private UIState state;
@@ -40,6 +41,7 @@ namespace RollABall.Assets.src.Managers
         public void PostInit()
         {
             gameManager = GameManager.Instance;
+            levelMan = LevelManager.Instance;
             log.Write("Initialization finished, setting state of MainMenu");
             State = UIState.Main;
         }
@@ -102,7 +104,6 @@ namespace RollABall.Assets.src.Managers
         }
         void LevelSelectHelper()
         {
-            LevelManager levelMan = LevelManager.Instance;
             levelSelect = levelSelectScene.Instantiate() as Control;
             AddChild(levelSelect);
 
@@ -111,7 +112,7 @@ namespace RollABall.Assets.src.Managers
             left.Pressed += () => { if (levelMan.LevelIndex > 0) { levelMan.LevelIndex--; ShowLevel(left, right); } };
             right.Pressed += () => { if (levelMan.LevelIndex < levelMan.Levels.Length - 1) { levelMan.LevelIndex++; ShowLevel(left, right); } };
             Button go = levelSelect.FindChild("go", true) as Button;
-            go.Pressed += levelMan.Load;
+            go.Pressed += () => { levelMan.CheckpointIndex = 0; levelMan.Load(); };
 
             ShowLevel(left, right);
         }
@@ -159,7 +160,6 @@ namespace RollABall.Assets.src.Managers
 
         void ShowLevel(Button left, Button right)
         {
-            LevelManager levelMan = LevelManager.Instance;
             int levelIndex = levelMan.LevelIndex;
 
             // Disable buttons if level not available.
