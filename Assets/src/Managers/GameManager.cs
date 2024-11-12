@@ -36,12 +36,16 @@ namespace RollABall.Assets.src.Managers
 
         public override void _Ready()
         {
+            // Set references.
             SetGMSingleton();
             SetOtherManagers();
+
+            // Now start initializing things
             DataManager.OnStartup();
 
             Init();
 
+            // Now run any post init operations.
             if (Instance == this) { PostInit(); }
 
             // Now that we're initialized, we'll handle our own quit requests.
@@ -50,6 +54,7 @@ namespace RollABall.Assets.src.Managers
 
         public override void _Notification(int what)
         {
+            // So far this is just to handle our own close requests to ensure we save things.
             if (what == NotificationWMCloseRequest) { try { StartQuit(); } catch { } }
         }
 

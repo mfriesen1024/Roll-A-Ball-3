@@ -12,14 +12,16 @@ namespace RollABall.Assets.src.LevelObjects
     {
         public override void _Ready()
         {
-            AreaEntered += OnTriggerEnter;
+            AreaEntered += OnTriggerEnter; // Idk why this is here.
             BodyEntered += OnTriggerEnter;
         }
 
         private void OnTriggerEnter(Node3D other)
         {
+            // If the object is a rigidbody
             if (other is RigidBody3D rb)
             {
+                // Check if rb and the player ball are the same thing, and if so, damage it.
                 PlayerManager playerManager = GameManager.Instance.PlayerManager;
                 if (rb == playerManager.Ball) { playerManager.OnDamage(); }
             }

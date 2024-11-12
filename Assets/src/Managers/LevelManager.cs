@@ -72,6 +72,10 @@ namespace RollABall.Assets.src.Managers
             loadHelper.LoadLevelAsync(levels[LevelIndex], Assign);
         }
 
+        /// <summary>
+        /// Assigns the level and adds to tree.
+        /// </summary>
+        /// <param name="level">The level to assign</param>
         private void Assign(Level level)
         {
             activeLevel = level;
@@ -128,6 +132,7 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         private void ELTCheck(Node3D other)
         {
+            // I feel like this is bad encapsulation, but idk how else to do this.
             if (gm.PlayerManager.Ball.Equals(other))
             {
                 CheckpointIndex = 0;
