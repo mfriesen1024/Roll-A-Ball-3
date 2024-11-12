@@ -190,6 +190,9 @@ _subresources={
 "PATH:MiscColliders/Wall_001": {
 "generate/physics": true,
 "physics/shape_type": 1
+},
+"PATH:Visuals/EndWall": {
+"generate/physics": true
 }
 }
 }
