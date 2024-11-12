@@ -37,9 +37,9 @@ namespace RollABall.Assets.src.Player
         {
             log.WriteAll($"Player died. Player has {Lives} lives left.");
             Lives--;
-            gm.UIManager.hud.Update();
+            gm.UIManager.HUD.Update();
             if (Lives >= 0) { gm.LevelManager.Reload(); }
-            else { Lives = 3; HUD.Instance.Update(); gm.UIManager.State = UIState.LevelFailure; }
+            else { Lives = 3; GameManager.Instance.UIManager.HUD.Update(); gm.UIManager.State = UIState.LevelFailure; }
         }
 
         public void OnLoadCheckpoint(Checkpoint checkpoint)

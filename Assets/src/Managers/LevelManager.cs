@@ -132,7 +132,7 @@ namespace RollABall.Assets.src.Managers
             {
                 CheckpointIndex = 0;
 
-                gm.PlayerManager.Lives = 3; HUD.Instance.Update();
+                gm.PlayerManager.Lives = 3; GameManager.Instance.UIManager.HUD.Update();
                 gm.UIManager.State = UIState.LevelComplete;
 
                 gm.DataManager.SaveScore(new ScoreSave() { score = 0, time = Timer.Ticks });

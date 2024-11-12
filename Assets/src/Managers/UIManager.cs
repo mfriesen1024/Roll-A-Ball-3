@@ -19,7 +19,7 @@ namespace RollABall.Assets.src.Managers
         #endregion
         #region UIObjectRefs
         Control mainMenu, options, levelSelect, loading;
-        public HUD hud { get; private set; }
+        public HUD HUD { get; private set; }
         Control pause, levelComplete, levelFailure;
         [Export] PackedScene mainMenuScene, optionsScene, levelSelectScene, loadingScene, hudScene, pauseScene, levelCompleteScene, levelFailureScene;
         #endregion
@@ -31,7 +31,7 @@ namespace RollABall.Assets.src.Managers
             log = new Logger(true, true, "logs\\", "uiLog", "txt", true);
             GameManager.PostInit += PostInit;
 
-            hud = hudScene.Instantiate() as HUD;
+            HUD = hudScene.Instantiate() as HUD;
         }
 
         public void PostInit()
@@ -69,7 +69,7 @@ namespace RollABall.Assets.src.Managers
             if (options != null) { options.QueueFree(); options = null; }
             if (levelSelect != null) { levelSelect.QueueFree(); levelSelect = null; }
             if (loading != null) { loading.QueueFree(); loading = null; }
-            if (hudEnabled) { RemoveChild(hud); hudEnabled = false; }
+            if (hudEnabled) { RemoveChild(HUD); hudEnabled = false; }
             if (pause != null) { pause.QueueFree(); pause = null; }
             if (levelComplete != null) { levelComplete.QueueFree(); levelComplete = null; }
             if (levelFailure != null) { levelFailure.QueueFree(); levelFailure = null; }
@@ -119,7 +119,7 @@ namespace RollABall.Assets.src.Managers
         }
         void HudHelper()
         {
-            AddChild(hud); hudEnabled = true;
+            AddChild(HUD); hudEnabled = true;
 
             gm.State = GameState.Gameplay;
         }

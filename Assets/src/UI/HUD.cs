@@ -8,16 +8,11 @@ namespace RollABall.Assets.src.UI
     {
         #region refs
         GameManager gm;
-        internal static HUD Instance { get; private set; }
         [Export] Label lives, time, score;
         #endregion
 
         public override void _Ready()
         {
-            // Set singleton
-            if (Instance == null) { Instance = this; }
-            else { QueueFree(); return; }
-
             gm = GameManager.Instance;
 
             // TODO: sort out first update shenaniganry.
