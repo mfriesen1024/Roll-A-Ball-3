@@ -20,12 +20,14 @@ namespace RollABall.Assets.src.UI
         }
         public override void _Process(double delta)
         {
+            // Get time, then format it to a string, forcing a length of 2. Then apply it to our label.
             DateTime timerTime = gm.LevelManager.Timer;
             time.Text = $"{ForceStringLength(timerTime.Hour)}:" +
                 $"{ForceStringLength(timerTime.Minute)}:" +
                 $"{ForceStringLength(timerTime.Second)}:" +
                 $"{ForceStringLength(timerTime.Millisecond)}";
         }
+
         // Call this to force player updates.
         public void Update()
         {
