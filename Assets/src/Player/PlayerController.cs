@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.LevelObjects;
 using System;
@@ -51,7 +50,7 @@ namespace RollABall.Assets.src.Player
                 Vector3 moveVelocityGoal = moveVector3D * maxMoveSpeed;
                 Vector3 newVelocity = ball.LinearVelocity.Lerp(moveVelocityGoal, (float)delta * moveLerpMod);
                 ball.LinearVelocity = newVelocity; // TODO: use a different velocity set method because threads.
-                if(shouldJump) { ball.ApplyCentralForce(Vector3.Up*jumpForce); }
+                if (shouldJump) { ball.ApplyCentralForce(Vector3.Up * jumpForce); }
             }
 
             void SetLookRotations()
@@ -63,6 +62,7 @@ namespace RollABall.Assets.src.Player
                 float newX = oldX + xDelta;
                 float toRadians = Mathf.Pi / 180;
                 newX = Mathf.Clamp(newX, -74 * toRadians, 14 * toRadians);
+
                 // Reassign xDelta based on our clamping.
                 xDelta = newX - oldX;
 
@@ -75,25 +75,31 @@ namespace RollABall.Assets.src.Player
 
             void GroundCheck()
             {
+                // Try catch so we don't stop execution, but still log the error.
                 try
                 {
                     var objects = groundCheck.GetOverlappingBodies();
 
                     bool grounded = false;
 
+                    // If we have any static body in our area, set grounded to true and move on.
                     foreach (Node3D node in objects)
                     {
                         if (node is StaticBody3D)
                         {
                             grounded = true;
+                            break;
                         }
                     }
 
                     if (!grounded) { shouldJump = false; }
+
                     this.grounded = grounded;
-                } catch (Exception e) { playerManager.log.WriteAll($"{e.GetType()}: {e.Message} {e.StackTrace}", LogLevel.error); }
+                }
+                catch (Exception e) { playerManager.log.WriteAll($"{e.GetType()}: {e.Message} {e.StackTrace}", LogLevel.error); }
             }
 
+            // Is this helper even needed?
             void UpdateOurPosition()
             {
                 Position = ball.Position;
@@ -114,6 +120,7 @@ namespace RollABall.Assets.src.Player
             moveVector3D = new(moveVector2D.X, 0, moveVector2D.Y);
         }
 
+        #region inputSetters
         public void OnLook(Vector2 direction)
         {
             lookVector = direction;
@@ -123,7 +130,12 @@ namespace RollABall.Assets.src.Player
         {
             shouldJump = grounded;
         }
+        #endregion
 
+        /// <summary>
+        /// Used to reset our transform when loading a checkpoint.
+        /// </summary>
+        /// <param name="checkpoint">The checkpoint we're snapping to.</param>
         internal void ResetTF(Checkpoint checkpoint)
         {
             ball.Position = checkpoint.Position + checkpoint.offset;
