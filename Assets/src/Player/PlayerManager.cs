@@ -14,9 +14,11 @@ namespace RollABall.Assets.src.Player
         #region Refs
         public Logger log;
 
+        GameManager gm = GameManager.Instance;
+
         [Export] public PlayerController controller;
-        public RigidBody3D Ball { get => ball; set => ball = value; }
         [Export] RigidBody3D ball;
+        public RigidBody3D Ball { get => ball; set => ball = value; }
         #endregion
         #region Stats
         public int Lives { get => lives; set => lives = value; }
@@ -35,9 +37,9 @@ namespace RollABall.Assets.src.Player
         {
             log.WriteAll($"Player died. Player has {Lives} lives left.");
             Lives--;
-            GameManager.Instance.UIManager.hud.Update();
-            if (Lives >= 0) { GameManager.Instance.LevelManager.Reload(); }
-            else { Lives = 3; HUD.Instance.Update(); GameManager.Instance.UIManager.State = UIState.LevelFailure; }
+            gm.UIManager.hud.Update();
+            if (Lives >= 0) { gm.LevelManager.Reload(); }
+            else { Lives = 3; HUD.Instance.Update(); gm.UIManager.State = UIState.LevelFailure; }
         }
 
         public void OnLoadCheckpoint(Checkpoint checkpoint)

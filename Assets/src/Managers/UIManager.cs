@@ -11,7 +11,7 @@ namespace RollABall.Assets.src.Managers
     internal partial class UIManager : Node
     {
         #region refs
-        GameManager gameManager;
+        GameManager gm;
         LevelManager levelMan;
         public UIState State { get => state; set { OnSetState(value); state = value; } }
         private UIState state;
@@ -36,8 +36,8 @@ namespace RollABall.Assets.src.Managers
 
         public void PostInit()
         {
-            gameManager = GameManager.Instance;
-            levelMan = GameManager.Instance.LevelManager;
+            gm = GameManager.Instance;
+            levelMan = gm.LevelManager;
             log.Write("Initialization finished, setting state of MainMenu");
             State = UIState.Main;
         }
@@ -79,16 +79,16 @@ namespace RollABall.Assets.src.Managers
             mainMenu = mainMenuScene.Instantiate() as Control;
             AddChild(mainMenu);
 
-            GameManager.Instance.State = GameState.MenuOnly;
+            gm.State = GameState.MenuOnly;
 
             Button play = mainMenu.FindChild("play", true) as Button;
             play.Pressed += () => { State = UIState.LevelSelect; };
             Button load = mainMenu.FindChild("load", true) as Button;
-            load.Pressed += () => { GameManager.Instance.LevelManager.LoadCheckpoint(); };
+            load.Pressed += () => { gm.LevelManager.LoadCheckpoint(); };
             Button options = mainMenu.FindChild("options", true) as Button;
             options.Pressed += () => { State = UIState.Options; };
             Button exit = mainMenu.FindChild("exit", true) as Button;
-            exit.Pressed += gameManager.StartQuit;
+            exit.Pressed += gm.StartQuit;
         }
         void OptionsHelper()
         {
@@ -121,14 +121,14 @@ namespace RollABall.Assets.src.Managers
         {
             AddChild(hud); hudEnabled = true;
 
-            GameManager.Instance.State = GameState.Gameplay;
+            gm.State = GameState.Gameplay;
         }
         void PauseHelper()
         {
             pause = pauseScene.Instantiate() as Control;
             AddChild(pause);
 
-            GameManager.Instance.State = GameState.Pause;
+            gm.State = GameState.Pause;
 
             Button resume = pause.FindChild("resume", true) as Button;
             resume.Pressed += () => { State = UIState.HUD; };
@@ -137,7 +137,7 @@ namespace RollABall.Assets.src.Managers
         }
         void LevelCompleteHelper()
         {
-            GameManager.Instance.State = GameState.Pause;
+            gm.State = GameState.Pause;
             levelComplete = levelCompleteScene.Instantiate() as Control;
             AddChild(levelComplete);
 
@@ -149,7 +149,7 @@ namespace RollABall.Assets.src.Managers
         }
         void LevelFailureHelper()
         {
-            GameManager.Instance.State = GameState.Pause;
+            gm.State = GameState.Pause;
             levelFailure = levelFailureScene.Instantiate() as Control;
             AddChild(levelFailure);
 

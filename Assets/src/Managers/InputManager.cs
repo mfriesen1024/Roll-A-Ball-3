@@ -9,6 +9,8 @@ namespace RollABall.Assets.src.Managers
         #region refs
         Logger inputLog;
 
+        GameManager gm = GameManager.Instance;
+
         // Components
         PlayerController controller;
         #endregion
@@ -19,7 +21,7 @@ namespace RollABall.Assets.src.Managers
             inputLog = new Logger(true, true, "logs\\", "inputLog", "txt", false);
 
             // Set references.
-            controller = GameManager.Instance.PlayerManager.controller;
+            controller = gm.PlayerManager.controller;
         }
 
         public override void _Input(InputEvent ie)
@@ -45,7 +47,9 @@ namespace RollABall.Assets.src.Managers
                 case Key.A:
                 case Key.S:
                 case Key.D: HandleMoveInput(); break;
-                case Key.Escape: if (GameManager.Instance.UIManager.State == UIState.HUD) { GameManager.Instance.UIManager.State = UIState.Pause; } break;
+                case Key.Escape:
+                    if (gm.UIManager.State == UIState.HUD) { gm.UIManager.State = UIState.Pause; }
+                    break;
                 case Key.Space: HandleJumpInput(); break;
                 default: break;
             }
@@ -64,11 +68,11 @@ namespace RollABall.Assets.src.Managers
             // Only set an axis' value if and only if one of its keys is pressed.
             bool s = Input.IsKeyPressed(Key.S);
             bool w = Input.IsKeyPressed(Key.W);
-            if (s||w && !(s&&w)) { if (s) { newMove.Y++; } if (w) { newMove.Y--; } }
+            if (s || w && !(s && w)) { if (s) { newMove.Y++; } if (w) { newMove.Y--; } }
 
             bool a = Input.IsKeyPressed(Key.A);
             bool d = Input.IsKeyPressed(Key.D);
-            if (a||d && !(a&&d)) { if (a) { newMove.X--; } if (d) { newMove.X++; } }
+            if (a || d && !(a && d)) { if (a) { newMove.X--; } if (d) { newMove.X++; } }
 
             // Move the player by this but normalized. No idea if normalizing is redundant here.
             controller.OnMove(newMove.Normalized());
