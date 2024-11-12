@@ -1,4 +1,4 @@
-﻿using KeystoneUtils.FileSystem.Binary;
+using KeystoneUtils.FileSystem.Binary;
 using RollABall.Assets.src.Data;
 using System;
 using System.IO;
@@ -18,10 +18,10 @@ namespace RollABall.Assets.src.Managers
         #region data
         // Data objects.
         private PlaythroughSave runData = new();
-        private ProgressionSave progression = new();
+        //private ProgressionSave progression = new();
 
         public PlaythroughSave RunData { get => runData; private set => runData = value; }
-        public ProgressionSave Progression { get => progression; private set => progression = value; }
+        //public ProgressionSave Progression { get => progression; private set => progression = value; }
         #endregion
 
         public void SaveScore(ScoreSave save)
@@ -63,7 +63,7 @@ namespace RollABall.Assets.src.Managers
 
             // Write stuff to files.
             File.WriteAllBytesAsync(savesPath + runFName, runData.ToBinary(runData));
-            File.WriteAllBytes(savesPath + progressionFName, progression.ToBinary(progression));
+            //File.WriteAllBytes(savesPath + progressionFName, progression.ToBinary(progression));
         }
 
         public void OnStartup()
@@ -72,7 +72,7 @@ namespace RollABall.Assets.src.Managers
             Directory.CreateDirectory(savesPath);
 
             if (File.Exists(savesPath+runFName)) { runData = runData.FromBinary(File.ReadAllBytes(savesPath + runFName)); }
-            if (File.Exists(savesPath+progressionFName)) { progression = progression.FromBinary(File.ReadAllBytes(savesPath + progressionFName)); }
+            //if (File.Exists(savesPath+progressionFName)) { progression = progression.FromBinary(File.ReadAllBytes(savesPath + progressionFName)); }
         }
     }
 }
