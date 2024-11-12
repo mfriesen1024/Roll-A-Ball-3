@@ -2,7 +2,6 @@ using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers;
-using RollABall.Assets.src.UI;
 
 namespace RollABall.Assets.src.Player
 {
