@@ -81,13 +81,14 @@ namespace RollABall.Assets.src.Managers
 
             gm.State = GameState.MenuOnly;
 
+            // Set button functionality.
             Button play = mainMenu.FindChild("play", true) as Button;
-            play.Pressed += () => { State = UIState.LevelSelect; };
             Button load = mainMenu.FindChild("load", true) as Button;
-            load.Pressed += () => { gm.LevelManager.LoadCheckpoint(); };
             Button options = mainMenu.FindChild("options", true) as Button;
-            options.Pressed += () => { State = UIState.Options; };
             Button exit = mainMenu.FindChild("exit", true) as Button;
+            play.Pressed += () => { State = UIState.LevelSelect; };
+            load.Pressed += gm.LevelManager.LoadCheckpoint;
+            options.Pressed += () => { State = UIState.Options; };
             exit.Pressed += gm.StartQuit;
         }
         void OptionsHelper()
@@ -103,11 +104,12 @@ namespace RollABall.Assets.src.Managers
             levelSelect = levelSelectScene.Instantiate() as Control;
             AddChild(levelSelect);
 
+            // Set button functionality.
             Button left = levelSelect.FindChild("left", true) as Button;
             Button right = levelSelect.FindChild("right", true) as Button;
+            Button go = levelSelect.FindChild("go", true) as Button;
             left.Pressed += () => { if (levelMan.LevelIndex > 0) { levelMan.LevelIndex--; ShowLevel(left, right); } };
             right.Pressed += () => { if (levelMan.LevelIndex < levelMan.Levels.Length - 1) { levelMan.LevelIndex++; ShowLevel(left, right); } };
-            Button go = levelSelect.FindChild("go", true) as Button;
             go.Pressed += () => { levelMan.CheckpointIndex = 0; levelMan.Load(); };
 
             ShowLevel(left, right);
@@ -130,9 +132,10 @@ namespace RollABall.Assets.src.Managers
 
             gm.State = GameState.Pause;
 
+            // Set button functionality.
             Button resume = pause.FindChild("resume", true) as Button;
-            resume.Pressed += () => { State = UIState.HUD; };
             Button menu = pause.FindChild("menu", true) as Button;
+            resume.Pressed += () => { State = UIState.HUD; };
             menu.Pressed += () => { State = UIState.Main; };
         }
         void LevelCompleteHelper()
