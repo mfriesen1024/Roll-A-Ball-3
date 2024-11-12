@@ -1,4 +1,4 @@
-﻿using KeystoneUtils.FileSystem.Binary;
+using KeystoneUtils.FileSystem.Binary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,8 @@ namespace RollABall.Assets.src.Data
 {
     /// <summary>
     /// Saves anything that gets unlocked (levels for example)
+    /// 
+    /// Currently this isn't used.
     /// </summary>
     public class ProgressionSave : IBinarySerializable<ProgressionSave>
     {

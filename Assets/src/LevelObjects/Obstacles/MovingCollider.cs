@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using KeystoneUtils.Logging;
 
 namespace RollABall.Assets.src.LevelObjects.Obstacles
@@ -53,9 +53,9 @@ namespace RollABall.Assets.src.LevelObjects.Obstacles
 
         private void UpdateMoveFields(double delta)
         {
-            float newDelta = (float)delta;
+            float deltaButFloat = (float)delta;
             // Set new lerp factor.
-            float scaledDelta = newDelta * speed; // This is constant, so its correct.
+            float scaledDelta = deltaButFloat * speed; // This is constant, so its correct.
             float oldLerpFactor = lerpFactor; // For logging purposes.
             if (returning) { lerpFactor-=scaledDelta; }
             else { lerpFactor+=scaledDelta; }
