@@ -11,9 +11,15 @@ config_version=5
 [application]
 
 config/name="Roll A Ball"
+config/version="0.2.0"
 run/main_scene="res://Assets/Scenes/entry.tscn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://Assets/Arting/Tex/1upIcon.png"
+
+[debug]
+
+file_logging/enable_file_logging.pc=false
 
 [dotnet]
 
