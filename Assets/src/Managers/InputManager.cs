@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.Player;
 
@@ -7,8 +7,9 @@ namespace RollABall.Assets.src.Managers
     internal partial class InputManager : Node
     {
         #region refs
-        public static InputManager Instance { get; private set; }
         Logger inputLog;
+
+        GameManager gm = GameManager.Instance;
 
         // Components
         PlayerController controller;
@@ -16,15 +17,11 @@ namespace RollABall.Assets.src.Managers
 
         public override void _Ready()
         {
-            // Set singleton
-            if (Instance == null) { Instance = this; }
-            else { QueueFree(); return; }
-
             // Set logger
             inputLog = new Logger(true, true, "logs\\", "inputLog", "txt", false);
 
             // Set references.
-            controller = PlayerManager.Instance.controller;
+            controller = gm.PlayerManager.controller;
         }
 
         public override void _Input(InputEvent ie)
@@ -50,7 +47,9 @@ namespace RollABall.Assets.src.Managers
                 case Key.A:
                 case Key.S:
                 case Key.D: HandleMoveInput(); break;
-                case Key.Escape: if (UIManager.Instance.State == UIState.HUD) { UIManager.Instance.State = UIState.Pause; } break;
+                case Key.Escape:
+                    if (gm.UIManager.State == UIState.HUD) { gm.UIManager.State = UIState.Pause; }
+                    break;
                 case Key.Space: HandleJumpInput(); break;
                 default: break;
             }
@@ -69,11 +68,11 @@ namespace RollABall.Assets.src.Managers
             // Only set an axis' value if and only if one of its keys is pressed.
             bool s = Input.IsKeyPressed(Key.S);
             bool w = Input.IsKeyPressed(Key.W);
-            if (s||w && !(s&&w)) { if (s) { newMove.Y++; } if (w) { newMove.Y--; } }
+            if (s || w && !(s && w)) { if (s) { newMove.Y++; } if (w) { newMove.Y--; } }
 
             bool a = Input.IsKeyPressed(Key.A);
             bool d = Input.IsKeyPressed(Key.D);
-            if (a||d && !(a&&d)) { if (a) { newMove.X--; } if (d) { newMove.X++; } }
+            if (a || d && !(a && d)) { if (a) { newMove.X--; } if (d) { newMove.X++; } }
 
             // Move the player by this but normalized. No idea if normalizing is redundant here.
             controller.OnMove(newMove.Normalized());

@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers;
@@ -12,12 +12,13 @@ namespace RollABall.Assets.src.Player
     internal partial class PlayerManager : Node
     {
         #region Refs
-        public static PlayerManager Instance { get; private set; }
         public Logger log;
 
+        GameManager gm = GameManager.Instance;
+
         [Export] public PlayerController controller;
-        public RigidBody3D Ball { get => ball; set => ball = value; }
         [Export] RigidBody3D ball;
+        public RigidBody3D Ball { get => ball; set => ball = value; }
         #endregion
         #region Stats
         public int Lives { get => lives; set => lives = value; }
@@ -26,9 +27,6 @@ namespace RollABall.Assets.src.Player
 
         public override void _Ready()
         {
-            if (Instance != null) { QueueFree(); return; }
-
-            Instance = this;
             log = new Logger(true, true, "logs\\", "playerLog", "txt", false);
         }
 
@@ -39,9 +37,9 @@ namespace RollABall.Assets.src.Player
         {
             log.WriteAll($"Player died. Player has {Lives} lives left.");
             Lives--;
-            UIManager.Instance.hud.Update();
-            if (Lives >= 0) { LevelManager.Instance.Reload(); }
-            else { Lives = 3; HUD.Instance.Update(); UIManager.Instance.State = UIState.LevelFailure; }
+            gm.UIManager.HUD.Update();
+            if (Lives >= 0) { gm.LevelManager.Reload(); }
+            else { Lives = 3; GameManager.Instance.UIManager.HUD.Update(); gm.UIManager.State = UIState.LevelFailure; }
         }
 
         public void OnLoadCheckpoint(Checkpoint checkpoint)

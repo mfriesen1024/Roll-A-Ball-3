@@ -1,9 +1,7 @@
 using Godot;
-using KeystoneUtils.Logging;
 using RollABall.Assets.src.Data;
 using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers.Helpers;
-using RollABall.Assets.src.Player;
 using RollABall.Assets.src.UI;
 using System;
 
@@ -15,10 +13,7 @@ namespace RollABall.Assets.src.Managers
     internal partial class LevelManager : Node
     {
         #region Refs
-        /// <summary>
-        /// Singleton instance of the levelman.
-        /// </summary>
-        public static LevelManager Instance { get; private set; }
+        GameManager gm;
 
         LevelLoadHelper loadHelper = new();
 
@@ -26,8 +21,8 @@ namespace RollABall.Assets.src.Managers
         public PackedScene[] Levels { get => levels; private set => levels = value; }
 
         // description stuff.
-        [Export]  Texture2D[] levelTextures;
-        [Export]  string[] levelNames;
+        [Export] Texture2D[] levelTextures;
+        [Export] string[] levelNames;
         public Texture2D[] LevelTextures { get => levelTextures; private set => levelTextures = value; }
         public string[] LevelNames { get => levelNames; private set => levelNames = value; }
 
@@ -46,11 +41,7 @@ namespace RollABall.Assets.src.Managers
 
         public override void _Ready()
         {
-            base._Ready();
-
-            // Set singleton
-            if (Instance == null) { Instance = this; }
-            else { QueueFree(); return; }
+            gm = GameManager.Instance;
         }
 
         #region loading bunk
@@ -59,12 +50,12 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         public void LoadCheckpoint()
         {
-            PlaythroughSave run = GameManager.Instance.DataManager.RunData;
+            PlaythroughSave run = gm.DataManager.RunData;
 
             // Load values.
             LevelIndex = run.level;
             CheckpointIndex = run.checkpoint;
-            PlayerManager.Instance.Lives = run.lives;
+            gm.PlayerManager.Lives = run.lives;
 
             // Load level.
             Load();
@@ -75,7 +66,7 @@ namespace RollABall.Assets.src.Managers
         public void Load()
         {
             // If state isn't loading, set that now.
-            if (UIManager.Instance.State != UIState.Loading) { UIManager.Instance.State = UIState.Loading; }
+            if (gm.UIManager.State != UIState.Loading) { gm.UIManager.State = UIState.Loading; }
 
             // Set the load helper to load the level and set it's parent async.
             loadHelper.LoadLevelAsync(levels[LevelIndex], Assign);
@@ -96,10 +87,10 @@ namespace RollABall.Assets.src.Managers
 
             // Set the player's position to checkpoint position.
             Checkpoint checkpoint = activeLevel.checkpoints[CheckpointIndex];
-            PlayerManager.Instance.OnLoadCheckpoint(checkpoint);
+            gm.PlayerManager.OnLoadCheckpoint(checkpoint);
 
             // Tell the UIMan to deactivate loading screen.
-            UIManager.Instance.State = UIState.HUD;
+            gm.UIManager.State = UIState.HUD;
 
             // Set the ELTs to end the level.
             foreach (EndLevelTrigger elt in activeLevel.triggers) { elt.BodyEntered += ELTCheck; }
@@ -109,7 +100,7 @@ namespace RollABall.Assets.src.Managers
             {
                 cp.BodyEntered += (Node3D other) =>
                 {
-                    if (PlayerManager.Instance.Ball.Equals(other))
+                    if (gm.PlayerManager.Ball.Equals(other))
                     {
                         CheckpointIndex = cp.index;
                     }
@@ -137,14 +128,14 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         private void ELTCheck(Node3D other)
         {
-            if (PlayerManager.Instance.Ball.Equals(other))
+            if (gm.PlayerManager.Ball.Equals(other))
             {
                 CheckpointIndex = 0;
 
-                PlayerManager.Instance.Lives = 3; HUD.Instance.Update();
-                UIManager.Instance.State = UIState.LevelComplete;
+                gm.PlayerManager.Lives = 3; GameManager.Instance.UIManager.HUD.Update();
+                gm.UIManager.State = UIState.LevelComplete;
 
-                GameManager.Instance.DataManager.SaveScore(new ScoreSave() { score=0, time=Timer.Ticks });
+                gm.DataManager.SaveScore(new ScoreSave() { score = 0, time = Timer.Ticks });
 
                 return;
             }
@@ -152,7 +143,7 @@ namespace RollABall.Assets.src.Managers
 
         internal void Reload()
         {
-            UIManager.Instance.State = UIState.Loading;
+            gm.UIManager.State = UIState.Loading;
             Discard();
             Load();
         }
@@ -177,7 +168,7 @@ namespace RollABall.Assets.src.Managers
 
         private DateTime GetTimerTime()
         {
-            return new DateTime(DateTime.Now.Ticks-startTime.Ticks);
+            return new DateTime(DateTime.Now.Ticks - startTime.Ticks);
         }
     }
 }

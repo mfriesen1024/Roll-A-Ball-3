@@ -2,10 +2,6 @@ using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.Player;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RollABall.Assets.src.Managers
 {
@@ -22,7 +18,7 @@ namespace RollABall.Assets.src.Managers
         /// <summary>
         /// State of the game.
         /// </summary>
-        public GameState State { get => state; set { OnSetState(value); state=value;  } }
+        public GameState State { get => state; set { OnSetState(value); state = value; } }
 
         private GameState state;
 
@@ -41,12 +37,12 @@ namespace RollABall.Assets.src.Managers
         public override void _Ready()
         {
             SetGMSingleton();
-            SetOtherSingletons();
+            SetOtherManagers();
             DataManager.OnStartup();
 
             Init();
 
-            if(Instance == this) { PostInit(); }
+            if (Instance == this) { PostInit(); }
 
             // Now that we're initialized, we'll handle our own quit requests.
             GetTree().AutoAcceptQuit = false;
@@ -54,7 +50,7 @@ namespace RollABall.Assets.src.Managers
 
         public override void _Notification(int what)
         {
-            if(what == NotificationWMCloseRequest) { try { StartQuit(); } catch { } }
+            if (what == NotificationWMCloseRequest) { try { StartQuit(); } catch { } }
         }
 
         void OnSetState(GameState state)
@@ -68,9 +64,9 @@ namespace RollABall.Assets.src.Managers
                     LevelManager.Unpause();
                     LevelManager.Discard();
                     // record run.
-                    DataManager.RecordPlaythrough(LevelManager.LevelIndex, LevelManager.CheckpointIndex, PlayerManager.Instance.Lives);
+                    DataManager.RecordPlaythrough(LevelManager.LevelIndex, LevelManager.CheckpointIndex, PlayerManager.Lives);
                     break;
-                case GameState.Pause: 
+                case GameState.Pause:
                     Input.MouseMode = Input.MouseModeEnum.Visible;
                     // pause specific things here.
                     LevelManager.Pause();
@@ -82,23 +78,19 @@ namespace RollABall.Assets.src.Managers
                     break;
                 default:
                     string s = $"State {state} is not implemented in GM! This bad!";
-                    Logger.StaticLogger.Write(s,LogLevel.error);
+                    Logger.StaticLogger.Write(s, LogLevel.error);
                     throw new NotImplementedException(s);
             }
         }
 
         #region helperMethods
-        private void SetOtherSingletons()
+        private void SetOtherManagers()
         {
             // Check other managers for their singleton instances, and if they don't exist, create them.
-            if (PlayerManager.Instance != null) { PlayerManager = PlayerManager.Instance; }
-            else { PlayerManager = playerManPrefab.Instantiate() as PlayerManager; AddChild(PlayerManager); }
-            if (InputManager.Instance != null) { InputManager = InputManager.Instance; }
-            else { InputManager = inputManPrefab.Instantiate() as InputManager; AddChild(InputManager); }
-            if (UIManager.Instance != null) { UIManager = UIManager.Instance; }
-            else { UIManager = uiManPrefab.Instantiate() as UIManager; AddChild(UIManager); }
-            if (LevelManager.Instance != null) { LevelManager = LevelManager.Instance; }
-            else { LevelManager = levelManPrefab.Instantiate() as LevelManager; AddChild(LevelManager); }
+            PlayerManager = playerManPrefab.Instantiate() as PlayerManager; AddChild(PlayerManager);
+            InputManager = inputManPrefab.Instantiate() as InputManager; AddChild(InputManager);
+            UIManager = uiManPrefab.Instantiate() as UIManager; AddChild(UIManager);
+            LevelManager = levelManPrefab.Instantiate() as LevelManager; AddChild(LevelManager);
         }
 
         private void SetGMSingleton()
@@ -120,7 +112,7 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         internal void StartQuit()
         {
-            Logger.StaticLogger.WriteAll($"Quitting!",LogLevel.info);
+            Logger.StaticLogger.WriteAll($"Quitting!", LogLevel.info);
 
             // Handle data things.
             DataManager.OnShutdown();
