@@ -101,6 +101,9 @@ namespace RollABall.Assets.src.Managers
 
         private void Init()
         {
+            // Disable saving debugs to file.
+            Logger.StaticLogger.allowDebug = false;
+
             // Load data from previous run. This could probably be encapsulated into another initialization action.
             PlayerManager.Lives = DataManager.RunData.lives;
             LevelManager.LevelIndex = DataManager.RunData.level;
