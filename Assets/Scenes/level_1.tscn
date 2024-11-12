@@ -321,6 +321,9 @@ visible = false
 [node name="Cube_021" parent="LevelColliders" index="21"]
 visible = false
 
+[node name="EndWall" parent="Visuals" index="20"]
+transform = Transform3D(-6, 0, -5.24537e-07, 0, 6, 0, 5.24537e-07, 0, -6, 0, 1, -65)
+
 [node name="KillPlaneVisual" parent="Visuals" index="21"]
 mesh = SubResource("ArrayMesh_j7xli")
 
