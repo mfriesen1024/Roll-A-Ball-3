@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bufig8w0mugb4"]
+[gd_scene load_steps=9 format=3 uid="uid://bufig8w0mugb4"]
 
 [ext_resource type="Script" path="res://Assets/src/Player/PlayerManager.cs" id="1_bad40"]
 [ext_resource type="Script" path="res://Assets/src/Player/PlayerController.cs" id="2_vlbyn"]
@@ -6,11 +6,18 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_46hwj"]
 height = 0.25
-radius = 0.25
+radius = 0.35
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_loah7"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_id2sy"]
+albedo_color = Color(0.1275, 0.31425, 0.75, 1)
+metallic = 0.35
+metallic_specular = 0.0
+roughness = 0.6
+
 [sub_resource type="SphereMesh" id="SphereMesh_u6ron"]
+material = SubResource("StandardMaterial3D_id2sy")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nekfl"]
 radius = 0.45
@@ -30,7 +37,7 @@ groundCheck = NodePath("GroundCheck")
 [node name="CamParent" type="Node3D" parent="PlayerController"]
 
 [node name="PlayerCam" type="Camera3D" parent="PlayerController/CamParent"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.51, 1.9)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.765, 2.85)
 script = ExtResource("3_5xord")
 
 [node name="GroundCheck" type="Area3D" parent="PlayerController"]

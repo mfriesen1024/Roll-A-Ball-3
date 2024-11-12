@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://ceadenttfhuyp"]
+[gd_scene load_steps=6 format=3 uid="uid://ceadenttfhuyp"]
 
 [ext_resource type="Script" path="res://Assets/src/Managers/LevelManager.cs" id="1_goot0"]
-[ext_resource type="PackedScene" uid="uid://b10toohx6iroa" path="res://Assets/Scenes/level_1.tscn" id="2_a7mxs"]
-[ext_resource type="PackedScene" uid="uid://dgs2box3ugel8" path="res://Assets/Scenes/level_2.tscn" id="3_3jaxf"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_whi3t"]
-size = Vector2(150, 150)
+[ext_resource type="PackedScene" uid="uid://b10toohx6iroa" path="res://Assets/Scenes/testLevel.tscn" id="2_a7mxs"]
+[ext_resource type="PackedScene" uid="uid://dgs2box3ugel8" path="res://Assets/Scenes/level_1.tscn" id="3_3jaxf"]
+[ext_resource type="Texture2D" uid="uid://c7708afg3j4wi" path="res://Assets/Scenes/levelPreviews/level1Preview.png" id="4_htqc8"]
+[ext_resource type="Texture2D" uid="uid://c78y2addy5ndm" path="res://Assets/Scenes/levelPreviews/testLevelPreview.png" id="5_igw1m"]
 
 [node name="levelMan" type="Node"]
 process_mode = 3
 script = ExtResource("1_goot0")
 levels = Array[PackedScene]([ExtResource("3_3jaxf"), ExtResource("2_a7mxs")])
-levelTextures = Array[Texture2D]([SubResource("PlaceholderTexture2D_whi3t"), SubResource("PlaceholderTexture2D_whi3t")])
+levelTextures = Array[Texture2D]([ExtResource("4_htqc8"), ExtResource("5_igw1m")])
+levelNames = PackedStringArray("Foundry", "test level")

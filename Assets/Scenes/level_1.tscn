@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dgs2box3ugel8"]
+[gd_scene load_steps=26 format=4 uid="uid://dgs2box3ugel8"]
 
 [ext_resource type="PackedScene" uid="uid://poomls081br5" path="res://Assets/Arting/Model/Level1.blend" id="1_3hlm8"]
 [ext_resource type="Script" path="res://Assets/src/LevelObjects/Level.cs" id="2_xwbe8"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dq0te7jlvq1xc" path="res://Assets/Arting/Tex/KillPlaneEmit.png" id="9_q4pbn"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_jaahr"]
-density = 4.0
+density = 8.0
 emission = Color(0.1, 0.1, 0.1, 1)
 edge_fade = 1.0
 
@@ -117,6 +117,45 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nioyd")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgt1h"]
+resource_name = "EndBlocks"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.41477, 0.41477, 0.41477, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0ygxk"]
+_surfaces = [{
+"aabb": AABB(-0.05, -0.5, -0.05, 0.1, 1, 0.1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAEAAAACAAMABwABAAMAAgAHAAMABAAAAAEAAgAAAAQABwAFAAEABAABAAUAAgAGAAcAAgAEAAYABgAFAAcABgAEAAUA"),
+"name": "EndBlocks",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP////8AAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAP///////wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hil8p"]
+resource_name = "Level1_Cube_021"
+_surfaces = [{
+"aabb": AABB(-0.05, -0.5, -0.05, 0.1, 1, 0.1),
+"attribute_data": PackedByteArray("/1////8f/z//XwAA/5////+fAAD/3/8//1//v/8f/3//X/+//5//v/+f/7//3/9//1//P/9f/z//X/8//5//P/+f/z//n/8//1//f/9f/3//X/9//5//f/+f/3//n/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAAJAAMAAAAGAAkACAAVAAoACAATABUAFAARABcAFAAOABEADQAEAA8ADQACAAQABwAMABIABwABAAwAFgAFAAsAFgAQAAUA"),
+"material": SubResource("StandardMaterial3D_lgt1h"),
+"name": "EndBlocks",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAAAA////vwAAAAD///+/AAD/////VNUAAP//////vwAA////////AAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//AAD//wAAVNUAAP//AAD//wAA//8AAP////8AAP///7///wAA////v///AAD//1TV/////////7///////////////////1TV//8AAAAA/7///wAAAAD/////AAAAAFTV/////wAA////////AAD///////8AAFTVVNVU1QAA/3//////VNVU1f//////f/+/VNVU1QAA/3//v/+/VNVU1f+//7//f/+/AAD/f/////+qKqoq//////9//7+qKqoqAAD/f/+//7+qKqoq/7//v/9//7+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_0ygxk")
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_bgk6s"]
 resource_name = "Level1_Cube_011"
 _surfaces = [{
@@ -182,6 +221,10 @@ script = ExtResource("3_t17hr")
 [node name="FogVolume" type="FogVolume" parent="MiscColliders/ELT" index="1"]
 size = Vector3(1.8, 1.8, 1.8)
 material = SubResource("FogMaterial_jaahr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MiscColliders/ELT" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+light_volumetric_fog_energy = 4.0
 
 [node name="KillPlane" parent="MiscColliders" index="11"]
 script = ExtResource("4_shnge")
@@ -278,6 +321,9 @@ visible = false
 [node name="Cube_021" parent="LevelColliders" index="21"]
 visible = false
 
+[node name="EndWall" parent="Visuals" index="20"]
+transform = Transform3D(-6, 0, -5.24537e-07, 0, 6, 0, 5.24537e-07, 0, -6, 0, 1, -65)
+
 [node name="KillPlaneVisual" parent="Visuals" index="21"]
 mesh = SubResource("ArrayMesh_j7xli")
 
@@ -294,7 +340,24 @@ light_energy = 0.5
 spot_range = 15.0
 spot_angle = 60.0
 
-[node name="LightBar_002" parent="Visuals" index="24"]
+[node name="LightBar_003" type="MeshInstance3D" parent="Visuals" index="24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -58)
+mesh = SubResource("ArrayMesh_dj8so")
+skeleton = NodePath("")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Visuals/LightBar_003" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.906332, 0.896244, 0.797738, 1)
+light_energy = 0.5
+spot_range = 15.0
+spot_angle = 60.0
+
+[node name="LightHolder_001" type="MeshInstance3D" parent="Visuals/LightBar_003" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("ArrayMesh_hil8p")
+skeleton = NodePath("")
+
+[node name="LightBar_002" parent="Visuals" index="25"]
 mesh = SubResource("ArrayMesh_bgk6s")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Visuals/LightBar_002" index="1"]
@@ -346,3 +409,6 @@ mesh = SubResource("BoxMesh_o33iq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="12"]
 environment = ExtResource("8_8g8pm")
+
+[node name="previewCam" type="Camera3D" parent="." index="13"]
+transform = Transform3D(0.707107, 0.183013, -0.683013, 0, 0.965926, 0.258819, 0.707107, -0.183013, 0.683013, -4, 5, -13)

@@ -1,5 +1,6 @@
 using Godot;
 using KeystoneUtils.Logging;
+using RollABall.Assets.src.Player;
 using RollABall.Assets.src.UI;
 using System;
 
@@ -12,6 +13,7 @@ namespace RollABall.Assets.src.Managers
     {
         #region refs
         GameManager gameManager;
+        LevelManager levelMan;
         public static UIManager Instance { get; private set; }
         public UIState State { get => state; set { OnSetState(value); state = value; } }
         private UIState state;
@@ -32,7 +34,7 @@ namespace RollABall.Assets.src.Managers
 
             Instance = this;
             log = new Logger(true, true, "logs\\", "uiLog", "txt", true);
-            GameManager.postInit += PostInit;
+            GameManager.PostInit += PostInit;
 
             hud = hudScene.Instantiate() as HUD;
         }
@@ -40,6 +42,7 @@ namespace RollABall.Assets.src.Managers
         public void PostInit()
         {
             gameManager = GameManager.Instance;
+            levelMan = LevelManager.Instance;
             log.Write("Initialization finished, setting state of MainMenu");
             State = UIState.Main;
         }
@@ -85,7 +88,7 @@ namespace RollABall.Assets.src.Managers
 
             Button play = mainMenu.FindChild("play", true) as Button;
             play.Pressed += () => { State = UIState.LevelSelect; };
-            Button load = mainMenu.FindChild("load",true) as Button;
+            Button load = mainMenu.FindChild("load", true) as Button;
             load.Pressed += () => { LevelManager.Instance.LoadCheckpoint(); };
             Button options = mainMenu.FindChild("options", true) as Button;
             options.Pressed += () => { State = UIState.Options; };
@@ -106,11 +109,13 @@ namespace RollABall.Assets.src.Managers
             AddChild(levelSelect);
 
             Button left = levelSelect.FindChild("left", true) as Button;
-            left.Pressed += () => { log.WriteAll($"Level select cycle left requested, but not implemented!", LogLevel.warn); };
             Button right = levelSelect.FindChild("right", true) as Button;
-            right.Pressed += () => { log.WriteAll($"Level select cycle right requested, but not implemented!", LogLevel.warn); };
+            left.Pressed += () => { if (levelMan.LevelIndex > 0) { levelMan.LevelIndex--; ShowLevel(left, right); } };
+            right.Pressed += () => { if (levelMan.LevelIndex < levelMan.Levels.Length - 1) { levelMan.LevelIndex++; ShowLevel(left, right); } };
             Button go = levelSelect.FindChild("go", true) as Button;
-            go.Pressed += () => { LevelManager.Instance.Load(); };
+            go.Pressed += () => { levelMan.CheckpointIndex = 0; levelMan.Load(); };
+
+            ShowLevel(left, right);
         }
         void LoadingHelper()
         {
@@ -141,6 +146,9 @@ namespace RollABall.Assets.src.Managers
             levelComplete = levelCompleteScene.Instantiate() as Control;
             AddChild(levelComplete);
 
+            // When the level ends, whether by completion or failure, set checkpoint to 0, and save the run.
+            levelMan.CheckpointIndex = 0;
+
             Button menu = levelComplete.FindChild("menu", true) as Button;
             menu.Pressed += () => { State = UIState.Main; };
         }
@@ -150,8 +158,26 @@ namespace RollABall.Assets.src.Managers
             levelFailure = levelFailureScene.Instantiate() as Control;
             AddChild(levelFailure);
 
+            // When the level ends, whether by completion or failure, set checkpoint to 0 and save the run.
+            levelMan.CheckpointIndex = 0;
+
             Button menu = levelFailure.FindChild("menu", true) as Button;
             menu.Pressed += () => { State = UIState.Main; };
+        }
+
+        void ShowLevel(Button left, Button right)
+        {
+            int levelIndex = levelMan.LevelIndex;
+
+            // Disable buttons if level not available.
+            left.Disabled = levelIndex == 0;
+            right.Disabled = levelIndex >= levelMan.Levels.Length - 1;
+
+            Label text = levelSelect.FindChild("name", true) as Label;
+            TextureRect preview = levelSelect.FindChild("preview", true) as TextureRect;
+
+            text.Text = levelMan.LevelNames[levelIndex];
+            preview.Texture = levelMan.LevelTextures[levelIndex];
         }
     }
 
