@@ -15,11 +15,6 @@ namespace RollABall.Assets.src.Managers
     internal partial class LevelManager : Node
     {
         #region Refs
-        /// <summary>
-        /// Singleton instance of the levelman.
-        /// </summary>
-        public static LevelManager Instance { get; private set; }
-
         LevelLoadHelper loadHelper = new();
 
         [Export] PackedScene[] levels;
@@ -46,11 +41,7 @@ namespace RollABall.Assets.src.Managers
 
         public override void _Ready()
         {
-            base._Ready();
 
-            // Set singleton
-            if (Instance == null) { Instance = this; }
-            else { QueueFree(); return; }
         }
 
         #region loading bunk
@@ -64,7 +55,7 @@ namespace RollABall.Assets.src.Managers
             // Load values.
             LevelIndex = run.level;
             CheckpointIndex = run.checkpoint;
-            PlayerManager.Instance.Lives = run.lives;
+            GameManager.Instance.PlayerManager.Lives = run.lives;
 
             // Load level.
             Load();
@@ -75,7 +66,7 @@ namespace RollABall.Assets.src.Managers
         public void Load()
         {
             // If state isn't loading, set that now.
-            if (UIManager.Instance.State != UIState.Loading) { UIManager.Instance.State = UIState.Loading; }
+            if (GameManager.Instance.UIManager.State != UIState.Loading) { GameManager.Instance.UIManager.State = UIState.Loading; }
 
             // Set the load helper to load the level and set it's parent async.
             loadHelper.LoadLevelAsync(levels[LevelIndex], Assign);
@@ -96,10 +87,10 @@ namespace RollABall.Assets.src.Managers
 
             // Set the player's position to checkpoint position.
             Checkpoint checkpoint = activeLevel.checkpoints[CheckpointIndex];
-            PlayerManager.Instance.OnLoadCheckpoint(checkpoint);
+            GameManager.Instance.PlayerManager.OnLoadCheckpoint(checkpoint);
 
             // Tell the UIMan to deactivate loading screen.
-            UIManager.Instance.State = UIState.HUD;
+            GameManager.Instance.UIManager.State = UIState.HUD;
 
             // Set the ELTs to end the level.
             foreach (EndLevelTrigger elt in activeLevel.triggers) { elt.BodyEntered += ELTCheck; }
@@ -109,7 +100,7 @@ namespace RollABall.Assets.src.Managers
             {
                 cp.BodyEntered += (Node3D other) =>
                 {
-                    if (PlayerManager.Instance.Ball.Equals(other))
+                    if (GameManager.Instance.PlayerManager.Ball.Equals(other))
                     {
                         CheckpointIndex = cp.index;
                     }
@@ -137,12 +128,12 @@ namespace RollABall.Assets.src.Managers
         /// </summary>
         private void ELTCheck(Node3D other)
         {
-            if (PlayerManager.Instance.Ball.Equals(other))
+            if (GameManager.Instance.PlayerManager.Ball.Equals(other))
             {
                 CheckpointIndex = 0;
 
-                PlayerManager.Instance.Lives = 3; HUD.Instance.Update();
-                UIManager.Instance.State = UIState.LevelComplete;
+                GameManager.Instance.PlayerManager.Lives = 3; HUD.Instance.Update();
+                GameManager.Instance.UIManager.State = UIState.LevelComplete;
 
                 GameManager.Instance.DataManager.SaveScore(new ScoreSave() { score=0, time=Timer.Ticks });
 
@@ -152,7 +143,7 @@ namespace RollABall.Assets.src.Managers
 
         internal void Reload()
         {
-            UIManager.Instance.State = UIState.Loading;
+            GameManager.Instance.UIManager.State = UIState.Loading;
             Discard();
             Load();
         }

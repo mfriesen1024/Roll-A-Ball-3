@@ -23,7 +23,7 @@ namespace RollABall.Assets.src.UI
         }
         public override void _Process(double delta)
         {
-            DateTime timerTime = LevelManager.Instance.Timer;
+            DateTime timerTime = GameManager.Instance.LevelManager.Timer;
             time.Text = $"{ForceStringLength(timerTime.Hour)}:" +
                 $"{ForceStringLength(timerTime.Minute)}:" +
                 $"{ForceStringLength(timerTime.Second)}:" +
@@ -32,7 +32,7 @@ namespace RollABall.Assets.src.UI
         // Call this to force player updates.
         public void Update()
         {
-            lives.Text = $"x{PlayerManager.Instance.Lives}";
+            lives.Text = $"x{GameManager.Instance.PlayerManager.Lives}";
         }
 
         private string ForceStringLength(object o, int length = 2)

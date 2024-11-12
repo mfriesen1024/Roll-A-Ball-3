@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.Player;
 
@@ -7,7 +7,6 @@ namespace RollABall.Assets.src.Managers
     internal partial class InputManager : Node
     {
         #region refs
-        public static InputManager Instance { get; private set; }
         Logger inputLog;
 
         // Components
@@ -16,15 +15,11 @@ namespace RollABall.Assets.src.Managers
 
         public override void _Ready()
         {
-            // Set singleton
-            if (Instance == null) { Instance = this; }
-            else { QueueFree(); return; }
-
             // Set logger
             inputLog = new Logger(true, true, "logs\\", "inputLog", "txt", false);
 
             // Set references.
-            controller = PlayerManager.Instance.controller;
+            controller = GameManager.Instance.PlayerManager.controller;
         }
 
         public override void _Input(InputEvent ie)
@@ -50,7 +45,7 @@ namespace RollABall.Assets.src.Managers
                 case Key.A:
                 case Key.S:
                 case Key.D: HandleMoveInput(); break;
-                case Key.Escape: if (UIManager.Instance.State == UIState.HUD) { UIManager.Instance.State = UIState.Pause; } break;
+                case Key.Escape: if (GameManager.Instance.UIManager.State == UIState.HUD) { GameManager.Instance.UIManager.State = UIState.Pause; } break;
                 case Key.Space: HandleJumpInput(); break;
                 default: break;
             }

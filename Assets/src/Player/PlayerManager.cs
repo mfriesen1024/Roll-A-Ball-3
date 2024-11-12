@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using KeystoneUtils.Logging;
 using RollABall.Assets.src.LevelObjects;
 using RollABall.Assets.src.Managers;
@@ -12,7 +12,6 @@ namespace RollABall.Assets.src.Player
     internal partial class PlayerManager : Node
     {
         #region Refs
-        public static PlayerManager Instance { get; private set; }
         public Logger log;
 
         [Export] public PlayerController controller;
@@ -26,9 +25,6 @@ namespace RollABall.Assets.src.Player
 
         public override void _Ready()
         {
-            if (Instance != null) { QueueFree(); return; }
-
-            Instance = this;
             log = new Logger(true, true, "logs\\", "playerLog", "txt", false);
         }
 
@@ -39,9 +35,9 @@ namespace RollABall.Assets.src.Player
         {
             log.WriteAll($"Player died. Player has {Lives} lives left.");
             Lives--;
-            UIManager.Instance.hud.Update();
-            if (Lives >= 0) { LevelManager.Instance.Reload(); }
-            else { Lives = 3; HUD.Instance.Update(); UIManager.Instance.State = UIState.LevelFailure; }
+            GameManager.Instance.UIManager.hud.Update();
+            if (Lives >= 0) { GameManager.Instance.LevelManager.Reload(); }
+            else { Lives = 3; HUD.Instance.Update(); GameManager.Instance.UIManager.State = UIState.LevelFailure; }
         }
 
         public void OnLoadCheckpoint(Checkpoint checkpoint)

@@ -41,7 +41,7 @@ namespace RollABall.Assets.src.Managers
         public override void _Ready()
         {
             SetGMSingleton();
-            SetOtherSingletons();
+            SetOtherManagers();
             DataManager.OnStartup();
 
             Init();
@@ -68,7 +68,7 @@ namespace RollABall.Assets.src.Managers
                     LevelManager.Unpause();
                     LevelManager.Discard();
                     // record run.
-                    DataManager.RecordPlaythrough(LevelManager.LevelIndex, LevelManager.CheckpointIndex, PlayerManager.Instance.Lives);
+                    DataManager.RecordPlaythrough(LevelManager.LevelIndex, LevelManager.CheckpointIndex, GameManager.Instance.PlayerManager.Lives);
                     break;
                 case GameState.Pause: 
                     Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -88,17 +88,13 @@ namespace RollABall.Assets.src.Managers
         }
 
         #region helperMethods
-        private void SetOtherSingletons()
+        private void SetOtherManagers()
         {
             // Check other managers for their singleton instances, and if they don't exist, create them.
-            if (PlayerManager.Instance != null) { PlayerManager = PlayerManager.Instance; }
-            else { PlayerManager = playerManPrefab.Instantiate() as PlayerManager; AddChild(PlayerManager); }
-            if (InputManager.Instance != null) { InputManager = InputManager.Instance; }
-            else { InputManager = inputManPrefab.Instantiate() as InputManager; AddChild(InputManager); }
-            if (UIManager.Instance != null) { UIManager = UIManager.Instance; }
-            else { UIManager = uiManPrefab.Instantiate() as UIManager; AddChild(UIManager); }
-            if (LevelManager.Instance != null) { LevelManager = LevelManager.Instance; }
-            else { LevelManager = levelManPrefab.Instantiate() as LevelManager; AddChild(LevelManager); }
+            PlayerManager = playerManPrefab.Instantiate() as PlayerManager; AddChild(PlayerManager);
+            InputManager = inputManPrefab.Instantiate() as InputManager; AddChild(InputManager);
+            UIManager = uiManPrefab.Instantiate() as UIManager; AddChild(UIManager);
+            LevelManager = levelManPrefab.Instantiate() as LevelManager; AddChild(LevelManager);
         }
 
         private void SetGMSingleton()

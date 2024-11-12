@@ -1,6 +1,5 @@
 using Godot;
 using KeystoneUtils.Logging;
-using RollABall.Assets.src.Player;
 using RollABall.Assets.src.UI;
 using System;
 
@@ -14,7 +13,6 @@ namespace RollABall.Assets.src.Managers
         #region refs
         GameManager gameManager;
         LevelManager levelMan;
-        public static UIManager Instance { get; private set; }
         public UIState State { get => state; set { OnSetState(value); state = value; } }
         private UIState state;
         public Logger log;
@@ -30,9 +28,6 @@ namespace RollABall.Assets.src.Managers
 
         public override void _Ready()
         {
-            if (Instance != null) { QueueFree(); return; }
-
-            Instance = this;
             log = new Logger(true, true, "logs\\", "uiLog", "txt", true);
             GameManager.PostInit += PostInit;
 
@@ -42,7 +37,7 @@ namespace RollABall.Assets.src.Managers
         public void PostInit()
         {
             gameManager = GameManager.Instance;
-            levelMan = LevelManager.Instance;
+            levelMan = GameManager.Instance.LevelManager;
             log.Write("Initialization finished, setting state of MainMenu");
             State = UIState.Main;
         }
@@ -89,7 +84,7 @@ namespace RollABall.Assets.src.Managers
             Button play = mainMenu.FindChild("play", true) as Button;
             play.Pressed += () => { State = UIState.LevelSelect; };
             Button load = mainMenu.FindChild("load", true) as Button;
-            load.Pressed += () => { LevelManager.Instance.LoadCheckpoint(); };
+            load.Pressed += () => { GameManager.Instance.LevelManager.LoadCheckpoint(); };
             Button options = mainMenu.FindChild("options", true) as Button;
             options.Pressed += () => { State = UIState.Options; };
             Button exit = mainMenu.FindChild("exit", true) as Button;
